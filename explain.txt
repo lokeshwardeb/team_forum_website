@@ -1,0 +1,27 @@
+Welcome to the explain.txt . In this file you will learn how to use this api on the website
+
+
+Sample url to fetch all the data :-
+
+http://localhost:8000/read_all_data?token=6c3dddbe9e96d5db&data_name=article
+
+Sample url to fetch only one id data :-
+http://localhost:8000/read_all_data?token=6c3dddbe9e96d5db&data_name=article&data_id=2
+
+In the example two there are one parameter is extra which is data_id=2. This will retrive 
+the data using its id and show it using the respective process
+
+What is the token ?
+
+The token is used to get the data securely using the api. The token ensures that the unaurthorized
+access blocks throughout the api.
+
+Note : You will have to a valid api access token to use the api.
+
+What is the data_name ?
+
+The data_name is the parameter which indicates that what kind of data you want to get. You have to
+ensure the valid parameter to get the data. Otherwise the unaurthorized data will block the
+ unaurthorized access throughout the api.
+
+Note : You will have to give the valid data parameter to get the data and use the api.

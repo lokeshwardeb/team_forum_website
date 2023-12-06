@@ -89,6 +89,39 @@ class Controllers extends sql_info
 
                         if ($result->num_rows > 0) {
                             // if the data is exists
+
+                            if(isset($_GET['data_id'])){
+                                // if the data id is exists on the url
+
+                                $get_data_id = $_GET['data_id'];
+
+                                $data_id_make = $data_name . '_id'; // example : catarogy_id
+
+                                $get_one_data_result = $this->show_where("$data_name", "`$data_id_make` = '$get_data_id'");
+
+                                if($get_one_data_result->num_rows == 1){
+                                    // if the data is equals to 1 data
+                                    $get_one_data_main = $get_one_data_result->fetch_assoc();
+
+                                    $data = [
+                                        'status' => 200,
+                                        'message' => 'Data Fetched Succesfully',
+                                        'data' => $get_one_data_main,
+                                    ];
+        
+                                    header("HTTP/1.0 200 Data Fetched Successfully");
+                                    return json_encode($data);
+
+
+                                }
+
+                            }else{
+                                // if the data id is not exists on the url
+
+                            }
+
+
+
                             $get_data =  $result->fetch_all(MYSQLI_ASSOC);
 
 
