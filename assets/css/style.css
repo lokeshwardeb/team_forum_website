@@ -1,0 +1,14 @@
+:root{
+    --custom-success-color: #198754;
+}
+
+
+body{
+    background-color: var(--custom-success-color) !important;
+}
+ul li a {
+    color: white !important;
+    text-decoration: none;
+    margin: 15px;
+    line-height: 50px !important;
+}
