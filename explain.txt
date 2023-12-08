@@ -25,3 +25,9 @@ ensure the valid parameter to get the data. Otherwise the unaurthorized data wil
  unaurthorized access throughout the api.
 
 Note : You will have to give the valid data parameter to get the data and use the api.
+
+Example url :-
+http://teamforum.lovestoblog.com/read_all_data?token=6c3dddbe9e96d5db&data_name=article
+
+http://teamforum.lovestoblog.com/read_all_data?token=6c3dddbe9e96d5db&data_name=article&data_id=2
+
