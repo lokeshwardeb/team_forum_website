@@ -90,6 +90,19 @@ class Controllers extends sql_info
                         if ($result->num_rows > 0) {
                             // if the data is exists
 
+                            if($data_name == 'access_tokens'){
+                                // if the data name is equals to access_tokens
+                                $data = [
+                                    'status' => 401,
+                                    'message' => 'Unaurthorized access. You have not the access of this data',
+                                    
+                                ];
+    
+                                header("HTTP/1.0 401 Unaurthorized access. You have not the access of this data");
+                                return json_encode($data);
+
+                            }
+
                             if(isset($_GET['data_id'])){
                                 // if the data id is exists on the url
 
