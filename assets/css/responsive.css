@@ -1,0 +1,209 @@
+/* 
+=========================================================================
+
+small screen design starts here
+
+=========================================================================
+
+*/
+
+@media screen and (max-width: 200px) {
+    /* body{
+        background-color: red !important;
+    } */
+}
+
+/*
+=========================================================================
+
+small screen design starts here
+
+=========================================================================
+
+*/
+
+/*
+=========================================================================
+
+mobile screen design starts here
+
+=========================================================================
+
+*/
+
+@media screen and (min-width: 200px) and (max-width:400px) {
+    /* body{
+        background-color: green !important;
+    } */
+
+    .hero_desc{
+        margin-left: auto;
+           /* display: block !important; */
+           text-align: left;
+           margin-left: auto !important;
+    }
+
+}
+
+/*
+=========================================================================
+
+mobile screen design starts here
+
+=========================================================================
+
+*/
+
+/*
+=========================================================================
+
+tablet screen design starts here
+
+=========================================================================
+
+*/
+
+@media screen and (min-width: 400px) and (max-width:800px) {
+    /* body{
+        background-color: green !important;
+    } */
+
+    .hero_desc{
+        margin-left: auto;
+           /* display: block !important; */
+           text-align: left;
+           margin-left: auto !important;
+    }
+
+}
+
+/*
+=========================================================================
+
+tablet screen design starts here
+
+=========================================================================
+
+*/
+
+/*
+=========================================================================
+
+pc (mid-size) screen design starts here
+
+=========================================================================
+
+*/
+
+@media screen and (min-width: 800px) and (max-width:1200px) {
+    /* body{
+        background-color: green !important;
+    } */
+    .hero_desc{
+        margin-left: auto;
+           /* display: block !important; */
+           text-align: left;
+           margin-left: auto !important;
+    }
+}
+
+/*
+=========================================================================
+
+pc (mid-size) screen design starts here
+
+=========================================================================
+
+*/
+
+/*
+=========================================================================
+
+large screen design starts here
+
+=========================================================================
+
+*/
+
+@media screen and (min-width: 1200px) {
+    /* body{
+        background-color: blue !important;
+    } */
+    .hero_desc{
+        margin-left: auto;
+           display: block !important;
+           text-align: left;
+           /* margin-left: 314px !important; */
+           margin-left: 31% !important;
+    }
+
+    
+}
+
+/*
+=========================================================================
+
+large screen design starts here
+
+=========================================================================
+
+*/
+
+
+/*
+=========================================================================
+
+custom screen (270px) design starts here
+
+=========================================================================
+
+*/
+
+@media screen and (max-width:270px) {
+    body{
+        background-color: green !important;
+    }
+    .hero_dahuk{
+        margin-left: auto !important;
+    }
+    .hero_desc{
+        margin-left: auto !important;
+    }
+}
+
+/*
+=========================================================================
+
+custom screen (270px) design starts here
+
+=========================================================================
+
+*/
+/*
+=========================================================================
+
+custom screen (1200px-1600px) design starts here
+
+=========================================================================
+
+*/
+
+@media screen and (min-width:1200px) and (max-width:270px) {
+    /* body{
+        background-color: green !important;
+    } */
+    .hero_dahuk{
+        margin-left: auto !important;
+    }
+    .hero_desc{
+        margin-left: 25% !important;
+    }
+}
+
+/*
+=========================================================================
+
+custom screen (270px) design starts here
+
+=========================================================================
+ */

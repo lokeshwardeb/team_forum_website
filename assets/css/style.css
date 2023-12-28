@@ -1,14 +1,118 @@
+/*
+=========================================================================
+
+common css design starts here
+
+=========================================================================
+
+*/
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
 :root{
-    --custom-success-color: #198754;
+    /* --custom-success-color: #198754; */
+    --custom-primary-color: #B68C5A;
+    --custom-secondary-color: #5E7C84;
+}
+
+.cus-primary-color{
+    color: var(--custom-primary-color) !important;
+}
+.cus-bg-primary-color{
+    background-color: var(--custom-primary-color) !important;
+}
+.cus-secondary-color{
+    color: var(--custom-secondary-color) !important;
+}
+.cus-bg-secondary-color{
+    background-color: var(--custom-secondary-color) !important;
+}
+
+/*
+=========================================================================
+
+common css design starts here
+
+=========================================================================
+
+*/
+
+/*
+=========================================================================
+
+navbar section design starts here
+
+=========================================================================
+
+*/
+
+.nav_login_btn:hover{
+    color: black !important;
+    border: 1px solid var(--custom-primary-color);
+    background-color: white !important;
+    /* background-color: green !important; */
+}
+
+.cus-nav-link-hover:hover{
+    color: #6f6f6f !important;
+    /* color: grey !important; */
+}
+
+.hero_dahuk{
+    margin-left: -138px;
+}
+.hero_desc{
+    margin-left: auto;
+       /* display: block !important; */
+       text-align: left;
+       /* margin-left: 237px; */
+       margin-left: 314px;
 }
 
 
-body{
-    background-color: var(--custom-success-color) !important;
+/*
+=========================================================================
+
+navbar section design ends here
+
+=========================================================================
+
+*/
+
+
+/*
+=========================================================================
+
+hero-aria section design starts here
+
+=========================================================================
+
+*/
+
+.hero-aria-section{
+    
+    /* background: url(./../img/banner_img.png); */
+    background-repeat: no-repeat;
+    background-position: center;
+    
+    /* background-size: 30vw; */
 }
-ul li a {
-    color: white !important;
-    text-decoration: none;
-    margin: 15px;
-    line-height: 50px !important;
-}
+
+
+/*
+=========================================================================
+
+hero-aria section design ends here
+
+=========================================================================
+
+*/
+
+
+
+

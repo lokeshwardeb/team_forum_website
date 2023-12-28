@@ -1,0 +1,260 @@
+body{
+    max-width: 1440px;
+}
+#navbardiv{
+    display: flex;
+    justify-content: center;
+    height: 50px;
+    width: 100%;
+}
+#navchilddiv1{
+    display: flex;
+    justify-content: flex-start;
+    width: 500px;
+    height: 50px;
+    align-items: center;
+}
+#paragraph1{
+    color: #B68C5A;
+    font-size: 22px;
+    font-weight: 900;
+    display: inline;
+}
+#navchilddiv2{
+    display: flex;
+    justify-content: flex-end;
+    width: 500px;
+    height: 50px;
+}
+#ulist{
+    display: flex;
+}
+#ulist>li{
+    display: inline;
+    margin: 0px 10px;
+}
+#ulist>li:hover{
+    cursor: pointer;
+    background-color: whitesmoke;
+}
+#button1{
+    background-color: #B68C5A;
+    color: white;
+    width: auto;
+    border: 1px solid white;
+    border-radius: 5px;
+}
+#button1:hover{
+    cursor: pointer;
+}
+#herosectiondiv{
+    height: 600px;
+    background-color: #688289;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+#herochilddiv1{
+    width: 400px;
+    height: 500px;
+    margin: 50px 0px;
+}
+#heading1{
+    font-weight:bold;
+}
+#imagediv{
+    width: 600px;
+    height: 500px;
+    margin: 50px 0px;
+}
+#image1{
+    height: 400px;
+    width: 600px;
+    margin: 50px 0px;
+}
+.paragraph1{
+    color: white;
+    font-size: 1.875rem;
+    margin-bottom: 0px;
+}
+#heading1{
+    color: white;
+    font-size: 3.75rem;
+    font-weight: 700;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+.paragraph2{
+    color: white;
+    font-size: 2.75rem;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-style: normal;
+}
+#button2{
+    background-color: #B68C5A;
+    height: 50px;
+    width: 150px;
+    color: white;
+    margin-top: 20px;
+    border: none;
+    border-radius: 5px;
+}
+#button2:hover{
+    cursor: pointer;
+}
+#contact{
+    height: 200px;
+    width: 100%;
+    text-align: center;
+    background-color: whitesmoke;
+}
+#paragraph3{
+    color: gray;
+}
+#paragraph4{
+    padding-top: 50px;
+}
+#parentdiv1{
+    background-color: whitesmoke;
+    height: 500px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 150px;
+}
+#childdiv1{
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    height: 400px;
+    width: 500px;
+    border-radius: 5px;
+    margin-left: 200px;
+}
+#griddiv1{
+    color: grey;
+    text-align: center;
+    width: 250px;
+    border-bottom: 3px solid #B68C5A;
+    border-right: 3px solid #B68C5A;
+}
+#griddiv2{
+    color: grey;
+    text-align: center;
+    width: 250px;
+    width: 250px;
+    border-bottom: 3px solid #B68C5A;
+}
+#griddiv3{
+    color: grey;
+    text-align: center;
+    width: 250px;
+    border-right: 3px solid #B68C5A;
+}
+#griddiv4{
+    color: grey;
+    text-align: center;
+    width: 250px;
+}
+#icon1{
+    margin-top: 30px;
+}
+#icon2{
+    margin-top: 30px;
+}
+#icon3{
+    margin-top: 30px;
+}
+#icon4{
+    margin-top: 30px;
+}
+.paragraph5{
+    font-size: 1.2rem;
+}
+.paragraph6{
+    font-size: small;
+}
+#childdiv2{
+    height: 400px;
+    width: 500px;
+    margin-left: 100px;
+}
+.paragraph7{
+    color: #B68C5A;
+}
+#textbox1{
+    height: 50px;
+    background-color: white;
+    width: 300px;
+    text-align: left;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+#textbox2{
+    height: 50px;
+    background-color: white;
+    width: 300px;
+    text-align: left;
+    border-radius: 5px;
+    border:none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+#textbox3{
+    height: 100px;
+    background-color: white;
+    width: 300px;
+    text-align: left;
+    border-radius: 5px;
+    border:none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+#button3{
+    margin-top: 40px;
+    background-color: #B68C5A;
+    height: 50px;
+    width: 300px;
+    text-align: center;
+    color: white;
+    border-radius: 5px;
+    border: none;
+}
+#button3:hover{
+    cursor: pointer;
+    color: black;
+    background-color: white;
+    border: 1px solid #B68C5A;
+    transition: 0.5s;
+}
+#div1{
+    height: 800px;
+    background-color: whitesmoke;
+    width: 100%;
+}
+#div2{
+    background-color: gray;
+    text-align: center;
+    color: white;
+    height: 100px;
+    width: 100%;
+    margin-bottom: 0px;
+}
+#paragraph8{
+    color: #B68C5A;
+    font-size: 22px;
+    font-weight: 900;
+    display: inline;
+}
+#div3{
+    background-color: cadetblue;
+    color: white;
+    text-align: center;
+    height: 50px;
+    width: 100%;
+    margin-top: -18px;
+}
+#paragraph9{
+    padding-top: 20px;
+}
