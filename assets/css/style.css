@@ -18,6 +18,10 @@ common css design starts here
     /* --custom-success-color: #198754; */
     --custom-primary-color: #B68C5A;
     --custom-secondary-color: #5E7C84;
+    --custom-light-secondary-color: #F3F3F3;
+    --custom-login-and-hovers-color: #6f6f6f;
+    /* --custom-light-hover-color: #cacaca; */
+    --custom-light-hover-color: #e2e2e2;
 }
 
 .cus-primary-color{
@@ -31,6 +35,24 @@ common css design starts here
 }
 .cus-bg-secondary-color{
     background-color: var(--custom-secondary-color) !important;
+}
+.cus-light-secondary-color{
+    color: var(--custom-light-secondary-color) !important;
+}
+.cus-bg-light-secondary-color{
+    background-color: var(--custom-light-secondary-color) !important;
+}
+.cus-white{
+    color: white !important;
+}
+.cus-bg-white{
+    background-color: white !important;
+}
+.cus-light{
+    color: var(--custom-light-hover-color) !important;
+}
+.cus-bg-light{
+    background-color: var(--custom-light-hover-color) !important;
 }
 
 /*
@@ -59,7 +81,7 @@ navbar section design starts here
 }
 
 .cus-nav-link-hover:hover{
-    color: #6f6f6f !important;
+    color:  var(--custom-login-and-hovers-color)!important;
     /* color: grey !important; */
 }
 
@@ -72,6 +94,10 @@ navbar section design starts here
        text-align: left;
        /* margin-left: 237px; */
        margin-left: 314px;
+}
+.hero_get_started_btn:hover{
+    background-color: black !important;
+    color: white !important;
 }
 
 
@@ -114,5 +140,93 @@ hero-aria section design ends here
 */
 
 
+/*
+=========================================================================
 
+catagory section design ends here
+
+=========================================================================
+
+*/
+
+.catagory-navbar{
+    height: auto;
+}
+.catagory-section-title{
+    min-height: 150px;
+}
+.catagory-section-links{
+    min-height: 50vh;
+    height: auto;
+    /* height: 50vh; */
+}
+.cata-li{
+    transition: all linear 1000ms;
+}
+.cata-li:hover{
+    /* background-color: var(--custom-light-hover-color) !important; */
+    background-color: var(--custom-primary-color) !important;
+    color: white !important;
+    transition: all linear 150ms;
+    /* transition: all ease-in 450ms; */
+    /* color: white !important; */
+}
+
+/*
+=========================================================================
+
+catagory section design ends here
+
+=========================================================================
+
+*/
+
+/*
+=========================================================================
+
+contents section design starts here
+
+=========================================================================
+
+*/
+
+.contents{
+    min-height: 20vw;
+    background-color: var(--custom-light-secondary-color) !important;
+}
+.contents img{
+    position: relative;
+}
+
+.back_img_content{
+    height: 20vh;
+    background: url(../img/company_table_look.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.content-read-more-btn{
+    border: 1px solid var(--custom-primary-color) !important;
+}
+.content-read-more-btn:hover{
+    background-color: var(--custom-primary-color) !important;
+    color: white !important;
+}
+
+.publisher_img{
+    max-width: 50px !important;
+    max-height: 50px !important;
+    width: 80px !important;
+
+}
+
+
+/*
+=========================================================================
+
+contents section design ends here
+
+=========================================================================
+
+*/
 

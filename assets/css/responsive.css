@@ -207,3 +207,35 @@ custom screen (270px) design starts here
 
 =========================================================================
  */
+
+ 
+
+/*
+=========================================================================
+
+custom screen (991px) (max-size applied) design starts here
+
+=========================================================================
+ */
+
+ @media screen and (min-width: 990px) {  
+ 
+    body{
+        background-color: green !important;
+    }
+ .nav-sections{
+    display: block !important;
+ }    
+
+ }
+
+
+ 
+/*
+=========================================================================
+
+custom screen (991px) (max-size applied) design starts here
+
+=========================================================================
+ */
+

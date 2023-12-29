@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
     <!-- <link rel="stylesheet" href="/assets/css/Homepage1.css"> -->
     <!-- <link rel="stylesheet" href="/assets/css/responsive.css"> -->
+    <link rel="stylesheet" href="/assets/css/main.responsive.css">
     <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 
@@ -16,25 +17,36 @@
     <main>
         <!-- navbar section starts here -->
         <div class="container">
-            <nav id="" class="navbar nav p-4">
-                <div id="" class="d-flex logo-section fs-4">
-                    <div class="logo_part_1 fw-bold cus-primary-color">D</div>
-                    <div class="logo_part_2">ahuk</div>
-                </div>
-                <div id="navchilddiv2" class="">
-                    <ul id="ulist" class="nav">
-                        <li class=""><a href=""
-                                class="nav-link text-dark ms-2 cus-nav-link-hover cus-primary-color ">Home</a> </li>
-                        <li class=""><a href="" class="nav-link text-dark ms-2 cus-nav-link-hover  ">Dashboard</a> </li>
-                        <li class=""><a href="" class="nav-link text-dark ms-2 cus-nav-link-hover  ">Blogs</a> </li>
-                        <li class=""><a href="" class="nav-link text-dark ms-2 cus-nav-link-hover  ">About</a> </li>
-                        <li class=""><a href="" class="nav-link text-dark ms-2 cus-nav-link-hover  ">Contact Us</a>
-                        </li>
+            <nav id="" class="navbar navbar-expand-lg  p-4">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">
+                        <div id="" class="d-flex logo-section fs-4">
+                            <div class="logo_part_1 fw-bold cus-primary-color">D</div>
+                            <div class="logo_part_2">ahuk</div>
+                        </div>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
 
-                        <li><button id="button1" class="ms-4 nav_login_btn btn cus-bg-primary-color text-light">Log
-                                in</button></li>
-                    </ul>
-                </div>
+                    <!-- id="navchilddiv2" -->
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul id="ulist" class="nav m-auto nav-sections">
+                            <li class=""><a href=""
+                                    class="nav-link text-dark ms-2 cus-nav-link-hover cus-primary-color ">Home</a> </li>
+                            <li class=""><a href="" class="nav-link text-dark ms-2 cus-nav-link-hover  ">Dashboard</a>
+                            </li>
+                            <li class=""><a href="" class="nav-link text-dark ms-2 cus-nav-link-hover  ">Blogs</a> </li>
+                            <li class=""><a href="" class="nav-link text-dark ms-2 cus-nav-link-hover  ">About</a> </li>
+                            <li class=""><a href="" class="nav-link text-dark ms-2 cus-nav-link-hover  ">Contact Us</a>
+                            </li>
+
+                            <li><button id="button1" class="ms-4 nav_login_btn btn cus-bg-primary-color text-light">Log
+                                    in</button></li>
+                        </ul>
+                    </div>
             </nav>
         </div>
         <!-- navbar section ends here -->
@@ -49,7 +61,8 @@
                         <div class="fs-3">Learn New Technology</div>
                         <div class="fs-1 fw-bold">Dahuk:</div>
                         <div class="fs-2 ">Fuel your passion and become a part of something extraordinary</div>
-                        <div class="btn cus-bg-primary-color text-light mt-4 btn-lg">Get Started</div>
+                        <div class="btn cus-bg-primary-color hero_get_started_btn text-light mt-4 btn-lg">Get Started
+                        </div>
                     </div>
                     <!-- <div class="container r">
                         <p class="fs-3 text">Learn New Technology</p>
@@ -71,10 +84,96 @@
         </div>
         <!-- hero-aria section ends here -->
 
+        <!-- catagory section starts here -->
+
+        <div class="container">
+            <div class="catagory-section">
+                <div class="row">
+                    <div class="col-md-4 col-sm-12  catagory-navbar mt-4  text-light">
+                        <div
+                            class="catagory-section-title pt-4 fs-1  rounded-4 text-center cus-bg-primary-color mt-4 mb-4">
+                            Catagories
+                        </div>
+
+                        <div class="catagory-section-links  cus-bg-light-secondary-color text-dark">
+                            <div class="container">
+                                <ul class="mt-4 mb-4 pt-4 pb-4">
+                                    <li class="navbar m-2 bg-white cata-li"><a href=""
+                                            class="nav-link m-auto p-4">ALL</a></li>
+                                    <li class="navbar m-2 bg-white cata-li"><a href="" class="nav-link m-auto p-4">UI/UX
+                                            DESIGN</a></li>
+                                    <li class="navbar m-2 bg-white cata-li"><a href=""
+                                            class="nav-link m-auto p-4">SOFTWARE ENGINEERING</a></li>
+                                    <li class="navbar m-2 bg-white cata-li"><a href=""
+                                            class="nav-link m-auto p-4">FRONTEND DEVELOPER</a></li>
+                                    <li class="navbar m-2 bg-white cata-li"><a href=""
+                                            class="nav-link m-auto p-4">BACKEND DEVELOPER</a></li>
+                                    <li class="navbar m-2 bg-white cata-li"><a href="" class="nav-link m-auto p-4">FULL
+                                            STACK DEVELOPER</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-8 col-sm-12">
+                        <div class="container mt-4 mb-4 pt-4">
+                            <div class="content-section">
+                                <div class="row">
+                                    <div class="col-12 contents mb-4 pb-4">
+                                        <!-- img section starts here -->
+                                        <!-- <img src="/assets/img/artical_book.jpg" class="img-fluid" alt=""> -->
+                                        <!-- img section ends here -->
+                                        <div class="post_info_section mt-4">
+                                            <div class="person_details">
+                                                <div class="row">
+                                                    <div class="col-md-6 col-sm-12 d-flex">
+                                                        <div class="publisher_img mt-4 mb-4">
+                                                            <img src="/assets/img/man1.jpg"
+                                                                class="img-fluid publisher_img rounded-circle" alt="">
+
+                                                        </div>
+                                                        <div class="publisher_info mt-4 mb-4 ms-2">
+                                                            <div class="publisher_name fw-bold ms-2">Protik</div>
+                                                            <div class="published_time ms-2">MAR 14 (14 days ago)</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-12">
+                                                        <div class="read_time_section mt-4 text-dark text-end">5 min
+                                                            read</div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="back_img_content"></div>
+
+                                        <div class="text-contents-title mt-4 fs-4 ">
+                                            <p> Lorem ipsum dolor sit amet, consectetu/.....</p>
+                                        </div>
+
+                                        <div
+                                            class="button-section btn  text-dark bg-light content-read-more-btn text-light">
+                                            Read More</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- catagory section starts here -->
+
 
 
     </main>
     <!-- main code section ends here -->
+
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="/assets/js/bootstrap.min.js"></script> -->
 </body>
 
 </html>
