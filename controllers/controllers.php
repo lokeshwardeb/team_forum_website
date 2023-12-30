@@ -8,6 +8,14 @@ $model = new sql_info;
 class Controllers extends sql_info
 {
 
+    public function dashboard_active_class($active_class){
+        if($active_class == 'add_blog'){
+            return 'dashboard-link-actived';
+        }elseif($active_class == 'publisher_home'){
+            return 'dashboard-link-actived';
+        }
+    }
+
     public function check_token($get_token_no)
     {
 

@@ -26,6 +26,9 @@ common css design starts here
     --twitter-brand-color: #1DA1F2;
     --youtube-brand-color: #FF0000;
     --instragram-brand-color: #fc1d00;
+    --cus-dash-violent-color: #BB33F5;
+    --cus-dash-activities-color: #FFEDD5;
+    --cus-dash-activities-info-color: #FEF9C2;
 }
 
 .cus-primary-color{
@@ -76,11 +79,28 @@ common css design starts here
 .cus-brand-bg-instragram{
     background-color: var(--instragram-brand-color) !important;
 }
+.link-actived{
+    background-color: var(--custom-primary-color) !important;
+    color: white !important;
+}
+.cus-dash-violent{
+    color: var(--cus-dash-violent-color) !important;
+}
+.cus-dash-bg-violent{
+    background-color: var(--cus-dash-violent-color) !important;
+}
+.cus-activities-bg{
+    background-color: var(--cus-dash-activities-color) !important;
+}
+.cus-activities-info-bg{
+    background-color: var(--cus-dash-activities-info-color) !important;
+}
+
 
 /*
 =========================================================================
 
-common css design starts here
+common css design starts ends
 
 =========================================================================
 
@@ -328,6 +348,81 @@ copyright section design starts here
 =========================================================================
 
 copyright section design ends here
+
+=========================================================================
+
+*/
+
+
+/*
+=========================================================================
+
+dashboard section design ends here
+
+=========================================================================
+
+*/
+
+
+
+
+.dashboard-navbar{
+    height: 100vh;
+}
+.dashboard-hover-link{
+    /* height: 100vh; */
+    transition: all linear 1000ms;
+}
+.dashboard-hover-link:hover{
+    /* height: 100vh; */
+    background-color: white ;
+    color: black ;
+    transition: all linear 450ms;
+}
+.dashboard-link-actived{
+    color: white !important;
+    
+}
+.dashboard-link-actived:hover{
+    color: black !important;
+    
+}
+.activities_img{
+    border: 10px solid var(--custom-primary-color) !important;
+    /* max-height: 80px;
+    min-width: 70px; */
+
+    border: 10px solid var(--custom-primary-color) !important;
+    min-height: 200px;
+    min-width: 200px;
+    max-height: 200px;
+    max-width: 200px;
+    /* border-radius: 80px;
+
+    min-height: 40vh;
+    min-width: 40vh;
+
+    max-height: 40vh;
+    max-width: 40vw;
+    /* border-radius: 80px; */
+    /* height: 10vh; */
+}
+.activities-user{
+    border-right: 5px solid var(--custom-primary-color) !important;
+}
+
+.add_blog_section{
+    height: auto !important;
+}
+
+
+
+
+
+/*
+=========================================================================
+
+dashboard section design ends here
 
 =========================================================================
 
