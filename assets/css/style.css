@@ -22,6 +22,10 @@ common css design starts here
     --custom-login-and-hovers-color: #6f6f6f;
     /* --custom-light-hover-color: #cacaca; */
     --custom-light-hover-color: #e2e2e2;
+    --custom-copyright-color: #676767;
+    --twitter-brand-color: #1DA1F2;
+    --youtube-brand-color: #FF0000;
+    --instragram-brand-color: #fc1d00;
 }
 
 .cus-primary-color{
@@ -53,6 +57,24 @@ common css design starts here
 }
 .cus-bg-light{
     background-color: var(--custom-light-hover-color) !important;
+}
+.cus-brand-twitter{
+    color: var(--twitter-brand-color) !important;
+}
+.cus-brand-bg-twitter{
+    background-color: var(--twitter-brand-color) !important;
+}
+.cus-brand-youtube{
+    color: var(--youtube-brand-color) !important;
+}
+.cus-brand-bg-youtube{
+    background-color: var(--youtube-brand-color) !important;
+}
+.cus-brand-instragram{
+    color: var(--instragram-brand-color) !important;
+}
+.cus-brand-bg-instragram{
+    background-color: var(--instragram-brand-color) !important;
 }
 
 /*
@@ -225,6 +247,87 @@ contents section design starts here
 =========================================================================
 
 contents section design ends here
+
+=========================================================================
+
+*/
+
+/*
+=========================================================================
+
+contact section design starts here
+
+=========================================================================
+
+*/
+
+.contact-section{
+    height: auto;
+}
+.contact-shadow{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.contact-border{
+    border: 1px solid var(--custom-primary-color) !important;
+}
+
+
+
+/*
+=========================================================================
+
+contact section design ends here
+
+=========================================================================
+
+*/
+
+/*
+=========================================================================
+
+footer section design starts here
+
+=========================================================================
+
+*/
+
+.footer-container{
+    height: auto;
+}
+
+
+
+
+
+/*
+=========================================================================
+
+footer section design ends here
+
+=========================================================================
+
+*/
+/*
+=========================================================================
+
+copyright section design starts here
+
+=========================================================================
+
+*/
+
+.copyright-section{
+    height: auto ;
+    background-color: var(--custom-copyright-color) !important;
+}
+
+
+
+
+/*
+=========================================================================
+
+copyright section design ends here
 
 =========================================================================
 

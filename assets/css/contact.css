@@ -1,0 +1,113 @@
+#parentdiv1{
+    background-color: whitesmoke;
+    height: 500px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 150px;
+}
+#childdiv1{
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    height: 400px;
+    width: 500px;
+    border-radius: 5px;
+    margin-left: 200px;
+}
+#griddiv1{
+    color: grey;
+    text-align: center;
+    width: 250px;
+    border-bottom: 3px solid #B68C5A;
+    border-right: 3px solid #B68C5A;
+}
+#griddiv2{
+    color: grey;
+    text-align: center;
+    width: 250px;
+    width: 250px;
+    border-bottom: 3px solid #B68C5A;
+}
+#griddiv3{
+    color: grey;
+    text-align: center;
+    width: 250px;
+    border-right: 3px solid #B68C5A;
+}
+#griddiv4{
+    color: grey;
+    text-align: center;
+    width: 250px;
+}
+#icon1{
+    margin-top: 30px;
+}
+#icon2{
+    margin-top: 30px;
+}
+#icon3{
+    margin-top: 30px;
+}
+#icon4{
+    margin-top: 30px;
+}
+.paragraph5{
+    font-size: 1.2rem;
+}
+.paragraph6{
+    font-size: small;
+}
+#childdiv2{
+    height: 400px;
+    width: 500px;
+    margin-left: 100px;
+}
+.paragraph7{
+    color: #B68C5A;
+}
+#textbox1{
+    height: 50px;
+    background-color: white;
+    width: 300px;
+    text-align: left;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+#textbox2{
+    height: 50px;
+    background-color: white;
+    width: 300px;
+    text-align: left;
+    border-radius: 5px;
+    border:none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+#textbox3{
+    height: 100px;
+    background-color: white;
+    width: 300px;
+    text-align: left;
+    border-radius: 5px;
+    border:none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+#button3{
+    margin-top: 40px;
+    background-color: #B68C5A;
+    height: 50px;
+    width: 300px;
+    text-align: center;
+    color: white;
+    border-radius: 5px;
+    border: none;
+}
+#button3:hover{
+    cursor: pointer;
+    color: black;
+    background-color: white;
+    border: 1px solid #B68C5A;
+    transition: 0.5s;
+}
