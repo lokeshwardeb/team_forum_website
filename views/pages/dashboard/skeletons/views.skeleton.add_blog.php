@@ -24,11 +24,11 @@ require_once __DIR__ . '/../../inc/header.php';
             <div class="row">
             <?php
 
-$active_class_publisher_home = "active_class";
+$active_class_add_blog = "active_class";
 
                     // $controllers->active_class($active_class);
 
-                    $controllers->dashboard_active_class($active_class_publisher_home);
+                    $controllers->dashboard_active_class($active_class_add_blog);
                     include __DIR__ . '/../../inc/dashboard_sidebar.php';
 
                     ?>
@@ -36,8 +36,8 @@ $active_class_publisher_home = "active_class";
                     <div class="container">
                         <div class="content-section">
                             <div class="add_blog_section  ">
-                                <div class="container blog_section_title fs-2 m-auto justify-content-center d-flex mt-4 pb-2 border-1 border-bottom border-dark">
-                                    ADD NEW BLOGS
+                                <div class="container blog_section_title fs-2 m-auto justify-content-center d-flex mt-4 pb-2 cus-bg-light-secondary-color">
+                                    
                                 </div>
 
                                 <div class="form-section container cus-bg-light-secondary-color mt-4">
@@ -45,7 +45,7 @@ $active_class_publisher_home = "active_class";
                                         <div class="row">
                                             <div class="col-md-12 col-sm-12">
                                                 <div class="mb-3">
-                                                    <label for="title" class="fw-bold m-2"></label>
+                                                    <label for="title" class="fw-bold m-2 pb-2"></label>
                                                     <input type="text" name="title" id="title" class="form-control" >
                                                 </div>
                                             </div>

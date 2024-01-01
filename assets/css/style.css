@@ -415,6 +415,10 @@ dashboard section design ends here
 .add_blog_section{
     height: auto !important;
 }
+.blog_section_title{
+    min-height: 10vh !important;
+    
+}
 
 
 

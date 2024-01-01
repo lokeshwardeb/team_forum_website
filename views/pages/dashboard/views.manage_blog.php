@@ -14,6 +14,17 @@ require_once __DIR__ . '/../inc/header.php';
 
 ?>
 
+<div id="preloader">
+    <!-- manage blog row skele view  ma -->
+                            <?php
+
+                            // skeleton of the page
+                            
+                            require __DIR__ . '/skeletons/views.skeleton.manage_blog.php';
+
+                            ?>
+                        </div>
+
 
 <!-- main code section starts here -->
 <main>
@@ -27,7 +38,7 @@ $active_class_manage_items = "active_class";
                 // $controllers->active_class($active_class);
 
                 $controllers->dashboard_active_class($active_class_manage_items);
-                require_once __DIR__ . '/../inc/dashboard_sidebar.php';
+                require __DIR__ . '/../inc/dashboard_sidebar.php';
 
                 ?>
                 <div class="col-md-9 col-sm-12 mb-4">

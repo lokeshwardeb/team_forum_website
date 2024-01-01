@@ -27,7 +27,7 @@ $active_class_publisher_home = "active_class";
                     // $controllers->active_class($active_class);
 
                     $controllers->dashboard_active_class($active_class_publisher_home);
-                    include __DIR__ . '/../../inc/dashboard_sidebar.php';
+                    include_once __DIR__ . '/../../inc/dashboard_sidebar.php';
 
                     ?>
                     <div class="col-md-9 col-sm-12">
@@ -82,21 +82,21 @@ $active_class_publisher_home = "active_class";
                                                 <div class="activities_content fs-5 mt-4">
                                                     <div class="content_box cus-bg-white d-flex text-success mb-4">
                                                         <div class="section_content me-2 ">
-                                                            <i class="fa-solid fa-star"></i>
+                                                            
                                                            
                                                         </div>
                                                         <div class="section_content"></div>
                                                     </div>
                                                     <div class="content_box cus-bg-white d-flex text-warning mb-4">
                                                         <div class="section_content me-2 ">
-                                                            <i class="fa-regular fa-clock"></i>
+                                                            
                                                             
                                                         </div>
                                                         <div class="section_content"></div>
                                                     </div>
                                                     <div class="content_box cus-bg-white d-flex text-danger">
                                                         <div class="section_content me-2 ">
-                                                            <i class="fa-solid fa-hand-holding-dollar"></i>
+                                                            
                                                             
                                                         </div>
                                                         <div class="section_content"></div>
