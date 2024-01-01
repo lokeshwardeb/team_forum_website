@@ -1,49 +1,37 @@
 <?php
 
-require_once __DIR__ . '/../../../config/conn.php';
-require_once __DIR__ . '/../../../models/models.php';
-require_once __DIR__ . '/../../../controllers/controllers.php';
+require_once __DIR__ . '/../../../../config/conn.php';
+require_once __DIR__ . '/../../../../models/models.php';
+require_once __DIR__ . '/../../../../controllers/controllers.php';
 
 
 $controllers = new Controllers;
 
-require_once __DIR__ . '/../inc/header.php';
+
+
+require_once __DIR__ . '/../../inc/header.php';
 // require_once __DIR__ . '/inc/navbar.php';
 
 
 
 ?>
-<div id="preloader">
-                            <?php
-
-                            // skeleton of the page
-                            
-                            require_once __DIR__ . '/skeletons/views.skeleton.add_blog.php';
-
-                            ?>
-                        </div>
 
 
-<!-- main code section starts here -->
-<main>
+<!-- skeleton code section starts here -->
+<div>
     <div class="add_blog">
         <div class="container-fluid">
             <div class="row">
+            <?php
 
-<!-- enter add blog nav -->
-                <?php
+$active_class_publisher_home = "active_class";
 
-                // main contents of the website
+                    // $controllers->active_class($active_class);
 
-                $active_class_add_blog = "active_class";
+                    $controllers->dashboard_active_class($active_class_publisher_home);
+                    include __DIR__ . '/../../inc/dashboard_sidebar.php';
 
-                // $controllers->active_class($active_class);
-
-                $controllers->dashboard_active_class($active_class_add_blog);
-                include __DIR__ . '/../inc/dashboard_sidebar.php';
-
-                ?>
-                <!-- enter add blog nav -->
+                    ?>
                 <div class="col-md-9 col-sm-12">
                     <div class="container">
                         <div class="content-section">
@@ -57,29 +45,29 @@ require_once __DIR__ . '/../inc/header.php';
                                         <div class="row">
                                             <div class="col-md-12 col-sm-12">
                                                 <div class="mb-3">
-                                                    <label for="title" class="fw-bold m-2">Title</label>
-                                                    <input type="text" name="title" id="title" class="form-control" placeholder="Enter Title">
+                                                    <label for="title" class="fw-bold m-2"></label>
+                                                    <input type="text" name="title" id="title" class="form-control" >
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-sm-12">
                                                 <div class="mb-3">
-                                                    <label for="catagory" class="fw-bold m-2">Catagory</label>
+                                                    <label for="catagory" class="fw-bold m-2"></label>
                                                     <select name="catagory" class="form-control" id="">
-                                                        <option value="Catagory">Select Catagory</option>
-                                                        <option value="FRONT-END DEVELOPMENT">FRONT-END DEVELOPMENT</option>
+                                                        <option value="Catagory"></option>
+                                                        <option value="FRONT-END DEVELOPMENT"></option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-sm-12">
                                                 <div class="mb-3">
-                                                    <label for="sub_title" class="fw-bold m-2">Sub Title</label>
-                                                    <input type="text" name="sub_title" id="sub_title" class="form-control" placeholder="Enter Title">
+                                                    <label for="sub_title" class="fw-bold m-2"></label>
+                                                    <input type="text" name="sub_title" id="sub_title" class="form-control" >
                                                 </div>
                                             </div>
                                             <div class="col-md-12 col-sm-12">
                                                 <div class="mb-3">
-                                                    <label for="sub_title" class="fw-bold m-2">Sub Title</label>
-                                                    <textarea name="article" id="article" class="form-control" placeholder="Write your article" cols="30" rows="10"></textarea>
+                                                    <label for="sub_title" class="fw-bold m-2"></label>
+                                                    <textarea name="article" id="article" class="form-control"  cols="30" rows="10"></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-md-12 col-sm-12">
@@ -100,11 +88,11 @@ require_once __DIR__ . '/../inc/header.php';
             </div>
         </div>
     </div>
-</main>
+</div>
 
-
+<!-- skeleton code section ends here -->
 
 <?php
 // require_once __DIR__ . '/../inc/footer.php';
-require_once __DIR__ . '/../inc/footer_scripts.php';
+// require_once __DIR__ . '/../inc/footer_scripts.php';
 ?>

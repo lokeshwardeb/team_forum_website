@@ -22,11 +22,11 @@ require_once __DIR__ . '/../inc/header.php';
             <div class="row">
                 <?php
 
-$active_class_manage_items = "active_class";
+$active_class_team_members = "active_class";
 
                 // $controllers->active_class($active_class);
 
-                $controllers->dashboard_active_class($active_class_manage_items);
+                $controllers->dashboard_active_class($active_class_team_members);
                 require_once __DIR__ . '/../inc/dashboard_sidebar.php';
 
                 ?>
@@ -35,7 +35,7 @@ $active_class_manage_items = "active_class";
                         <div class="content-section">
                             <div class="add_blog_section  ">
                                 <div class="container blog_section_title fs-2 m-auto justify-content-center d-flex mt-4 pb-2 border-1 border-bottom border-dark">
-                                    MANAGE BLOGS
+                                    MY TEAM MEMBERS
                                 </div>
 
                                 <div class="manage-section container cus-bg-light-secondary-color mt-4">
@@ -46,11 +46,11 @@ $active_class_manage_items = "active_class";
                                                 <thead>
                                                     <tr>
                                                         <th>Sl</th>
-                                                        <th>Item Image</th>
-                                                        <th>Item Name</th>
-                                                        <th>View</th>
-                                                        <th>Update</th>
-                                                        <th>Delete</th>
+                                                        <th>Member Image</th>
+                                                        <th>Member Name</th>
+                                                        <th>Contribution</th>
+                                                        <th>Message Member</th>
+                                                        <th>Report The Member</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -59,16 +59,16 @@ $active_class_manage_items = "active_class";
                                                         <td>
                                                             <img src="/assets/img/company_table_look.jpg" width="50px" class="img-fluid" alt="">
                                                         </td>
-                                                        <td>UI/UX Design</td>
+                                                        <td>Protik</td>
                                                         <td>20</td>
                                                         <td>
-                                                        <button class="btn cus-bg-primary-color text-light hero_get_started_btn">
-                                                        <i class="fa-solid fa-pen-to-square"></i>
+                                                        <button class="btn btn-primary text-light hero_get_started_btn">
+                                                        <i class="fa-solid fa-envelope"></i>
                                                         </button>
                                                         </td>
                                                         <td>
                                                             <button class="btn btn-danger text-light hero_get_started_btn">
-                                                                <i class="fa-solid fa-trash"></i>
+                                                            <i class="fa-solid fa-flag"></i>
 
                                                             </button>
                                                         </td>
@@ -80,16 +80,16 @@ $active_class_manage_items = "active_class";
                                                         <img src="/assets/img/artical_book.jpg" width="50px" class="img-fluid" alt="">
 
                                                         </td>
-                                                        <td>UI/UX Design</td>
+                                                        <td>Amit</td>
                                                         <td>20</td>
                                                         <td>
-                                                        <button class="btn cus-bg-primary-color text-light hero_get_started_btn">
-                                                        <i class="fa-solid fa-pen-to-square"></i>
+                                                        <button class="btn btn-primary text-light hero_get_started_btn">
+                                                        <i class="fa-solid fa-envelope"></i>
                                                         </button>
                                                         </td>
                                                         <td>
                                                             <button class="btn btn-danger text-light hero_get_started_btn">
-                                                                <i class="fa-solid fa-trash"></i>
+                                                            <i class="fa-solid fa-flag"></i>
 
                                                             </button>
                                                         </td>

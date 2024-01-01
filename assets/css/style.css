@@ -409,6 +409,7 @@ dashboard section design ends here
 }
 .activities-user{
     border-right: 5px solid var(--custom-primary-color) !important;
+    min-height: 50vh;
 }
 
 .add_blog_section{
@@ -428,3 +429,39 @@ dashboard section design ends here
 
 */
 
+
+/*
+=========================================================================
+
+skeleton section design starts here
+
+=========================================================================
+
+*/
+
+#preloader{
+  
+    height: 100vh !important;
+    width: 100vw !important;
+    /* display: none; */
+}
+
+.info-content{
+    min-height: 20vh;
+}
+.content_box{
+    min-height: 5vh !important;
+}
+.welcome-section{
+    min-height: 6vh !important;
+}
+
+
+/*
+=========================================================================
+
+skeleton section design ends here
+
+=========================================================================
+
+*/

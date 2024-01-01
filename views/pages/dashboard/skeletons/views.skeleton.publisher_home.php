@@ -1,31 +1,22 @@
 <?php
 
-require_once __DIR__ . '/../../../config/conn.php';
-require_once __DIR__ . '/../../../models/models.php';
-require_once __DIR__ . '/../../../controllers/controllers.php';
+require_once __DIR__ . '/../../../../config/conn.php';
+require_once __DIR__ . '/../../../../models/models.php';
+require_once __DIR__ . '/../../../../controllers/controllers.php';
 
 
 $controllers = new Controllers;
 
-require_once __DIR__ . '/../inc/header.php';
+require_once __DIR__ . '/../../inc/header.php';
 // require_once __DIR__ . '/inc/navbar.php';
 
 
 
 ?>
 
-<div id="preloader">
-                            <?php
-
-                            // skeleton of the page
-                            
-                            require_once __DIR__ . '/skeletons/views.skeleton.publisher_home.php';
-
-                            ?>
-                        </div>
 
     <!-- main code section starts here -->
-    <main>
+    <div>
         <div class="my-home-section">
             <div class="container-fluid">
                 <div class="row">
@@ -35,51 +26,41 @@ $active_class_publisher_home = "active_class";
 
                     // $controllers->active_class($active_class);
 
-                    ?>
-
-                    
-                    
-                    
-
-<?php                    
-
-                    // main contents of the page
-
                     $controllers->dashboard_active_class($active_class_publisher_home);
-                    include __DIR__ . '/../inc/dashboard_sidebar.php';
+                    include __DIR__ . '/../../inc/dashboard_sidebar.php';
 
                     ?>
                     <div class="col-md-9 col-sm-12">
                         <div class="container">
                             <div class="content-section">
-                                <div class="welcome-section fs-2 m-4">
-                                    Hi, Protik, welcome back !
+                                <div class="welcome-section cus-bg-light-secondary-color h-25 fs-2 m-4">
+                                    
                                 </div>
                                 <div class="info-section">
                                     <div class="row">
-                                        <div class="col-md-3 col-sm-12 cus-dash-bg-violent rounded-4 mt-4 border border-5 border-light">
+                                        <div class="col-md-3 col-sm-12 cus-bg-light-secondary-color rounded-4 mt-4 border border-5 border-light">
                                             <div class="info-content p-4 text-center fs-4 text-light ">
-                                                <div class="info-count">1000</div>
-                                                <div class="info-name">Total Publish</div>
+                                                <div class="info-count"></div>
+                                                <div class="info-name"></div>
                                             </div>
                                         </div>
-                                        <div class="col-md-3 col-sm-12 cus-bg-primary-color rounded-4 mt-4 border border-5 border-light">
+                                        <div class="col-md-3 col-sm-12 cus-bg-light-secondary-color rounded-4 mt-4 border border-5 border-light">
                                             <div class="info-content p-4 text-center fs-4 text-light ">
-                                                <div class="info-count">1500</div>
-                                                <div class="info-name">UI/UX Design</div>
+                                                <div class="info-count"></div>
+                                                <div class="info-name"></div>
                                             </div>
                                         </div>
-                                        <div class="col-md-3 col-sm-12 bg-danger rounded-4 mt-4 border border-5 border-light">
+                                        <div class="col-md-3 col-sm-12 cus-bg-light-secondary-color rounded-4 mt-4 border border-5 border-light">
                                             <div class="info-content p-4 text-center fs-4 text-light ">
-                                                <div class="info-count">1500</div>
-                                                <div class="info-name">UI/UX Design</div>
+                                                <div class="info-count"></div>
+                                                <div class="info-name"></div>
                                             </div>
                                         </div>
                                         
-                                        <div class="col-md-3 col-sm-12 bg-primary rounded-4 mt-4 border border-5 border-light">
+                                        <div class="col-md-3 col-sm-12 cus-bg-light-secondary-color rounded-4 mt-4 border border-5 border-light">
                                             <div class="info-content p-4 text-center fs-4 text-light ">
-                                                <div class="info-count">1500</div>
-                                                <div class="info-name">UI/UX Design</div>
+                                                <div class="info-count"></div>
+                                                <div class="info-name"></div>
                                             </div>
                                         </div>
                                         
@@ -87,38 +68,38 @@ $active_class_publisher_home = "active_class";
                                 </div>
                                 <div class="activities-section m-auto">
                                     <div class="row">
-                                        <div class="col-md-6 col-sm-12 activities-user cus-activities-bg p-4 mt-4">
-                                            <img src="/assets/img/man1.jpg" class="img-fluid activities_img rounded-circle d-flex m-auto" alt="">
-                                            <div class="user_name fs-2 text-center mt-4 mb-4">
-                                                Protik
+                                        <div class="col-md-6 col-sm-12 activities-user cus-bg-light-secondary-color p-4 mt-4">
+                                            <img src="" class="img-fluid bg-light activities_img rounded-circle d-flex m-auto" alt="">
+                                            <div class="user_name fs-2 text-center bg-light w-100 h-25 mt-4 mb-4">
+                                                
                                             </div>
                                         </div>
-                                        <div class="col-md-6 col-sm-12 cus-activities-info-bg mt-4 p-4">
+                                        <div class="col-md-6 col-sm-12  cus-bg-light-secondary-color mt-4 p-4">
                                             <div class="user_activities_info m-4">
-                                                <div class="activities_title fs-2 ">
-                                                    Your Activies
+                                                <div class="activities_title fs-2 cus-bg-white h-25">
+                                                    
                                                 </div>
                                                 <div class="activities_content fs-5 mt-4">
-                                                    <div class="content_box d-flex text-success">
+                                                    <div class="content_box cus-bg-white d-flex text-success mb-4">
                                                         <div class="section_content me-2 ">
                                                             <i class="fa-solid fa-star"></i>
-                                                            Reviews:
+                                                           
                                                         </div>
-                                                        <div class="section_content">2</div>
+                                                        <div class="section_content"></div>
                                                     </div>
-                                                    <div class="content_box d-flex text-warning">
+                                                    <div class="content_box cus-bg-white d-flex text-warning mb-4">
                                                         <div class="section_content me-2 ">
                                                             <i class="fa-regular fa-clock"></i>
-                                                            Read Time:
+                                                            
                                                         </div>
-                                                        <div class="section_content">1</div>
+                                                        <div class="section_content"></div>
                                                     </div>
-                                                    <div class="content_box d-flex text-danger">
+                                                    <div class="content_box cus-bg-white d-flex text-danger">
                                                         <div class="section_content me-2 ">
                                                             <i class="fa-solid fa-hand-holding-dollar"></i>
-                                                            Total Donate:
+                                                            
                                                         </div>
-                                                        <div class="section_content">3</div>
+                                                        <div class="section_content"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -133,12 +114,12 @@ $active_class_publisher_home = "active_class";
                 </div>
             </div>
         </div>
-    </main>
+</div>
 
 
 
 <?php
 // require_once __DIR__ . '/../inc/footer.php';
-require_once __DIR__ . '/../inc/footer_scripts.php';
+// require_once __DIR__ . '/../../inc/footer_scripts.php';
 ?>
 

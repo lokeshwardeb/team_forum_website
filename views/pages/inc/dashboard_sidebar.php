@@ -46,22 +46,28 @@ $controllers = new Controllers;
                                         </a>
                                     </li>
                                     <li class="list-group mb-4 dashboard-hover-link p-2 rounded <?php echo $controllers->dashboard_active_class($active_class_manage_items) ?>">
-                                        <a href="" class="nav-link ">
+                                        <a href="/manage_blog" class="nav-link ">
                                             <i class="fa-solid fa-list-check"></i>
-                                            Manage Items
+                                            Manage Blogs
                                         </a>
                                     </li>
-                                    <li class="list-group dashboard-hover-link p-2 rounded mb-4 <?php echo $controllers->dashboard_active_class($active_class_all_blogs) ?>">
-                                        <a href="" class="nav-link ">
+                                    <li class="list-group dashboard-hover-link p-2 rounded mb-4 <?php echo $controllers->dashboard_active_class($active_class_my_all_blogs) ?>">
+                                        <a href="/my_all_blogs" class="nav-link ">
                                             <i class="fa-regular fa-newspaper"></i>
-                                            All Blogs
+                                           My All Blogs
                                         </a>
                                     </li>
                                     <div class="border border-light"></div>
+                                    <li class="list-group dashboard-hover-link p-2 mt-4 rounded <?php echo $controllers->dashboard_active_class($active_class_team_members) ?>">
+                                        <a href="/my_team_members" class="nav-link ">
+                                            <i class="fa-regular fa-newspaper"></i>
+                                            My Team Members
+                                        </a>
+                                    </li>
                                     <li class="list-group dashboard-hover-link p-2 mt-4 rounded <?php echo $controllers->dashboard_active_class($active_class_view_post) ?>">
                                         <a href="/home" target="_blank" class="nav-link ">
                                             <i class="fa-regular fa-newspaper"></i>
-                                            View post
+                                            View Post
                                         </a>
                                     </li>
                                 </ul>

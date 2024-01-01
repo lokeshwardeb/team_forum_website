@@ -1,21 +1,16 @@
-function change_ac(){
-    var joint_second_user = document.getElementById("joint_second_user");
-// let joint_second_user_value = joint_second_user.value;
-var main_submit = document.getElementById('main_submit');
 
+// auto reload functionalities
+// here 5000 means 5 seconds
 
-var account_type = document.getElementById('account_type').value;
+// setTimeout(function(){
+//     window.location.reload();
+//  }, 5000);
 
-console.log('the value is' . joint_second_user_value)
-if(account_type == "Joint Account"){
-    joint_second_user.classList.remove('d-none');
-    main_submit.classList.add('d-none');
-    
-}else{
-    joint_second_user.classList.add('d-none');
-    main_submit.classList.remove('d-none');
+ 
+//  let loader = document.getElementById("preloader");
 
-}
-// joint_second_user.classList.add('d-none');
+//  window.addEventListener("load", function () { 
+//     loader.style.display = "none"
+//   })
 
-}
+  console.log("connected js")

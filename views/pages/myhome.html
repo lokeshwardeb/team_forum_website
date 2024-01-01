@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/assets//css/bootstrap.min.css">
+</head>
+
+<body>
+  <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <button id="alert" class="btn btn-dark" onclick="sweetalert2()">Click dsdHere</button>
+
+
+
+
+
+  <script>
+    document.getElementById("alert");
+
+    function alert_btn() {
+      // this is the sweet alert function
+      swal("Title", "Text", "error");
+    }
+
+
+
+    function customized_alert() {
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: "btn btn-dark",
+          cancelButton: "btn btn-danger"
+        },
+        buttonsStyling: false
+      });
+      swalWithBootstrapButtons.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!",
+        reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+          swalWithBootstrapButtons.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success"
+          });
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire({
+            title: "Cancelled",
+            text: "Your imaginary file is safe :)",
+            icon: "error",
+            cancelButton: "green"
+          });
+        }
+      });
+    }
+
+
+
+
+
+    function sweetalert2() {
+      //             Swal.fire({
+      //   title: "The Internet?",
+      //   text: "That thing is still around?",
+      //   icon: "warning"
+      // });
+
+
+
+ 
+      // this is the sweet alert 2 function
+
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "black",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+        loader: '...',
+
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success",
+            confirmButtonColor: "green",
+            showCancelButton: false,
+            
+
+
+          })
+        }
+      });
+
+      setTimeout(function(){
+   window.location.reload();
+}, 5000);
+
+
+    }
+  </script>
+
+  <script src="/assets/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

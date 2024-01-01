@@ -9,9 +9,7 @@ class Controllers extends sql_info
 {
 
     public function dashboard_active_class($active_class){
-        if($active_class == 'add_blog'){
-            return 'dashboard-link-actived';
-        }elseif($active_class == 'publisher_home'){
+        if($active_class == 'active_class'){
             return 'dashboard-link-actived';
         }
     }
