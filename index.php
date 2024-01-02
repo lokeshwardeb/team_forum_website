@@ -14,6 +14,7 @@ $Routes = [
     '/manage_blog' => __DIR__ . '/views/pages/dashboard/views.manage_blog.php',
     '/my_all_blogs' => __DIR__ . '/views/pages/dashboard/views.my_all_blogs.php',
     '/my_team_members' => __DIR__ . '/views/pages/dashboard/views.my_team_members.php',
+    '/signup' => __DIR__ . '/views/pages/views.signup.php',
     '/skeleton_publisher_home' => __DIR__ . '/views/pages/dashboard/skeletons/views.skeleton.publisher_home.php',
     '/skeleton_add_blog' => __DIR__ . '/views/pages/dashboard/skeletons/views.skeleton.add_blog.php',
     '/skeleton_manage_blog' => __DIR__ . '/views/pages/dashboard/skeletons/views.skeleton.manage_blog.php',

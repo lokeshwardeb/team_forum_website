@@ -4,14 +4,14 @@ $sql = new sql_info;
 
 class sql_info extends connect{
 
-    function show_all($table_name){
-        $show_all_sql = "SELECT * FROM $table_name";
+    function show_all($table_name, $order_by_condition=''){
+        $show_all_sql = "SELECT * FROM $table_name $order_by_condition;";
         $result = $this->connection()->query($show_all_sql);
 
         return $result;
     }
-    function show_where($table_name, $where_conditions){
-        $show_where_sql = "SELECT * FROM $table_name WHERE $where_conditions";
+    function show_where($table_name, $where_conditions, $order_by_condition=''){
+        $show_where_sql = "SELECT * FROM $table_name WHERE $where_conditions $order_by_condition;";
         $result = $this->connection()->query($show_where_sql);
 
         return $result;

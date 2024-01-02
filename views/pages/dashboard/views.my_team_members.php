@@ -51,7 +51,7 @@ $active_class_team_members = "active_class";
 
                                 <div class="manage-section container cus-bg-light-secondary-color mt-4">
                                     <div class="container">
-                                        <div class="total_item_section m-4 p-4 fs-4">Total Items : 4</div>
+                                        <div class="total_item_section m-4 p-4 fs-4">Total Members : 4</div>
                                         <div class="table-responsive">
                                             <table class="table align-middle table-hover">
                                                 <thead>
