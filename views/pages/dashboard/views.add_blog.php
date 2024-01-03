@@ -10,6 +10,8 @@ $controllers = new Controllers;
 require_once __DIR__ . '/../inc/header.php';
 // require_once __DIR__ . '/inc/navbar.php';
 
+$controllers->login_check();
+
 
 
 ?>
@@ -66,6 +68,7 @@ require_once __DIR__ . '/../inc/header.php';
                                                 <div class="mb-3">
                                                     <label for="title" class="fw-bold m-2">Title</label>
                                                     <input type="text" name="title" id="title" class="form-control" placeholder="Enter Title" required>
+                                                   
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-sm-12">
@@ -104,7 +107,7 @@ require_once __DIR__ . '/../inc/header.php';
                                             <div class="col-md-12 col-sm-12 mb-4">
                                                 <div class="mb-3">
                                                     <label for="img" class="fw-bold m-2">Choose Image</label>
-                                                   <input type="file" name="img" id="img" class="form-control">
+                                                   <input type="file" name="img" id="img" class="form-control" >
                                                 </div>
                                             </div>
                                             <div class="col-md-12 col-sm-12">

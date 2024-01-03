@@ -10,6 +10,8 @@ $controllers = new Controllers;
 require_once __DIR__ . '/../inc/header.php';
 // require_once __DIR__ . '/inc/navbar.php';
 
+$controllers->login_check();
+
 
 
 ?>
@@ -51,7 +53,21 @@ $active_class_team_members = "active_class";
 
                                 <div class="manage-section container cus-bg-light-secondary-color mt-4">
                                     <div class="container">
-                                        <div class="total_item_section m-4 p-4 fs-4">Total Members : 4</div>
+                                        <div class="total_item_section m-4 p-4 fs-4">Total Members : 
+                                            <?php
+
+                                            $result_team_count = $controllers->show_all("users");
+
+                                            if($result_team_count){
+                                                if($result_team_count->num_rows > 0){
+                                                    echo $result_team_count->num_rows;
+                                                }else{
+                                                    echo '0';
+                                                }
+                                            }
+
+                                            ?>
+                                        </div>
                                         <div class="table-responsive">
                                             <table class="table align-middle table-hover">
                                                 <thead>
@@ -65,12 +81,25 @@ $active_class_team_members = "active_class";
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
+
+                                                <?php
+
+                                                // $result_team = $controllers->join_2_show_all("*", "`article` ar", "`images` img", "ar.image_id = img.image_id", "`users` u", "u.user_id = ar.user_id", "ORDER BY u.user_id ASC");
+                                                // $result_team = $controllers->join_2_show_all("*", "`article` ar", "`images` img", "ar.image_id = img.image_id", "`users` u", "u.user_id = ar.user_id", "ORDER BY u.user_id ASC");
+                                                // $result_team = $controllers->join_show_all("*", "`users` u", "`images` img", "u.user_id = img.user_id");
+                                                $result_team = $controllers->show_all("users");
+
+                                                if($result_team){
+                                                    if($result_team->num_rows > 0){
+                                                        while($row = $result_team->fetch_assoc()){
+                                                            echo '
+                                                            
+                                                        <tr>
                                                         <td>1</td>
                                                         <td>
                                                             <img src="/assets/img/company_table_look.jpg" width="50px" class="img-fluid" alt="">
                                                         </td>
-                                                        <td>Protik</td>
+                                                        <td>'.$row['user_name'].'</td>
                                                         <td>20</td>
                                                         <td>
                                                         <button class="btn btn-primary text-light hero_get_started_btn">
@@ -85,27 +114,17 @@ $active_class_team_members = "active_class";
                                                         </td>
                                                         
                                                     </tr>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>
-                                                        <img src="/assets/img/artical_book.jpg" width="50px" class="img-fluid" alt="">
+                                                            
+                                                            ';
+                                                        }
+                                                    }
+                                                }
 
-                                                        </td>
-                                                        <td>Amit</td>
-                                                        <td>20</td>
-                                                        <td>
-                                                        <button class="btn btn-primary text-light hero_get_started_btn">
-                                                        <i class="fa-solid fa-envelope"></i>
-                                                        </button>
-                                                        </td>
-                                                        <td>
-                                                            <button class="btn btn-danger text-light hero_get_started_btn">
-                                                            <i class="fa-solid fa-flag"></i>
+                                                ?>
 
-                                                            </button>
-                                                        </td>
-                                                        
-                                                    </tr>
+
+                                                    
+                                                    
                                                     
                                                 </tbody>
                                             </table>

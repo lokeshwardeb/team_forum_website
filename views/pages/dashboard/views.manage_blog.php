@@ -10,6 +10,8 @@ $controllers = new Controllers;
 require_once __DIR__ . '/../inc/header.php';
 // require_once __DIR__ . '/inc/navbar.php';
 
+$controllers->login_check();
+
 
 
 ?>
@@ -51,7 +53,23 @@ $active_class_manage_items = "active_class";
 
                                 <div class="manage-section container cus-bg-light-secondary-color mt-4">
                                     <div class="container">
-                                        <div class="total_item_section m-4 p-4 fs-4">Total Items : 4</div>
+                                        <div class="total_item_section m-4 p-4 fs-4">Total Items : 
+                                            <?php
+
+                                            $user_id = $_SESSION['user_id'];
+
+                                            $result_total = $controllers->show_where("article", "`user_id` = '$user_id'");
+
+                                            if($result_total){
+                                                if($result_total->num_rows > 0){
+                                                    echo $result_total->num_rows;
+                                                }else{
+                                                    echo '0';
+                                                }
+                                            }
+
+                                            ?>
+                                        </div>
                                         <div class="table-responsive">
                                             <table class="table align-middle table-hover">
                                                 <thead>
@@ -65,27 +83,57 @@ $active_class_manage_items = "active_class";
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>
-                                                            <img src="/assets/img/company_table_look.jpg" width="50px" class="img-fluid" alt="">
-                                                        </td>
-                                                        <td>UI/UX Design</td>
-                                                        <td>20</td>
-                                                        <td>
-                                                        <button class="btn cus-bg-primary-color text-light hero_get_started_btn">
-                                                        <i class="fa-solid fa-pen-to-square"></i>
-                                                        </button>
-                                                        </td>
-                                                        <td>
-                                                            <button class="btn btn-danger text-light hero_get_started_btn">
-                                                                <i class="fa-solid fa-trash"></i>
+                                                  <?php
 
-                                                            </button>
-                                                        </td>
-                                                        
-                                                    </tr>
-                                                    <tr>
+                                                  $user_id = $_SESSION['user_id'];
+
+                                                  $result_article = $controllers->show_where("article", "`user_id` = '$user_id'");
+
+                                                  if($result_article){
+                                                    if($result_article->num_rows > 0){
+                                                        $sl_no = 1;
+                                                        while($row = $result_article->fetch_assoc()){
+                                                            echo '  
+                                                                    <tr>
+                                                                    <td>'. $sl_no .'</td>
+                                                                    <td>
+                                                                        <img src="/assets/img/company_table_look.jpg" width="50px" class="img-fluid" alt="">
+                                                                    </td>
+                                                                    <td>'.$row['title'].'</td>
+                                                                    <td>20</td>
+                                                                    <td>
+                                                                    <a href="/update_blog?blog_sl_no='.$row['article_id'].'">
+                                                                        <button class="btn cus-bg-primary-color text-light hero_get_started_btn">
+                                                                            <i class="fa-solid fa-pen-to-square"></i>
+                                                                            </button>
+                                                                    </a>
+                                                                    </td>
+                                                                    <td>
+                                                                    <a href="/update_blog" class="nav-link">
+                                                                        <button class="btn btn-danger text-light hero_get_started_btn">
+                                                                            <i class="fa-solid fa-trash"></i>
+
+                                                                        </button>
+                                                                        </a>
+                                                                    </td>
+                                                                    
+                                                                </tr>';
+
+                                                                $sl_no++;
+                                                        }
+                                                    }else{
+                                                        echo '
+                                                        <script>
+                                                        danger_alert("Sorry, you have not published any blogs yet !", "Please publish a blog. If you are facing the same problem after publishing the blogs then contact the developer !!");
+                                                        </script>
+                                                        ';
+                                                    }
+                                                  }
+
+                                                  
+
+                                                  ?>
+                                                    <!-- <tr>
                                                         <td>1</td>
                                                         <td>
                                                         <img src="/assets/img/artical_book.jpg" width="50px" class="img-fluid" alt="">
@@ -105,7 +153,7 @@ $active_class_manage_items = "active_class";
                                                             </button>
                                                         </td>
                                                         
-                                                    </tr>
+                                                    </tr> -->
                                                     
                                                 </tbody>
                                             </table>

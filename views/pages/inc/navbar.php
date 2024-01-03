@@ -27,8 +27,8 @@
                                     Us</a>
                             </li>
 
-                            <li><button id="button1" class="ms-4 nav_login_btn btn cus-bg-primary-color text-light">Log
-                                    in</button></li>
+                            <li><a href="/login"><button id="button1" class="ms-4 nav_login_btn btn cus-bg-primary-color text-light">Log
+                                    in</button></a></li>
                         </ul>
                     </div>
             </nav>

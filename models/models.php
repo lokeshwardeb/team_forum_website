@@ -17,6 +17,20 @@ class sql_info extends connect{
         return $result;
 
     }
+    function join_show_all($select_conditions, $first_table_and_short_name, $second_table_and_short_name, $on_conditions, $order_by_table_name_and_conditions = '', $where_conditions = '1'){
+        // $sql = "SELECT a.article_id, a.title, c.catagory_id, c.catagory_name FROM `article` a  JOIN  catagory c  ON a.catagory_id = c.catagory_id WHERE c.catagory_name = 'UI/UX DESIGN'";
+        $sql = "SELECT $select_conditions FROM $first_table_and_short_name  JOIN  $second_table_and_short_name  ON $on_conditions WHERE $where_conditions $order_by_table_name_and_conditions";
+        $result = $this->connection()->query($sql);
+
+        return $result;
+    }
+    function join_2_show_all($first_select_conditions, $first_table_and_short_name, $second_table_and_short_name, $first_on_conditions, $third_table_and_short_name, $second_on_conditions, $order_by_table_name_and_conditions = '', $where_conditions = '1'){
+        // $sql = "SELECT a.article_id, a.title, c.catagory_id, c.catagory_name FROM `article` a  JOIN  catagory c  ON a.catagory_id = c.catagory_id WHERE c.catagory_name = 'UI/UX DESIGN'";
+        $sql = "SELECT $first_select_conditions FROM $first_table_and_short_name JOIN $second_table_and_short_name ON $first_on_conditions JOIN $third_table_and_short_name ON $second_on_conditions WHERE $where_conditions $order_by_table_name_and_conditions;";
+        $result = $this->connection()->query($sql);
+
+        return $result;
+    }
     function insert_all(){
         $insert_all_sql = "";
         $result = $this->connection()->query($insert_all_sql);
@@ -39,8 +53,8 @@ class sql_info extends connect{
         return $result;
 
     }
-    function update_where(){
-        $update_where_sql = "";
+    function update_where($table_name, $update_rows_and_values, $grab_point_and_grab_point_values = '1'){
+        $update_where_sql = "UPDATE `$table_name` SET $update_rows_and_values WHERE $grab_point_and_grab_point_values";
         $result = $this->connection()->query($update_where_sql);
 
         return $result;

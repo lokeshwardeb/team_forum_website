@@ -27,17 +27,20 @@ class Controllers extends sql_info
             $img_type = $_FILES['img']['type'];
 
 
+            $user_id = $_SESSION['user_id'];
+
             $album_id = $catagory;
 
             // echo 'the img type is : ' . $img_type;
 
             $image_path = __DIR__ . '/../assets/uploads/img/' . $img_name;
+            // $image_path =  '/assets/uploads/img/' . $img_name;
 
 
             $the_result = $this->show_where("article", " `album_id` = '$album_id' AND `catagory_id` = '$catagory' AND `title` = '$title' AND `sub_title` = '$sub_title' AND `description` = '$article'");
 
-            if($the_result){
-                if($the_result->num_rows > 0){
+            if ($the_result) {
+                if ($the_result->num_rows > 0) {
                     echo '
                     
                     <script>
@@ -48,33 +51,33 @@ class Controllers extends sql_info
                     ';
 
                     // echo 'the danger';
-                }else{
-                    
-                    
-                $result_img = $this->insert_where("images", "`album_id`, `image_path`, `image_type`", "'$album_id', '$image_path', '$img_type'");
+                } else {
 
-                // $result_select = $this->show_all("images", " ORDER BY `images`.`image_id` DESC");
-                $result_select = $this->show_all("images");
-    
-                if ($result_select) {
-                    if ($result_select->num_rows > 0) {
-                        while ($row = $result_select->fetch_assoc()) {
-                            $last_img_id = $row['image_id'];
+
+                    $result_img = $this->insert_where("images", "`album_id`, `image_name`, `image_type`", "'$album_id', '$img_name', '$img_type'");
+
+                    // $result_select = $this->show_all("images", " ORDER BY `images`.`image_id` DESC");
+                    $result_select = $this->show_all("images");
+
+                    if ($result_select) {
+                        if ($result_select->num_rows > 0) {
+                            while ($row = $result_select->fetch_assoc()) {
+                                $last_img_id = $row['image_id'];
+                            }
                         }
                     }
-                }
-    
-    
-    
-                $result = $this->insert_where("article", "`album_id`, `catagory_id`, `title`, `sub_title`, `description`, `image_id`", "'$album_id', '$catagory', '$title', '$sub_title', '$article', '$last_img_id'");
-    
-    
-    
-    
-                if ($result_img) {
-                    if ($result) {
-    
-                        echo '
+
+
+
+                    $result = $this->insert_where("article", "`album_id`, `catagory_id`, `title`, `sub_title`, `description`, `image_id`, `user_id`", "'$album_id', '$catagory', '$title', '$sub_title', '$article', '$last_img_id', '$user_id'");
+
+
+
+
+                    if ($result_img) {
+                        if ($result) {
+
+                            echo '
                 
                         <script>
                         success_alert("The new blog has been added successfully");
@@ -82,9 +85,9 @@ class Controllers extends sql_info
                         </script>
                         
                         ';
-    
-                        if (move_uploaded_file($img_tmp_name, $image_path)) {
-                            echo '
+
+                            if (move_uploaded_file($img_tmp_name, $image_path)) {
+                                echo '
                 
                             <script>
                             success_alert("The new blog has been added successfully with image !");
@@ -92,10 +95,10 @@ class Controllers extends sql_info
                             </script>
                             
                             ';
-                        }
-                    }else{
-                        // that means if the blog are not published successfully
-                        echo '
+                            }
+                        } else {
+                            // that means if the blog are not published successfully
+                            echo '
                 
                         <script>
                         danger_alert("The blog are not published successfully !");
@@ -103,10 +106,10 @@ class Controllers extends sql_info
                         </script>
                         
                         ';
-                    }
-                }else{
-                    // that means if the image are not inserted successfully
-                    echo '
+                        }
+                    } else {
+                        // that means if the image are not inserted successfully
+                        echo '
                 
                     <script>
                     danger_alert("The blog published but the image cannot be published !");
@@ -114,16 +117,9 @@ class Controllers extends sql_info
                     </script>
                     
                     ';
+                    }
                 }
-    
-    
-    
-    
-    
-
-                    
-                }
-            }else{
+            } else {
                 echo '
                 
                 <script>
@@ -136,8 +132,8 @@ class Controllers extends sql_info
 
 
 
-            
-  
+
+
 
 
 
@@ -155,36 +151,142 @@ class Controllers extends sql_info
         }
     }
 
+    public function update_blog($blog_id){
+        if(isset($_POST['update_blog'])){
+            $title = $this->pure_data($_POST['title']);
+            $sub_title = $this->pure_data($_POST['sub_title']);
+            $catagory = $this->pure_data($_POST['catagory']);
+            $article = $this->pure_data($_POST['article']);
 
-    public function signup(){
-        if(isset($_POST['signup_btn'])){
+            $img_name = $_FILES['img']['name'];
+            $img_tmp_name = $_FILES['img']['tmp_name'];
+
+            $upload_dir = __DIR__ . '/../assets/uploads/img/';
+            
+            $blog_id;
+
+            $result = $this->show_where("article", "`article_id` = '$blog_id'");
+
+            if($result){
+                if($result->num_rows == 1){
+                    // that means there are only one row will be exists
+
+                    // getting the img id no 
+                    
+                    while($row = $result->fetch_assoc()){
+                        $get_img_id = $row['image_id'];
+                    }
+
+
+                    // updating the article
+                    
+                    $result_update = $this->update_where("article", "`title` = '$title', `sub_title` = '$sub_title', `catagory_id` = '$catagory', `description` = '$article'");
+
+                    // updating the article img
+                    $result_update_img = $this->update_where("images", "`image_name` = '$img_name'", "`image_id` = '$get_img_id'");
+
+                    if($result_update){
+                        // that means updated successfully
+
+
+                        if($result_update_img){
+
+                            // if the file is not exist then it will upload on the server otherwise it will not upload the same file again
+
+                        if(!file_exists($upload_dir . $img_name)){
+                            move_uploaded_file($img_tmp_name, $upload_dir . $img_name);
+                            // echo 'the img has been inserted';
+                        }
+
+                        echo '
+                        
+                        <script>
+                        success_alert("The blog has been updated successfully", "The blog has been updated with its new values");
+                        </script>
+                        
+                        ';
+
+                        }
+
+
+                        
+                    }else{
+                        // that means not updated successfully
+                        echo '
+                        
+                        <script>
+                        danger_alert("The blog has not been updated successfully", "There were some issues while updating the values !!");
+                        </script>
+                        
+                        ';
+                    }
+                }
+            }
+
+            
+
+        }
+    }
+
+
+    public function signup()
+    {
+        if (isset($_POST['signup_btn'])) {
             $name = $this->pure_data($_POST['name']);
             $email = $this->pure_data($_POST['email']);
             $password = $this->pure_data($_POST['password']);
             $cpassword = $this->pure_data($_POST['cpassword']);
 
-            if($password == $cpassword){
+            if ($password == $cpassword) {
                 // that means the entered the same password
 
-                $hash = password_hash($password, PASSWORD_DEFAULT);
+                $result_check_user = $this->show_where("users", "`email` = '$email'");
 
-                $result = $this->insert_where("users", "`user_name`, `email`, `password`", "'$name', '$email', '$hash'");
+                if ($result_check_user) {
+                    if ($result_check_user->num_rows > 0) {
+                        // that means the user already exists with the email
+                        echo '
+                    
+                        <script>
+                        
+                        danger_alert("User already exists !", "User already exists with the email ! Please login with your credentials");
+    
+                        </script>
+    
+                        ';
+                    } else {
+                        // that means the user is not exists with the email
 
-                if($result){
+                        $hash = password_hash($password, PASSWORD_DEFAULT);
+
+                        $result = $this->insert_where("users", "`user_name`, `email`, `password`", "'$name', '$email', '$hash'");
+
+                        if ($result) {
+                            echo '
+                    
+                            <script>
+                            
+                            success_alert("Signed Up Successfully", "Your account has been signed up successfully");
+
+                            </script>
+
+                            ';
+                        }
+                    }
+                } else {
+                    // that means the result check user are not runs
                     echo '
                     
                     <script>
                     
-                    success_alert("Signed Up Successfully", "Your account has been signed up successfully");
+                    danger_alert("Something Error !", "There are some error happens while processing with the signup functionalities ! Please contract the developer !");
 
                     </script>
 
                     ';
                 }
-
-
-            }else{
-                // the password are not same
+            } else {
+                // that means the password are not same
                 echo '
                 <script>
                 
@@ -194,6 +296,88 @@ class Controllers extends sql_info
                 
                 ';
             }
+        }
+    }
+
+
+
+    public function login()
+    {
+        if (isset($_POST['login_btn'])) {
+            $email = $this->pure_data($_POST['email']);
+            $password = $this->pure_data($_POST['password']);
+
+            $result = $this->show_where("users", "`email` = '$email'");
+
+            if ($result) {
+                if ($result->num_rows == 1) {
+                    // if the only one user is found
+                    while($row = $result->fetch_assoc()){
+                        $hash = $row['password'];
+
+                        $password_verify = password_verify($password, $hash);
+
+                        if($password == $password_verify){
+                            // that means the password is correct
+                            echo '
+                            <script>
+                            
+                            success_alert("Loggedin Successfully !!", "Loggedin successfully with your credentials");
+
+                            </script>
+                            
+                            ';
+
+                            $_SESSION['login_status'] = 'loggedin';
+
+                            $_SESSION['user_id'] = $row['user_id'];
+                            $_SESSION['username'] = $row['user_name'];
+                            $_SESSION['user_email'] = $row['user_email'];
+
+                            header('location: /publisher_home');
+
+                        }else{
+                            // that means the password is not correct
+                            echo '
+                            <script>
+                            
+                            danger_alert("Wrong password !!", "Please enter the correct password for login");
+
+                            </script>
+                            
+                            ';
+                        }
+
+                    }
+                }else{
+                    // that means the user does not exist on db
+                    echo '
+                    <script>
+                    
+                    danger_alert("User does not exist !!", "Please enter the correct credentials");
+
+                    </script>
+                    
+                    ';
+                }
+            }
+        }
+    }
+
+
+
+    public function login_check(){
+        if(!isset($_SESSION['login_status'])){
+            // that means if the user is not loggedin
+            echo '
+            
+            <script>
+            
+            location.href = "/login"
+
+            </script>
+            
+            ';
         }
     }
 

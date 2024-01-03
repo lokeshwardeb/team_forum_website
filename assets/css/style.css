@@ -95,7 +95,11 @@ common css design starts here
 .cus-activities-info-bg{
     background-color: var(--cus-dash-activities-info-color) !important;
 }
-
+.blog_scroll{
+    max-height: 100vh;
+    overflow: hidden;
+    overflow-y: scroll;
+}
 
 /*
 =========================================================================

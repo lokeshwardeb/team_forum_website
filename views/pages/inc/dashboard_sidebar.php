@@ -60,14 +60,28 @@ $controllers = new Controllers;
                                     <div class="border border-light"></div>
                                     <li class="list-group dashboard-hover-link p-2 mt-4 rounded <?php echo $controllers->dashboard_active_class($active_class_team_members) ?>">
                                         <a href="/my_team_members" class="nav-link ">
-                                            <i class="fa-regular fa-newspaper"></i>
+                                        <i class="fa-solid fa-people-group"></i>
                                             My Team Members
                                         </a>
                                     </li>
+                                    <li class="list-group dashboard-hover-link p-2 mt-4 rounded <?php echo $controllers->dashboard_active_class($active_class_settings) ?>">
+                                        <a href="/my_team_members" class="nav-link ">
+                                        <i class="fa-solid fa-gear"></i>
+                                            Settings
+                                        </a>
+                                    </li>
+                                  
                                     <li class="list-group dashboard-hover-link p-2 mt-4 rounded <?php echo $controllers->dashboard_active_class($active_class_view_post) ?>">
                                         <a href="/home" target="_blank" class="nav-link ">
-                                            <i class="fa-regular fa-newspaper"></i>
+                                        <i class="fa-solid fa-book-open"></i>
                                             View Post
+                                        </a>
+                                    </li>
+
+                                    <li class="list-group dashboard-hover-link p-2 mt-4 rounded <?php echo $controllers->dashboard_active_class($active_class_settings) ?>">
+                                        <a href="/logout" class="nav-link ">
+                                        <i class="fa-solid fa-right-from-bracket"></i>
+                                            Logout
                                         </a>
                                     </li>
                                 </ul>

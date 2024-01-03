@@ -10,6 +10,8 @@ $controllers = new Controllers;
 require_once __DIR__ . '/../inc/header.php';
 // require_once __DIR__ . '/inc/navbar.php';
 
+$controllers->login_check();
+
 
 
 ?>
@@ -52,7 +54,7 @@ $active_class_my_all_blogs = "active_class";
                                    <div class="container">
                                     <?php
 
-                                    require_once __DIR__ . '/../inc/blog_post.php';
+                                    require_once __DIR__ . '/../inc/blog_post_dashboard.php';
 
                                     ?>
                                    </div>

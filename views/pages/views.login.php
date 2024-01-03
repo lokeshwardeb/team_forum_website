@@ -26,17 +26,14 @@ require_once __DIR__ . '/inc/navbar.php';
             <div class="alert_section">
                 <?php
 
-                $controllers->signup();
+                $controllers->login();
 
                 ?>
             </div>
             <div class="mb-4 fs-2 text-center ">
-                Sign Up
+                Login
             </div>
-            <div class="mb-3">
-                <label for="name  " class="">Name</label>
-                <input type="text" name="name" id="name" class="form-control signup_login_input mt-2">
-            </div>
+          
             <div class="mb-3">
                 <label for="email " class="">Email</label>
                 <input type="email" name="email" id="email" class="form-control signup_login_input mt-2">
@@ -48,22 +45,22 @@ require_once __DIR__ . '/inc/navbar.php';
                     <button type="button" class="btn" onclick="signup_show_pass()"><i class="fa-solid fa-eye" id="signup_pass_icon"></i></button>
                 </div>
             </div>
-            <div class="mb-3">
-                <label for="name mb-4 pb-4" class="d-block ">Confirm your password</label>
-                <div class="input_section d-flex">
-                    <input type="password" name="cpassword" id="signup_cpass" class="form-control signup_login_input mt-2">
-                    <button type="button" class="btn" onclick="signup_show_cpass()"><i class="fa-solid fa-eye" id="signup_cpass_icon"></i>
-                </div>
-            </div>
+        
 
             <div class="mb-3 d-flex justify-content-center">
-                <button type="submit" class="cus-bg-primary-color btn text-light p-2 mt-4 text-center hero_get_started_btn " style="min-width: 25vw; min-height: 5vh" name="signup_btn">Signup</button>
+                <button type="submit" class="cus-bg-primary-color btn text-light p-2 mt-4 text-center hero_get_started_btn " style="min-width: 25vw; min-height: 5vh" name="login_btn">Login</button>
             </div>
 
-            <div class="mb-3 mt-4">
+            <div class="mb-3 mt-5">
                 <div class="login_info_section">
-                    <label for="">Are you have a account ?</label>
-                    <a href="/login" class="">Login</a> with your account
+                    <label for="">Don't have an account ?</label>
+                    <a href="/signup" class="">Signup</a> with your information
+                </div>
+            </div>
+            <div class="mb-3 mt-2">
+                <div class="login_info_section">
+                    <label for="">Are you have forgot your password ?</label>
+                    <a href="/signup" class="">Recover password</a> with your information
                 </div>
             </div>
 
