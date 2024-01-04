@@ -38,9 +38,9 @@
                     </div>
                 </div>
 
-                <div class="back_img_content"></div>
+                <div class="back_img_content" style="background-image: url(assets/uploads/img/'. $row['image_name'] .');"></div>
 
-                <div class="text-contents-title mt-4 fs-4 ">
+                <div class="text-contents-title mt-4 fs-3 ">
                     <p> '.$row['title'].'</p>
                 </div>
                 <div class="text-contents-title mt-4 fs-5 ">

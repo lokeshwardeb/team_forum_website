@@ -8,10 +8,169 @@ $model = new sql_info;
 class Controllers extends sql_info
 {
 
+    // read time count functions
+    public function calculateReadTime($content) {
+        // Counting the number of words in the content
+        $wordCount = str_word_count(strip_tags($content));
+    
+        // Assuming an average reading speed of 200 words per minute
+        $wordsPerMinute = 200;
+    
+        // Calculating estimated read time in minutes
+        $readTime = ceil($wordCount / $wordsPerMinute);
+    
+        return $readTime;
+    }
+
+    public function active_class($active_class)
+    {
+        if ($active_class == 'active_class') {
+            return 'cus-primary-color';
+        }
+    }
     public function dashboard_active_class($active_class)
     {
         if ($active_class == 'active_class') {
             return 'dashboard-link-actived';
+        }
+    }
+
+    public function update_settings(){
+        if(isset($_POST['update_settings_btn'])){
+            $user_id = $this->pure_data($_POST['user_id']);
+            $user_name = $this->pure_data($_POST['user_name']);
+            $email = $this->pure_data($_POST['email']);
+
+            $user_img_name = $_FILES['img']['name'];
+            $user_img_tmp_name = $_FILES['img']['tmp_name'];
+            $user_img_type = $_FILES['img']['type'];
+
+              $img_type = pathinfo($user_img_name, PATHINFO_EXTENSION);
+
+
+            $upload_img_name = $user_name . '_user_img' . '.' . $img_type;
+            $upload_dir = __DIR__ . '/../assets/uploads/users_img/';
+
+
+
+
+
+            // check the users if it exists
+
+            $result = $this->show_where("users", "`user_id` = '$user_id'");
+
+            if($result){
+                if($result->num_rows == 1){
+                    // that means there will be only one user with the id
+                    if($user_img_name != ''){
+                        // that means the user img is not blank
+                       $result_setting_update =  $this->update_where("users", "`user_name` = '$user_name', `email` = '$email', `user_img_name` = '$upload_img_name'", "`user_id` = '$user_id'");
+
+                       if($result_setting_update){
+                                                // $_SESSION['user_id'] = $row['user_id'];
+                        $_SESSION['username'] = $user_name;
+                        $_SESSION['user_email'] = $email;
+                        $_SESSION['user_img_name'] = $upload_img_name;
+
+
+                        $upload_img = $upload_dir . $upload_img_name;
+
+                        if($img_type == 'jpg' || $img_type == 'jpeg' || $img_type == 'png'){
+
+                            if(move_uploaded_file($user_img_tmp_name, $upload_img)){
+                                echo '
+                            
+                                <script>
+                                
+                                success_alert("The informations has been updated successfully with image !");
+        
+                                
+                                </script>
+                                
+                                ';
+                            }else{
+                                echo '
+                            
+                                <script>
+                                
+                                danger_alert("There was some error while uploading the user image !", "The image has not been uploaded successfully ! Please contact the developer !!");
+        
+                                
+                                </script>
+                                
+                                ';
+                            }
+    
+    
+                        }else{
+                            echo '
+                            
+                            <script>
+                            
+                            danger_alert("Your uploaded file is not an image", "Please select an image for uploading as user image !!");
+    
+                            
+                            </script>
+                            
+                            ';
+                        }
+               
+                       }else{
+                        echo '
+                        
+                        <script>
+                        
+                        danger_alert("There was some error while updating the information !");
+
+                        
+                        </script>
+                        
+                        ';
+                       }
+
+
+
+                        
+
+                    }else{
+                        // that means the img is not selected
+                      $result_update =  $this->update_where("users", "`user_name` = '$user_name', `email` = '$email', `user_img_name` = '$user_img_name'", "`user_id` = '$user_id'");
+
+                      if($result_update){
+                        $_SESSION['username'] = $user_name;
+                        $_SESSION['user_email'] = $email;
+                       
+                        echo '
+                        
+                        <script>
+                        
+                        success_alert("The informations has been updated successfully !");
+
+                        
+                        </script>
+                        
+                        ';
+
+                      }else{
+                        echo '
+                        
+                        <script>
+                        
+                        danger_alert("There was some error while updating the information !");
+
+                        
+                        </script>
+                        
+                        ';
+                      }
+                       
+
+                    }
+
+                }
+            }
+
+
         }
     }
 
@@ -151,66 +310,80 @@ class Controllers extends sql_info
         }
     }
 
-    public function update_blog($blog_id){
-        if(isset($_POST['update_blog'])){
+    public function update_blog()
+    {
+        if (isset($_POST['update_blog_btn'])) {
             $title = $this->pure_data($_POST['title']);
             $sub_title = $this->pure_data($_POST['sub_title']);
             $catagory = $this->pure_data($_POST['catagory']);
+            // $article = $this->pure_data($_POST['article']);
             $article = $this->pure_data($_POST['article']);
 
             $img_name = $_FILES['img']['name'];
             $img_tmp_name = $_FILES['img']['tmp_name'];
 
             $upload_dir = __DIR__ . '/../assets/uploads/img/';
-            
-            $blog_id;
+
+            $blog_id = $this->pure_data($_POST['blog_id']);
 
             $result = $this->show_where("article", "`article_id` = '$blog_id'");
 
-            if($result){
-                if($result->num_rows == 1){
+            if ($result) {
+                if ($result->num_rows == 1) {
                     // that means there are only one row will be exists
 
                     // getting the img id no 
-                    
-                    while($row = $result->fetch_assoc()){
+
+                    while ($row = $result->fetch_assoc()) {
                         $get_img_id = $row['image_id'];
                     }
 
 
                     // updating the article
-                    
-                    $result_update = $this->update_where("article", "`title` = '$title', `sub_title` = '$sub_title', `catagory_id` = '$catagory', `description` = '$article'");
 
-                    // updating the article img
-                    $result_update_img = $this->update_where("images", "`image_name` = '$img_name'", "`image_id` = '$get_img_id'");
+                    $result_update = $this->update_where("article", "`title` = '$title', `sub_title` = '$sub_title', `catagory_id` = '$catagory', `description` = '$article'", "`article_id` = '$blog_id'");
 
-                    if($result_update){
+                    // if the image is not blank then it will update the new image name else if the image is equals to blank then it will not update the old image name again
+                    if ($img_name != '') {
+                        // updating the article img
+                        $result_update_img = $this->update_where("images", "`image_name` = '$img_name'", "`image_id` = '$get_img_id'");
+                    }
+
+                    if ($result_update) {
                         // that means updated successfully
 
 
-                        if($result_update_img){
+                        // if the image is not equals to blank that means there are new images seleted for updation upload then it will upload the new updated image on the server else it will not update anything
+                        if ($img_name != '') {
+                            if ($result_update_img) {
 
-                            // if the file is not exist then it will upload on the server otherwise it will not upload the same file again
+                                // if the file is not exist then it will upload on the server otherwise it will not upload the same file again
 
-                        if(!file_exists($upload_dir . $img_name)){
-                            move_uploaded_file($img_tmp_name, $upload_dir . $img_name);
-                            // echo 'the img has been inserted';
+                                if (!file_exists($upload_dir . $img_name)) {
+                                    move_uploaded_file($img_tmp_name, $upload_dir . $img_name);
+                                    // echo 'the img has been inserted';
+                                }
+                            }
+
+                            echo '
+                            
+                            <script>
+                            success_alert("The blog has been updated with the image successfully", "The blog has been updated with its new values");
+                            </script>
+                            
+                            ';
+                        }else{
+                            // that means the img is blank and will not be updated
+
+                            echo '
+                        
+                            <script>
+                            success_alert("The blog has been updated without the image successfully", "The blog has been updated with its new values");
+                            </script>
+                            
+                            ';
                         }
-
-                        echo '
-                        
-                        <script>
-                        success_alert("The blog has been updated successfully", "The blog has been updated with its new values");
-                        </script>
-                        
-                        ';
-
-                        }
-
-
-                        
-                    }else{
+                    } else {
                         // that means not updated successfully
                         echo '
                         
@@ -222,9 +395,6 @@ class Controllers extends sql_info
                     }
                 }
             }
-
-            
-
         }
     }
 
@@ -312,12 +482,12 @@ class Controllers extends sql_info
             if ($result) {
                 if ($result->num_rows == 1) {
                     // if the only one user is found
-                    while($row = $result->fetch_assoc()){
+                    while ($row = $result->fetch_assoc()) {
                         $hash = $row['password'];
 
                         $password_verify = password_verify($password, $hash);
 
-                        if($password == $password_verify){
+                        if ($password == $password_verify) {
                             // that means the password is correct
                             echo '
                             <script>
@@ -332,11 +502,21 @@ class Controllers extends sql_info
 
                             $_SESSION['user_id'] = $row['user_id'];
                             $_SESSION['username'] = $row['user_name'];
-                            $_SESSION['user_email'] = $row['user_email'];
+                            $_SESSION['user_email'] = $row['email'];
+                            $_SESSION['user_img_name'] = $row['user_img_name'];
 
-                            header('location: /publisher_home');
+                            // header('location: /publisher_home');
 
-                        }else{
+                            echo '
+                            
+                            <script>
+                            location.href = "/publisher_home";
+                            </script>
+                            
+                            ';
+
+
+                        } else {
                             // that means the password is not correct
                             echo '
                             <script>
@@ -347,9 +527,8 @@ class Controllers extends sql_info
                             
                             ';
                         }
-
                     }
-                }else{
+                } else {
                     // that means the user does not exist on db
                     echo '
                     <script>
@@ -366,8 +545,9 @@ class Controllers extends sql_info
 
 
 
-    public function login_check(){
-        if(!isset($_SESSION['login_status'])){
+    public function login_check()
+    {
+        if (!isset($_SESSION['login_status'])) {
             // that means if the user is not loggedin
             echo '
             

@@ -82,6 +82,42 @@ class sql_info extends connect{
 
     }
 
+//     public function article_data($data){
+//         // $encodedData = htmlspecialchars($data); // Encode special characters
+//         $encodedData = nl2br($data); // Preserve line breaks
+    
+//         // $result = mysqli_real_escape_string($this->connection(), $encodedData);
+
+//         // $result = $encodedData;
+
+//         $decodedData = str_replace("<br>", "\n", $data);
+// $decodedData = strip_tags($decodedData);
+
+//         return $data;
+
+//     }
+
+    public function show_blog_data($article){
+        // $result = htmlspecialchars_decode($article);
+
+        // replacing the \r\n with the br tag when it is showing the data
+        $result = str_replace("\r\n", "<br>", $article);;
+
+        
+
+        return $result;
+    }
+
+    public function read_article_data($data){
+        // $result = str_replace("<br/>", "", $data);
+
+        $result = nl2br(htmlspecialchars(mysqli_real_escape_string($this->connection(), $data), ENT_QUOTES));
+
+
+        return $result;
+    }
+
+
     public function check_table($table_name){
         $sql_check_exist = "SHOW TABLES LIKE '$table_name'";
         $result = $this->connection()->query($sql_check_exist);

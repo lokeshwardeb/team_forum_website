@@ -100,6 +100,16 @@ common css design starts here
     overflow: hidden;
     overflow-y: scroll;
 }
+.blog_scroll::-webkit-scrollbar{
+    display: none;
+}
+
+.show_blogs{
+    height: 250px;
+    position: absolute;
+    left: 50%;
+    top: 156px;
+}
 
 /*
 =========================================================================

@@ -151,7 +151,30 @@ $active_class_publisher_home = "active_class";
                                 <div class="activities-section m-auto">
                                     <div class="row">
                                         <div class="col-md-6 col-sm-12 activities-user cus-activities-bg p-4 mt-4">
-                                            <img src="/assets/img/man1.jpg" class="img-fluid activities_img rounded-circle d-flex m-auto" alt="">
+
+                                        <?php
+
+                                        if(isset($_SESSION['user_img_name'])){
+                                            if($_SESSION['user_img_name'] != ''){
+                                                echo '
+                                                
+                                                <img src="/assets/uploads/users_img/' . $_SESSION['user_img_name'] . '" class="img-fluid activities_img rounded-circle d-flex m-auto" alt="">
+                                                
+                                                ';
+                                            }else{
+                                                echo '
+                                                <img src="/assets/img/man1.jpg" class="img-fluid activities_img rounded-circle d-flex m-auto" alt="">
+                                                
+                                                ';
+                                            }
+                                        }
+
+                                        ?>
+
+
+                                            
+
+
                                             <div class="user_name fs-2 text-center mt-4 mb-4">
                                                 <?php 
                                                 

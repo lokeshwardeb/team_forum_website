@@ -7,6 +7,12 @@ require_once __DIR__ . '/../../controllers/controllers.php';
 $controllers = new Controllers;
 
 require_once __DIR__ . '/inc/header.php';
+
+$active_class_nav_home = 'active_class';
+
+$controllers->active_class($active_class_nav_home);
+
+
 require_once __DIR__ . '/inc/navbar.php';
 
 

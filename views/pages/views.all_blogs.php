@@ -6,7 +6,10 @@ require_once __DIR__ . '/../../controllers/controllers.php';
 
 $controllers = new Controllers;
 
+
+
 require_once __DIR__ . '/inc/header.php';
+
 
 $active_class_nav_blogs = 'active_class';
 
@@ -25,10 +28,13 @@ require_once __DIR__ . '/inc/navbar.php';
 
         // catagory section starts here
 
+        // require_once __DIR__ . '/inc/show_catagory_blog.php';
 
-        require_once __DIR__ . '/inc/show_catagory_blog.php';
+        // require_once __DIR__ . '/inc/show_blog_post.php';
 
-        require_once __DIR__ . '/inc/show_blog_post.php';
+        require_once __DIR__ . '/inc/catagory.php';
+
+        require_once __DIR__ . '/inc/blog_post.php';
 
         // catagory section ends here
 

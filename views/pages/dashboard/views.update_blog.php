@@ -24,7 +24,7 @@ $controllers->login_check();
             <div class="row">
                 <?php
 
-$active_class_manage_items = "active_class";
+                $active_class_manage_items = "active_class";
 
                 // $controllers->active_class($active_class);
 
@@ -45,7 +45,7 @@ $active_class_manage_items = "active_class";
 
                                     $blog_id = $controllers->pure_data($_GET['blog_sl_no']);
 
-                                    if(!isset($_GET['blog_sl_no'])){
+                                    if (!isset($_GET['blog_sl_no'])) {
                                         // header('Location: /manage_blog');
                                         echo '
                                         
@@ -56,22 +56,20 @@ $active_class_manage_items = "active_class";
                                         ';
                                     }
 
-                                    $controllers->update_blog($blog_id);
+                                    $controllers->update_blog();
 
 
                                     $result_update_show = $controllers->show_where("article", "`article_id` = '$blog_id'");
 
-                                    if($result_update_show){
-                                        if($result_update_show->num_rows > 0){
-                                            while($row = $result_update_show->fetch_assoc()){
+                                    if ($result_update_show) {
+                                        if ($result_update_show->num_rows == 1) {
+                                            while ($row = $result_update_show->fetch_assoc()) {
                                                 $show_title = $row['title'];
                                                 $show_sub_title = $row['sub_title'];
                                                 $show_article = $row['description'];
                                                 $show_catagory_id = $row['catagory_id'];
-
-                                                
                                             }
-                                        }else{
+                                        } else {
                                             $show_title = '';
                                             $show_sub_title = '';
                                             $show_article = '';
@@ -89,45 +87,44 @@ $active_class_manage_items = "active_class";
                                                 <div class="mb-3">
                                                     <label for="title" class="fw-bold m-2">Title</label>
                                                     <input type="text" name="title" id="title" class="form-control" placeholder="Enter Title" value="<?php echo $show_title ?>">
+
+
+                                                    <input type="hidden" name="blog_id" id="title" class="form-control" placeholder="Enter Title" value="<?php echo $blog_id ?>">
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-sm-12">
                                                 <div class="mb-3">
                                                     <label for="catagory" class="fw-bold m-2">Catagory</label>
                                                     <select name="catagory" class="form-control" id="">
-                                                    <option value="">Select Catagory</option>
-                                                     
-                                                     <?php
+                                                        <option value="">Select Catagory</option>
 
-                                                      $result_catagory = $controllers->show_all("catagory");
+                                                        <?php
 
-                                                      if($result_catagory){
-                                                        if($result_catagory->num_rows){
-                                                            while($row = $result_catagory->fetch_assoc()){
-                                                                echo '
+                                                        $result_catagory = $controllers->show_all("catagory");
+
+                                                        if ($result_catagory) {
+                                                            if ($result_catagory->num_rows) {
+                                                                while ($row = $result_catagory->fetch_assoc()) {
+                                                                    echo '
                                                               
-                                                                <option value="'.$row['catagory_id'].'
-                                                                " '?>
-                                                                <?php
-                                                                
-                                                                if($row['catagory_id'] == $show_catagory_id){
-                                                                    echo 'selected';
-                                                                }
-                                                                
-                                                                ?>
+                                                                <option value="'.$row['catagory_id'].'"' ?><?php
 
-                                                                <?php
-                                                                echo 
-                                                                '
-                                                                >'.$row['catagory_name'].'</option>
+                                                                        if ($row['catagory_id'] == $show_catagory_id) {
+                                                                            echo 'selected';
+                                                                        }
+
+                                                                        ?><?php
+                                                                    echo
+                                                                    '
+                                                                >' . $row['catagory_name'] . '</option>
                                                                 ';
+                                                                }
                                                             }
                                                         }
-                                                      }
 
 
 
-                                                      ?>
+                                                                    ?>
                                                     </select>
                                                 </div>
                                             </div>
@@ -140,18 +137,18 @@ $active_class_manage_items = "active_class";
                                             <div class="col-md-12 col-sm-12">
                                                 <div class="mb-3">
                                                     <label for="sub_title" class="fw-bold m-2">Article</label>
-                                                    <textarea name="article" id="article" class="form-control" placeholder="Write your article" cols="30" rows="10"><?php echo $show_article ?></textarea>
+                                                    <textarea name="article" id="article" class="form-control" placeholder="Write your article" cols="30" rows="10"><?php echo $controllers->pure_data($show_article);   ?></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-md-12 col-sm-12 mb-4">
                                                 <div class="mb-3">
                                                     <label for="img" class="fw-bold m-2">Choose Image</label>
-                                                   <input type="file" name="img" id="img" class="form-control" >
+                                                    <input type="file" name="img" id="img" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="col-md-12 col-sm-12">
                                                 <div class="mb-3">
-                                                    <button type="submit" class="btn cus-bg-primary-color text-white hero_get_started_btn mb-4"  name="update_blog">Update Blog</button>
+                                                    <button type="submit" class="btn cus-bg-primary-color text-white hero_get_started_btn mb-4" name="update_blog_btn">Update Blog</button>
                                                 </div>
                                             </div>
                                         </div>

@@ -17,13 +17,13 @@
                     <!-- id="navchilddiv2" -->
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul id="ulist" class="nav m-auto nav-sections">
-                            <li class=""><a href=""
-                                    class="nav-link text-dark ms-2 cus-nav-link-hover cus-primary-color ">Home</a> </li>
-                            <li class=""><a href="" class="nav-link text-dark ms-2 cus-nav-link-hover  ">Dashboard</a>
+                            <li class=""><a href="/home"
+                                    class="nav-link text-dark ms-2 cus-nav-link-hover  <?php echo $controllers->active_class($active_class_nav_home) ?> ">Home</a> </li>
+                            <li class=""><a href="/publisher_home" class="nav-link text-dark ms-2 cus-nav-link-hover  ">Dashboard</a>
                             </li>
-                            <li class=""><a href="" class="nav-link text-dark ms-2 cus-nav-link-hover  ">Blogs</a> </li>
+                            <li class=""><a href="/all_blogs" class="nav-link text-dark ms-2 cus-nav-link-hover <?php echo $controllers->active_class($active_class_nav_blogs) ?>  ">Blogs</a> </li>
                             <li class=""><a href="" class="nav-link text-dark ms-2 cus-nav-link-hover  ">About</a> </li>
-                            <li class="mb-2"><a href="" class="nav-link text-dark ms-2 cus-nav-link-hover  ">Contact
+                            <li class="mb-2"><a href="" class="nav-link text-dark ms-2 cus-nav-link-hover  <?php echo $controllers->active_class($active_class_nav_contact) ?> ">Contact
                                     Us</a>
                             </li>
 

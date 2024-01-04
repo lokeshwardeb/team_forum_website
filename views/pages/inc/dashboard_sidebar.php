@@ -65,7 +65,7 @@ $controllers = new Controllers;
                                         </a>
                                     </li>
                                     <li class="list-group dashboard-hover-link p-2 mt-4 rounded <?php echo $controllers->dashboard_active_class($active_class_settings) ?>">
-                                        <a href="/my_team_members" class="nav-link ">
+                                        <a href="/settings" class="nav-link ">
                                         <i class="fa-solid fa-gear"></i>
                                             Settings
                                         </a>
@@ -78,7 +78,7 @@ $controllers = new Controllers;
                                         </a>
                                     </li>
 
-                                    <li class="list-group dashboard-hover-link p-2 mt-4 rounded <?php echo $controllers->dashboard_active_class($active_class_settings) ?>">
+                                    <li class="list-group dashboard-hover-link p-2 mt-4 rounded <?php echo $controllers->dashboard_active_class($active_class_logout) ?>">
                                         <a href="/logout" class="nav-link ">
                                         <i class="fa-solid fa-right-from-bracket"></i>
                                             Logout

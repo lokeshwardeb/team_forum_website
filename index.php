@@ -3,9 +3,13 @@
 $uri = parse_url($_SERVER['REQUEST_URI'])['path'];
 
 $Routes = [
-    '/' => __DIR__ . '/views/pages/views.index.php',
-    '/dashboard' => __DIR__ . '/views/pages/views.index.php',
+    // '/' => __DIR__ . '/views/pages/views.index.php',
+    // '/dashboard' => __DIR__ . '/views/pages/views.index.php',
+    '/' => __DIR__ . '/views/pages/views.home.php',
     '/home' => __DIR__ . '/views/pages/views.home.php',
+    '/blogs' => __DIR__ . '/views/pages/views.blogs.php',
+    '/all_blogs' => __DIR__ . '/views/pages/views.all_blogs.php',
+    '/testing' => __DIR__ . '/views/pages/testing/testing.php',
     '/template_check' => __DIR__ . '/views/pages/template_check.html',
     '/myhome' => __DIR__ . '/views/pages/myhome.html',
     '/publisher_home' => __DIR__ . '/views/pages/dashboard/views.publisher_home.php',
@@ -14,6 +18,7 @@ $Routes = [
     '/manage_blog' => __DIR__ . '/views/pages/dashboard/views.manage_blog.php',
     '/my_all_blogs' => __DIR__ . '/views/pages/dashboard/views.my_all_blogs.php',
     '/my_team_members' => __DIR__ . '/views/pages/dashboard/views.my_team_members.php',
+    '/settings' => __DIR__ . '/views/pages/dashboard/views.settings.php',
     '/signup' => __DIR__ . '/views/pages/views.signup.php',
     '/login' => __DIR__ . '/views/pages/views.login.php',
     '/logout' => __DIR__ . '/views/pages/views.logout.php',

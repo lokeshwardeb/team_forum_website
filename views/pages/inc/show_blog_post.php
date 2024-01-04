@@ -22,7 +22,38 @@
         }
     }else{
         // that means the catagory sl no is not set and it will show the all data
-        $result_post = $controllers->join_2_show_all("*", "`article` ar", "`images` img", "ar.image_id = img.image_id", "`users` u", "u.user_id = ar.user_id", "ORDER BY img.image_id DESC");
+        // $result_post = $controllers->join_2_show_all("*", "`article` ar", "`images` img", "ar.image_id = img.image_id", "`users` u", "u.user_id = ar.user_id", "ORDER BY img.image_id DESC");
+
+        // if the catagory sl is not set then it will return to show all the data form the current page
+
+        echo '
+        
+        <script>
+        // danger_alert("Please select the correct blog");
+        location.href="/all_blogs"
+        </script>
+        
+        ';
+
+
+    }
+
+    if(isset($_GET['blog_sl_no'])){
+        $get_blog_id = $controllers->pure_data($_GET['blog_sl_no']);
+              // that means the blog id is not blank and it will show the data by its blog id no
+              $result_post = $controllers->join_2_show_all("*", "`article` ar", "`images` img", "ar.image_id = img.image_id", "`users` u", "u.user_id = ar.user_id", "ORDER BY img.image_id DESC", "ar.article_id='$get_blog_id'");
+        
+    }else{
+
+        echo '
+        
+        <script>
+        // danger_alert("Please select the correct blog");
+        location.href="/all_blogs"
+        </script>
+        
+        ';
+
     }
 
     
@@ -39,7 +70,7 @@
                 echo '
     <div class="content-section">
         <div class="row">
-            <div class="col-12 contents mb-4 pb-4">
+            <div class="col-12 contents mb-4 pb-4" style="min-height: 200vh;">
                 <!-- img section starts here -->
                 <!-- <img src="/assets/img/artical_book.jpg" class="img-fluid" alt=""> -->
                 <!-- img section ends here -->
@@ -65,19 +96,61 @@
                     </div>
                 </div>
 
-                <div class="back_img_content" style="background-image: url(assets/uploads/img/'. $row['image_name'] .');"></div>
+                <div class="rela_po" style="position: relative;">
+                    <div class="back_img_content" style="background-image: url(assets/uploads/img/'. $row['image_name'] .');"></div>
 
-                <div class="text-contents-title mt-4 fs-3 ">
+                    <div class="container p-4 bg-white border-bottom border-dark" style="position: absolute; top: 88px; border-radius: 50px; box-shadow: 20px 20px 20px rgba(000, 000, 000, 0.4); ">';
+
+                    if($row['image_name'] != ''){
+                        echo '
+                        <img src="assets/uploads/img/'. $row['image_name'] .'" class="img-fluid" style="max-height: 50vh; display: flex; justify-content: center; margin: auto;">
+                        ';
+                    }
+
+                    ?>
+                        
+
+
+
+                        <?php 
+                        echo '
+                        <div class="text-contents-title mt-4 fs-2 ">
+                            <p> '.$row['title'].'</p>
+                        </div>
+                        <div class="text-contents-title mt-4 fs-4 ">
+                            <p> '.$row['sub_title'].'</p>
+                        </div>
+                        <div class="text-contents-title mt-4 mb-4 pb-4 fs-6 ">
+                            <p> '. $controllers->show_blog_data($row['description']) .'</p>
+                        </div>
+                        <div class="text-contents-title mt-4 mb-4 pb-4 fs-6 ">
+                            <a href="/all_blogs" class="nav-link"><button class="btn cus-bg-primary-color text-light d-flex m-auto hero_get_started_btn">View all blogs</button></a>
+                        </div>
+                    </div>
+
+
+                    <!-- <div class="container">
+                        <div class="text-contents-title mt-4 fs-3 ">
+                            <p> '.$row['title'].'</p>
+                        </div>
+                    <div class="text-contents-title mt-4 fs-5 ">
+                        <p> '.$row['sub_title'].'</p>
+                    </div>
+                    </div> -->
+
+
+                </div>
+
+               
+
+                <!-- <div class="text-contents-title mt-4 fs-3 ">
                     <p> '.$row['title'].'</p>
                 </div>
                 <div class="text-contents-title mt-4 fs-5 ">
                     <p> '.$row['sub_title'].'</p>
-                </div>
+                </div> -->
 
-                <a href="/blogs?blog_sl_no='.$row['article_id'].'&catagory_sl_no='.$row['catagory_id'].'">
-                <div class="button-section btn  text-dark bg-light content-read-more-btn text-light">
-                    Read More</div>
-                </a>
+                
             </div>
         </div>
     </div>
