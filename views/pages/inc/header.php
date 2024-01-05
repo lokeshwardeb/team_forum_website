@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+// namespace TeamForumWebsite\TeamForumWebsite;
 
 
 ?>
@@ -13,7 +14,8 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dahuk Forum || Home</title>
+    <link rel="shortcut icon" href="/assets/img/logo-it.gif" type="image/x-icon">
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
     <!-- <link rel="stylesheet" href="/assets/css/Homepage1.css"> -->
     <!-- <link rel="stylesheet" href="/assets/css/responsive.css"> -->

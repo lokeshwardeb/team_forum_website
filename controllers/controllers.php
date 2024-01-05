@@ -8,6 +8,219 @@ $model = new sql_info;
 class Controllers extends sql_info
 {
 
+    public function delete_blog(){
+        if(isset($_POST['delete_blog_btn'])){
+            $blog_id = $this->pure_data($_POST['blog_id']);
+
+            // $result_check = $this->show_where("article", "`article_id` = '$blog_id'");
+            $result_check = $this->join_2_show_all("*", "`article` ar", "`images` img", "ar.image_id = img.image_id", "`users` u", "u.user_id = ar.user_id", "ORDER BY img.image_id DESC", "ar.article_id = '$blog_id'");
+
+            if($result_check){
+                if($result_check->num_rows == 1){
+                    // that means the only one article data exists
+
+                    while($row = $result_check->fetch_assoc()){
+
+                       $image_id = $row['image_id'];
+                       $image_name = $row['image_name'];
+
+                       
+                       $upload_dir = './assets/uploads/img/';
+                       
+                    echo   $upload_image = $upload_dir . $image_name;
+                       
+                       $result_delete = $this->delete_where("article", "`article_id` = '$blog_id'");
+
+
+
+                        if($result_delete){
+                            // that means the article has been deleted successfully and now processing with further
+
+                            $result_delete_img = $this->delete_where("images",  "`image_id` = '$image_id'");
+
+
+                            if($result_delete_img){
+
+                                if($image_name != ''){
+                                    if(file_exists($upload_image)){
+                                        if(unlink($upload_image)){
+                                            // that means the image has been deleted successfully from the software
+                                            echo '
+                                
+                                                <script>
+                                                
+                                                success_alert("The blog post has been deleted successfully !", "Your blog post has been deleted successfully");
+                        
+                                                </script>
+                                                
+                        
+                                                ';
+                                        }else{
+                                            // that means there was some issues while deleting the images from the software
+                                            echo '
+                                
+                                            <script>
+                                            
+                                            danger_alert("The blog post has not been deleted successfully !", "There was some error while deleting the blog ! Please contact the developer if you are facing the problem for a long time !!");
+                    
+                                            </script>
+                                            
+                    
+                                            ';
+                                        }
+                                    }else{
+                                        // that means the image file is not exists 
+    
+                                        echo '
+                                
+                                        <script>
+                                        
+                                        success_alert("The article of the  blog post has not been deleted successfully but the image was not found !", "The image was not found while deleting the blog. But the article has been deleted from our software. If your blog was not contained an image then you can ignore this message, but if your blog was contained an image then please contact with your developer with the issue ! Please contact the developer if your article was contained an image and if are facing the problem for a long time !!");
+                
+                                        </script>
+                                        
+                
+                                        ';
+                                    }
+                                }else{
+                                    // that means there was not image contains on the post
+
+                                    // and that means the deletation was successfull and this will show the success alert message
+                                    echo '
+                                
+                                    <script>
+                                    
+                                    success_alert("The blog post has been deleted successfully !", "Your blog post has been deleted successfully");
+            
+                                    </script>
+                                    
+            
+                                    ';
+                                }
+
+                         
+                            }
+
+
+    
+                       
+                        }else{
+                            // that means there was error while deleting the article
+
+                            echo '
+                            
+                            <script>
+                            
+                            danger_alert("The blog post has not been deleted successfully !", "There was some error while deleting the blog ! Please contact the developer if you are facing the problem for a long time !!");
+    
+                            </script>
+                            
+    
+                            ';
+                        }
+
+
+
+                    }
+                 
+
+                   
+
+                }else{
+                    echo '
+                                
+                    <script>
+                    
+                    danger_alert("The blog post has not found !", "Your blog post has not found. This may cause because you may have deleted the post. If you have not deleted the post and you are viewing this alert then please contact our developer !!");
+
+                    // using 10s delay on redirection
+                    setTimeout(function(){
+                        location.href="/manage_blog";
+                         }, 10000);
+                        
+                
+
+                    </script>
+                    
+
+                    ';
+                }
+            }
+
+
+        }
+    }
+
+    
+
+    public function show_blog_post_image($image_name){
+
+        
+        if($image_name != ''){
+
+            $img_dir = './assets/uploads/img/';
+
+            $img_upload = $img_dir . $image_name;
+
+            // if(file_exists($img_upload)){
+            //     $img = '<img src="'. $img_upload .'" class="img-fluid publisher_img rounded-circle" style="min-height: 50px !important;" alt="">';
+
+            // }else{
+            //     $img = '';
+
+            // }
+
+            $img = '<img src="'. $image_name .'" class="img-fluid publisher_img rounded-circle" style="min-height: 50px !important;" alt="">';
+
+        }else{
+            $img = '';
+        }
+
+        return $img;
+    }
+    public function show_user_image($image_name){
+        if($image_name != ''){
+            $img = '/assets/uploads/users_img/' . $image_name;
+        }else{
+            $img = '/assets/img/man1.jpg';
+        }
+
+        return $img;
+    }
+
+    public function blog_post_date($dbDate){
+            // Storing the retrieved date in a variable
+    // $dbDate = $row['date_column'];
+
+    // Creating a DateTime object with the retrieved date
+    $date = new DateTime($dbDate);
+
+    // Formatting the date to display with the month name
+    $formattedDate = $date->format('F j, Y'); // 'F' represents the full month name, 'j' for day without leading zeros, 'Y' for year (adjust format as needed)
+
+    return $formattedDate;
+
+
+    }
+
+    public function calculateDate($dbDate){
+        // Storing the retrieved date in a variable
+    // $dbDate = $row['date_column'];
+    
+    // Creating DateTime objects for the database date and current date
+    $databaseDate = new DateTime($dbDate);
+    $currentDate = new DateTime();
+
+    // Calculating the difference between the dates
+    $interval = $currentDate->diff($databaseDate);
+    
+    // Getting the difference in days
+    $daysDifference = $interval->format('%a');
+
+    return $daysDifference;
+
+    }
+
     // read time count functions
     public function calculateReadTime($content) {
         // Counting the number of words in the content
@@ -85,7 +298,7 @@ class Controllers extends sql_info
                                 success_alert("The informations has been updated successfully with image !");
         
                                 
-                                </script>
+                                </scrip>
                                 
                                 ';
                             }else{

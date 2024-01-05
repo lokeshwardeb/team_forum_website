@@ -16,6 +16,7 @@ $Routes = [
     '/add_blog' => __DIR__ . '/views/pages/dashboard/views.add_blog.php',
     '/update_blog' => __DIR__ . '/views/pages/dashboard/views.update_blog.php',
     '/manage_blog' => __DIR__ . '/views/pages/dashboard/views.manage_blog.php',
+    '/delete_blog' => __DIR__ . '/views/pages/dashboard/views.delete_blog.php',
     '/my_all_blogs' => __DIR__ . '/views/pages/dashboard/views.my_all_blogs.php',
     '/my_team_members' => __DIR__ . '/views/pages/dashboard/views.my_team_members.php',
     '/settings' => __DIR__ . '/views/pages/dashboard/views.settings.php',

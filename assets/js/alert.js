@@ -1,8 +1,37 @@
 
-function delete_alert(){
+// function delete_alert(msg_title1, msg1, msg_title2, msg2, delete_blog_id){
+//     Swal.fire({
+//       title: msg_title1,
+//       text: msg1,
+//       icon: "warning",
+//       showCancelButton: true,
+//       confirmButtonColor: "black",
+//       cancelButtonColor: "#d33",
+//       confirmButtonText: "Yes, delete it!",
+//       loader: '...',
+
+//     }).then((result) => {
+//       if (result.isConfirmed) {
+//         document.cookie = "delete_blog_id=" + delete_blog_id + "; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+
+
+//         Swal.fire({
+//           title: msg_title2,
+//           text: msg2,
+//           icon: "success",
+//           confirmButtonColor: "green",
+//           showCancelButton: false,
+          
+
+
+//         })
+//       }
+//     });
+//   }
+function delete_alert(delete_blog_id, msg_title1, msg1){
     Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
+      title: msg_title1,
+      text: msg1,
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "black",
@@ -12,16 +41,21 @@ function delete_alert(){
 
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({
-          title: "Deleted!",
-          text: "Your file has been deleted.",
-          icon: "success",
-          confirmButtonColor: "green",
-          showCancelButton: false,
+        // document.cookie = "delete_blog_id=" + delete_blog_id + "; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+        // document.cookie = "delete_blog_id=2" + delete_blog_id + ";";
+        document.cookie = "'delete_blog_id="+ delete_blog_id + "'; ";
+
+
+        // Swal.fire({
+        //   title: msg_title2,
+        //   text: msg2,
+        //   icon: "success",
+        //   confirmButtonColor: "green",
+        //   showCancelButton: false,
           
 
 
-        })
+        // })
       }
     });
   }

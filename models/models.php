@@ -67,8 +67,8 @@ class sql_info extends connect{
         return $result;
 
     }
-    function delete_where(){
-        $delete_where_sql = "";
+    function delete_where($table_name, $grab_point_and_values){
+        $delete_where_sql = "DELETE FROM `$table_name` WHERE `$table_name`.$grab_point_and_values";
         $result = $this->connection()->query($delete_where_sql);
 
         return $result;

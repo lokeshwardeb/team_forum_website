@@ -1,9 +1,11 @@
-<div class="container mt-4 mb-4 pt-4">
+<div class="container blog_scroll  mt-4 mb-4 pt-4">
     <?php
 
     $user_id = $_SESSION['user_id'];
 
-    $result_post = $controllers->join_show_all("*", "article ar", "images img", "ar.image_id = img.image_id", "", "ar.user_id = '$user_id'");
+    // $result_post = $controllers->join_show_all("*", "article ar", "images img", "ar.image_id = img.image_id", "", "ar.user_id = '$user_id'");
+
+    $result_post = $controllers->join_2_show_all("*", "`article` ar", "`images` img", "ar.image_id = img.image_id", "`users` u", "u.user_id = ar.user_id", "ORDER BY ar.article_id DESC", "u.user_id = '$user_id'");
 
     if($result_post){
         if($result_post->num_rows > 0){
@@ -21,17 +23,17 @@
                         <div class="row">
                             <div class="col-md-6 col-sm-12 d-flex">
                                 <div class="publisher_img mt-4 mb-4">
-                                    <img src="/assets/img/man1.jpg" class="img-fluid publisher_img rounded-circle" alt="">
+                                <img src="'. $controllers->show_user_image($row['user_img_name']) .'" class="img-fluid publisher_img rounded-circle" style="min-height: 50px !important;" alt="">
 
                                 </div>
-                                <div class="publisher_info mt-4 mb-4 ms-2">
-                                    <div class="publisher_name fw-bold ms-2">'.$_SESSION['username'].'</div>
-                                    <div class="published_time ms-2">MAR 14 (14 days ago)</div>
+                             <div class="publisher_info mt-4 mb-4 ms-2">
+                                    <div class="publisher_name fw-bold ms-2">'.$row['user_name'].'</div>
+                                    <div class="published_time ms-2">'. $controllers->blog_post_date($row['datetime']) .' (' . $controllers->calculateDate($row['datetime']) . ' days ago)</div>
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-12">
-                                <div class="read_time_section mt-4 text-dark text-end">5 min
-                                    read</div>
+                            <div class="read_time_section mt-4 text-dark text-end">'.$controllers->calculateReadTime($row['description']).' min
+                            read</div>
                             </div>
                         </div>
 
@@ -47,8 +49,10 @@
                     <p> '.$row['sub_title'].'</p>
                 </div>
 
+                <a href="/blogs?blog_sl_no='.$row['article_id'].'&catagory_sl_no='.$row['catagory_id'].'" target="_blank">
                 <div class="button-section btn  text-dark bg-light content-read-more-btn text-light">
                     Read More</div>
+                </a>
             </div>
         </div>
     </div>

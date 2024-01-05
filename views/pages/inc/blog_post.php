@@ -48,12 +48,12 @@
                         <div class="row">
                             <div class="col-md-6 col-sm-12 d-flex">
                                 <div class="publisher_img mt-4 mb-4">
-                                    <img src="../../../assets/img/man1.jpg" class="img-fluid publisher_img rounded-circle" alt="">
+                                    <img src="'. $controllers->show_user_image($row['user_img_name']) .'" class="img-fluid publisher_img rounded-circle" style="min-height: 50px !important;" alt="">
 
                                 </div>
                                 <div class="publisher_info mt-4 mb-4 ms-2">
                                     <div class="publisher_name fw-bold ms-2">'.$row['user_name'].'</div>
-                                    <div class="published_time ms-2">MAR 14 (14 days ago)</div>
+                                    <div class="published_time ms-2">'. $controllers->blog_post_date($row['datetime']) .' (' . $controllers->calculateDate($row['datetime']) . ' days ago)</div>
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-12">

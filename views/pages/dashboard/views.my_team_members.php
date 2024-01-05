@@ -52,7 +52,7 @@ $active_class_team_members = "active_class";
                                 </div>
 
                                 <div class="manage-section container cus-bg-light-secondary-color mt-4">
-                                    <div class="container">
+                                    <div class="container blog_scroll">
                                         <div class="total_item_section m-4 p-4 fs-4">Total Members : 
                                             <?php
 
@@ -87,20 +87,44 @@ $active_class_team_members = "active_class";
                                                 // $result_team = $controllers->join_2_show_all("*", "`article` ar", "`images` img", "ar.image_id = img.image_id", "`users` u", "u.user_id = ar.user_id", "ORDER BY u.user_id ASC");
                                                 // $result_team = $controllers->join_2_show_all("*", "`article` ar", "`images` img", "ar.image_id = img.image_id", "`users` u", "u.user_id = ar.user_id", "ORDER BY u.user_id ASC");
                                                 // $result_team = $controllers->join_show_all("*", "`users` u", "`images` img", "u.user_id = img.user_id");
-                                                $result_team = $controllers->show_all("users");
 
+                                                $result_team = $controllers->show_all("users");
+                                                
+                                                // $result_team = $controllers->join_2_show_all("*", "`article` ar", "`images` img", "ar.image_id = img.image_id", "`users` u", "u.user_id = ar.user_id", "ORDER BY ar.article_id DESC");
+                                                
                                                 if($result_team){
                                                     if($result_team->num_rows > 0){
                                                         while($row = $result_team->fetch_assoc()){
+
+                                                            $user_id = $row['user_id'];
+
+
                                                             echo '
                                                             
                                                         <tr>
                                                         <td>1</td>
                                                         <td>
-                                                            <img src="/assets/img/company_table_look.jpg" width="50px" class="img-fluid" alt="">
+                                                            <img src="'. $controllers->show_user_image($row['user_img_name']) .'" style="min-height: 50px !important;"  width="50px" class="img-fluid" alt="">
                                                         </td>
                                                         <td>'.$row['user_name'].'</td>
-                                                        <td>20</td>
+                                                        <td>'?>
+                                                        
+                                                    
+                                                    <?php 
+
+                                                    $result_contibuton = $controllers->show_where("article", "`user_id` = '$user_id'");
+
+                                                    if($result_contibuton){
+                                                        if($result_contibuton->num_rows > 0){
+                                                            echo $result_contibuton->num_rows;
+                                                        }else{
+                                                            echo '0';
+                                                        }
+                                                    }
+                                                    
+                                                    echo '
+                                                    
+                                                    </td>
                                                         <td>
                                                         <button class="btn btn-primary text-light hero_get_started_btn">
                                                         <i class="fa-solid fa-envelope"></i>

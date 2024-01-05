@@ -51,8 +51,16 @@ $active_class_manage_items = "active_class";
                                     MANAGE BLOGS
                                 </div>
 
+                                <div class="alert_section">
+                                    <?php
+
+                                    // $controllers->delete_btn_alert();
+
+                                    ?>
+                                </div>
+
                                 <div class="manage-section container cus-bg-light-secondary-color mt-4">
-                                    <div class="container">
+                                    <div class="container blog_scroll">
                                         <div class="total_item_section m-4 p-4 fs-4">Total Items : 
                                             <?php
 
@@ -87,7 +95,10 @@ $active_class_manage_items = "active_class";
 
                                                   $user_id = $_SESSION['user_id'];
 
-                                                  $result_article = $controllers->show_where("article", "`user_id` = '$user_id'");
+                                                //   $result_article = $controllers->show_where("article", "`user_id` = '$user_id'");
+
+
+                                                  $result_article = $controllers->join_2_show_all("*", "`article` ar", "`images` img", "ar.image_id = img.image_id", "`users` u", "u.user_id = ar.user_id", "ORDER BY ar.article_id DESC", "u.user_id = '$user_id'");
 
                                                   if($result_article){
                                                     if($result_article->num_rows > 0){
@@ -97,7 +108,7 @@ $active_class_manage_items = "active_class";
                                                                     <tr>
                                                                     <td>'. $sl_no .'</td>
                                                                     <td>
-                                                                        <img src="/assets/img/company_table_look.jpg" width="50px" class="img-fluid" alt="">
+                                                                        <img src="/assets/uploads/img/'. $row['image_name'] .'" width="50px" class="img-fluid" alt="">
                                                                     </td>
                                                                     <td>'.$row['title'].'</td>
                                                                     <td>20</td>
@@ -109,12 +120,17 @@ $active_class_manage_items = "active_class";
                                                                     </a>
                                                                     </td>
                                                                     <td>
-                                                                    <a href="/update_blog" class="nav-link">
-                                                                        <button class="btn btn-danger text-light hero_get_started_btn">
+                                                                     <a href="/delete_blog?del_blog_sl_no='. $row['article_id'] .'" class="nav-link" > 
+                                                                    <!-- <form action="" method="post"> -->
+
+                                                                    <!-- <input type="text" name="delete_id" value="'. $row['article_id'] .'" > -->
+
+                                                                        <button class="btn btn-danger text-light hero_get_started_btn" name="delete_alert" type="submit" >
                                                                             <i class="fa-solid fa-trash"></i>
 
                                                                         </button>
-                                                                        </a>
+                                                                    <!-- </form> -->
+                                                                        </a> 
                                                                     </td>
                                                                     
                                                                 </tr>';
