@@ -56,8 +56,8 @@ $controllers->login_check();
             </div>
             <div class="mb-3 mt-2">
                 <div class="login_info_section">
-                    <label for="">Are you have forgot your password ?</label>
-                    <a href="/signup" class="">Recover password</a> with your information
+                    <label for="">Are you want to change you email ?</label>
+                    <a href="/settings" class="">change you email</a> with your information
                 </div>
             </div>
 

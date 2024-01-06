@@ -18,6 +18,160 @@ $model = new sql_info;
 class Controllers extends sql_info
 {
 
+    public function change_password(){
+        if(isset($_POST['change_pass'])){
+            $otp = $this->pure_data($_POST['otp']);
+            $new_pass = $this->pure_data($_POST['new_pass']);
+
+
+
+            $name = $_SESSION['recover_pass_name'];
+            $email = $_SESSION['recover_pass_email'];
+
+            $result_check_user = $this->show_where("users", "`user_name` = '$name' AND `email` = '$email'");
+
+            if($result_check_user){
+                if($result_check_user->num_rows == 1){
+                    // that means there are only one user exists
+
+                    while($row = $result_check_user->fetch_assoc()){
+
+                        $hash = password_hash($new_pass, PASSWORD_DEFAULT);
+                        
+                        $result_update_pass = $this->update_where("users", "`password` = '$hash'");
+
+                        if($result_update_pass){
+
+                            $remove_otp_result = $this->update_where("users", "`otp` = ''", "`user_name` = '$name' AND `email` = '$email'");
+
+                            if($remove_otp_result){
+                                echo '
+                            
+                                <script>
+                                
+                                success_alert("Password has been changed successfully !");
+                                
+                                </script>
+
+                            
+                            ';
+                            }else{
+                                echo '
+                            
+                            <script>
+                            
+                            success_alert("There was some issues while updating your password ! Please contact your developer or try again later !");
+                            
+                            </script>
+
+                            
+                            ';
+                            }
+
+                            
+                        }
+
+                    }
+
+                }else{
+                    // that means no user has been found and this will through an error
+
+                    echo '
+                    
+                    <script>
+                    
+                    danger_alert("Users not found with your credentials", "Please give the correct credentials");
+                    
+                    </script>
+
+                    
+                    ';
+
+                }
+            }
+
+
+
+            
+
+
+        }
+    }
+
+
+    public function recover_password(){
+        if(isset($_POST['recover_pass'])){
+            $name = $this->pure_data($_POST['name']);
+            $email = $this->pure_data($_POST['email']);
+
+            $result = $this->show_where("users", "`user_name` = '$name' AND `email` = '$email'");
+
+            if($result){
+                if($result->num_rows == 1){
+                    // that means the only one user is exists
+
+                    $_SESSION['recover_pass_status'] = 'recover_pass_started';
+
+                    $_SESSION['recover_pass_name'] = $name;
+                    $_SESSION['recover_pass_email'] = $email;
+
+                    $otp = rand(1111, 9999);
+
+                    $update_pass_result = $this->update_where("users", "`otp` = '$otp'", "`user_name` = '$name' AND `email` = '$email'");
+
+
+
+
+
+                    $mail_result = $this->mail("Dahuk Forum Website", $name, $email, "Your otp for the recover of your password", $this->mail_template($name, "otp_verify", $otp));
+
+                    if($mail_result == 'mail_sent'){
+                        echo '
+                        
+                        <script>
+                        
+                        success_alert("The otp has been sent on your email address '. $email . '", "Please recover your password with the otp");
+
+                        window.location.href = "/recover_change_pass"
+
+                        </script>
+                        
+                        ';
+                    }else{
+                        echo '
+                        
+                        <script>
+                        
+                        danger_alert("The otp cannot been sent on your email address '. $email . '", "Please try again !!");
+
+                        </script>
+                        
+                        ';
+                    }
+
+
+
+                }else{
+                    // that means the user are not exits and this will through an error
+
+                    echo '
+                    
+                    <script>
+                    
+                    danger_alert("User not exists !", "The users are not exists with your credentials. Please give correct credentials !!");
+
+                    </script>
+
+                    ';
+
+                }
+            }
+
+
+        }
+    }
+
+
     public function mail_template($username, $email_type, $otp = "", $website_name = "Dahuk Forum Website"){
 
         $current_date =  date("Y-m-d");
@@ -1009,6 +1163,11 @@ try {
 
                             if($email_verify_status_result){
                                 
+                                
+
+
+                                
+
                             echo '
                             
                             <script>
