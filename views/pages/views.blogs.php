@@ -6,6 +6,8 @@ require_once __DIR__ . '/../../controllers/controllers.php';
 
 $controllers = new Controllers;
 
+$active_title = "Blogs";
+
 require_once __DIR__ . '/inc/header.php';
 
 $active_class_nav_blogs = 'active_class';

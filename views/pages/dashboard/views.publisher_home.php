@@ -7,11 +7,14 @@ require_once __DIR__ . '/../../../controllers/controllers.php';
 
 $controllers = new Controllers;
 
+$active_title = "Publisher Home";
+
 require_once __DIR__ . '/../inc/header.php';
 // require_once __DIR__ . '/inc/navbar.php';
 
 $controllers->login_check();
 
+$controllers->check_verify_email($_SESSION['user_email']);
 
 
 ?>

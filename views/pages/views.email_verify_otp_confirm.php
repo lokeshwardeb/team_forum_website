@@ -6,11 +6,28 @@ require_once __DIR__ . '/../../controllers/controllers.php';
 
 $controllers = new Controllers;
 
-$active_title = "Login";
+$active_title = "Verify your email";
 
 require_once __DIR__ . '/inc/header.php';
 require_once __DIR__ . '/inc/navbar.php';
 
+$controllers->login_check();
+
+
+// $_SESSION['verify_email_sent_otp_status'] = "otp sent";
+
+if(!isset($_SESSION['verify_email_sent_otp_status']) || $_SESSION['verify_email_sent_otp_status'] != "otp sent"){
+    echo '
+    
+    <script>
+    
+    window.location.href = "/email_verify";
+    
+    </script>
+    
+    
+    ';
+}
 
 
 ?>
@@ -28,29 +45,27 @@ require_once __DIR__ . '/inc/navbar.php';
             <div class="alert_section">
                 <?php
 
-                $controllers->login();
+                $controllers->verify_email();
 
                 ?>
             </div>
             <div class="mb-4 fs-2 text-center ">
-                Login
+                Verify your email
             </div>
           
             <div class="mb-3">
-                <label for="email " class="">Email</label>
-                <input type="email" name="email" id="email" class="form-control signup_login_input mt-2">
+                <!-- <label for="email " class="">Email</label> -->
+                <input type="hidden" name="email" id="email" class="form-control signup_login_input mt-2" value="<?php echo $_SESSION['verify_otp_email_address'] ?>">
             </div>
             <div class="mb-3">
-                <label for="name " class="d-block ">Password</label>
-                <div class="input_section d-flex">
-                    <input type="password" name="password" id="signup_pass" class="form-control signup_login_input mt-2">
-                    <button type="button" class="btn" onclick="signup_show_pass()"><i class="fa-solid fa-eye" id="signup_pass_icon"></i></button>
-                </div>
+                <label for="email " class="">Otp</label>
+                <input type="number" name="otp" id="email" class="form-control signup_login_input mt-2" ">
             </div>
+         
         
 
             <div class="mb-3 d-flex justify-content-center">
-                <button type="submit" class="cus-bg-primary-color btn text-light p-2 mt-4 text-center hero_get_started_btn " style="min-width: 25vw; min-height: 5vh" name="login_btn">Login</button>
+                <button type="submit" class="cus-bg-primary-color btn text-light p-2 mt-4 text-center hero_get_started_btn " style="min-width: 25vw; min-height: 5vh" name="verify_email">Verify Email</button>
             </div>
 
             <div class="mb-3 mt-5">

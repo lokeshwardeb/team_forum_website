@@ -3,10 +3,200 @@
 require_once __DIR__ . '/../config/conn.php';
 require_once __DIR__ . '/../models/models.php';
 
+//Import PHPMailer classes into the global namespace
+//These must be at the top of your script, not inside a function
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+//Load Composer's autoloader
+require __DIR__ . '/../vendor/autoload.php';
+
+
 $model = new sql_info;
 
 class Controllers extends sql_info
 {
+
+    public function mail_template($username, $email_type, $otp = "", $website_name = "Dahuk Forum Website"){
+
+        $current_date =  date("Y-m-d");
+        $current_dayname = date("l");
+        $time_zone =  date_default_timezone_set("Asia/Dhaka");
+        $current_time =  date("h:i:sa");
+        $current_year = date("Y");
+
+        $currentTimezone = date_default_timezone_get();
+
+
+
+        if($email_type == 'new_login_found'){
+            return ("<!doctype html>
+<html lang='en'>
+
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>New login was found on your account -- $website_name'</title>
+    <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ' crossorigin='anonymous'>
+</head>
+
+<body>
+    <div class='container bg-primary' style='background-color: #B68C5A !important; color:white; padding:20px; margin-top:25px !important; margin-bottom: 25px;'>
+        <center><img src='https://scontent.fcla2-1.fna.fbcdn.net/v/t39.30808-6/325760220_488402183478215_627316119726042019_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=b9YaKsyFV4kAX-zEFyI&_nc_zt=23&_nc_ht=scontent.fcla2-1.fna&oh=00_AfDR59oZZj-GZF_ppegTNHiHRcPd8-haKdSyDmyTW5-e8A&oe=646C132E' width='250px' height='250px' alt='logo' style='border-radius: 100% !important;'></center>
+        <center style = 'color:white !important;'> <h1>$website_name </h1></center>
+        <!-- #0D6EFD -->
+
+        <div style='color:black; background-color: white;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); padding:20px; margin-top:15px ; margin-bottom: 25px;'>
+
+
+
+            Hi $username, <br>
+            New login was found on your <b>$website_name</b> user account . You can ignore it if you was logged in to your account. If you was not logged in with your account please change your password and contract us immediately. Thanks. <br>
+
+            <b>Loggedin time: $current_time </b> <br>
+            <b>Loggedin date: $current_date </b><br>
+            <b>Dayname: $current_dayname </b><br>
+            <b>Timezone: $currentTimezone </b><br>
+
+    
+        </div>
+
+        <center style='text-align:center; margin-top:25px; padding-bottom:25px; padding-top:25px; margin-bottom: 25px; color:white !important;'>
+            &copy; All right are reserved by  $website_name  || Copyright by $website_name
+        </center>
+
+    </div>
+    <!-- <h1>Hello, world!</h1> -->
+    <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js' integrity='sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe' crossorigin='anonymous'></script>
+
+
+
+
+</body>
+
+</html>");
+        }elseif($email_type = 'otp_verify'){
+            return ("<!doctype html>
+<html lang='en'>
+
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>New login was found on your account -- $website_name'</title>
+    <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ' crossorigin='anonymous'>
+</head>
+
+<body>
+    <div class='container bg-primary' style='background-color: #B68C5A !important; color:white; padding:20px; margin-top:25px !important; margin-bottom: 25px; justify-content: center !important;'>
+
+    
+    <center>
+    <div id='' class='d-flex logo-section fs-4' style='justify-content: center !important;display: flex; font-size: 26px !important; background-color: white !important; text-align: center !important; padding: 25px !important;'>
+                            <div class='logo_part_1 fw-bold cus-primary-color' style='color: #B68C5A;'>D</div>
+                            <div class='logo_part_2' style='color: black';>ahuk</div>
+                        </div>
+    
+    </center>
+
+  
+        <!-- #0D6EFD -->
+
+        <div style='color:black; background-color: white;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); padding:20px; margin-top:15px ; margin-bottom: 25px;'>
+
+
+
+
+
+            Hi $username, <br>
+            Your request for otp verification on <b>$website_name</b> user account has been found . Please verify with your otp <br><br>
+            
+            <center><h1>Here is your otp</h1></center>
+
+            <center><h1>$otp</h1></center>
+
+            
+            
+            <br><br>
+            
+            
+            You can ignore it if you was logged in to your account. If you was not logged in with your account please change your password and contract us immediately. Thanks. <br>
+    
+        </div>
+
+        <center style='text-align:center; margin-top:25px; padding-bottom:25px; padding-top:25px; margin-bottom: 25px; color:white !important;'>
+            &copy; All right are reserved by  $website_name  || Copyright by $website_name
+        </center>
+
+    </div>
+    <!-- <h1>Hello, world!</h1> -->
+    <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js' integrity='sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe' crossorigin='anonymous'></script>
+
+
+
+
+</body>
+
+</html>");
+        }
+    }
+
+    public function mail($from_name = "Dahuk Forum Website", $to_name, $to_address, $email_subject, $email_body){
+        
+
+// //Load Composer's autoloader
+// require __DIR__ . '/../vendor/autoload.php';
+// require 'vendor/autoload.php';
+
+//Create an instance; passing `true` enables exceptions
+$mail = new PHPMailer(true);
+
+try {
+    //Server settings
+    // $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+    $mail->isSMTP();                                            //Send using SMTP
+    $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+    $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+    $mail->Username   = 'birathostmailsmtp@gmail.com';                     //SMTP username
+    $mail->Password   = 'qobifpydqrvlgwbv';  // qobi fpyd qrvl gwbv                              //SMTP password
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+    $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+    //Recipients
+    $mail->setFrom("birathostmailsmtp@gmail.com", "Dahuk Forum Website");
+    $mail->addAddress("$to_address", "$to_name");     //Add a recipient
+    // $mail->addAddress('ellen@example.com');               //Name is optional
+    // $mail->addReplyTo('info@example.com', 'Information');
+    // $mail->addCC('cc@example.com');
+    // $mail->addBCC('bcc@example.com');
+
+    //Attachments
+    // $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
+    // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+
+    //Content
+    $mail->isHTML(true);                                  //Set email format to HTML
+    $mail->Subject = "$email_subject";
+    $mail->Body    = "$email_body";
+    // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+    $mail->send();
+    echo 'Message has been sent';
+
+    if($mail->send()){
+        return "mail_sent";
+    }else{
+        return "mail_not_sent";
+    }
+
+} catch (Exception $e) {
+    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+}
+    }
+
+
 
     public function delete_blog(){
         if(isset($_POST['delete_blog_btn'])){
@@ -275,111 +465,292 @@ class Controllers extends sql_info
             if($result){
                 if($result->num_rows == 1){
                     // that means there will be only one user with the id
-                    if($user_img_name != ''){
-                        // that means the user img is not blank
-                       $result_setting_update =  $this->update_where("users", "`user_name` = '$user_name', `email` = '$email', `user_img_name` = '$upload_img_name'", "`user_id` = '$user_id'");
 
-                       if($result_setting_update){
-                                                // $_SESSION['user_id'] = $row['user_id'];
-                        $_SESSION['username'] = $user_name;
-                        $_SESSION['user_email'] = $email;
-                        $_SESSION['user_img_name'] = $upload_img_name;
+                    // $email_verify_status;
+                    while($row = $result->fetch_assoc()){
+                        $db_email = $row['email'];
+                    }
 
-
-                        $upload_img = $upload_dir . $upload_img_name;
-
-                        if($img_type == 'jpg' || $img_type == 'jpeg' || $img_type == 'png'){
-
-                            if(move_uploaded_file($user_img_tmp_name, $upload_img)){
-                                echo '
+                    if($email == $db_email){
+                        // that means the email is already verified
+                        if($user_img_name != ''){
+                            // that means the user img is not blank
+    
                             
-                                <script>
+    
+                           $result_setting_update =  $this->update_where("users", "`user_name` = '$user_name', `email` = '$email', `user_img_name` = '$upload_img_name'", "`user_id` = '$user_id'");
+    
+                           if($result_setting_update){
+                                                    // $_SESSION['user_id'] = $row['user_id'];
+                            $_SESSION['username'] = $user_name;
+                            $_SESSION['user_email'] = $email;
+                            $_SESSION['user_img_name'] = $upload_img_name;
+    
+    
+                            $upload_img = $upload_dir . $upload_img_name;
+    
+                            if($img_type == 'jpg' || $img_type == 'jpeg' || $img_type == 'png'){
+    
+                                if(move_uploaded_file($user_img_tmp_name, $upload_img)){
+                                    echo '
                                 
-                                success_alert("The informations has been updated successfully with image !");
+                                    <script>
+                                    
+                                    success_alert("The informations has been updated successfully with image !");
+            
+                                    
+                                    </scrip>
+                                    
+                                    ';
+                                }else{
+                                    echo '
+                                
+                                    <script>
+                                    
+                                    danger_alert("There was some error while uploading the user image !", "The image has not been uploaded successfully ! Please contact the developer !!");
+            
+                                    
+                                    </script>
+                                    
+                                    ';
+                                }
         
-                                
-                                </scrip>
-                                
-                                ';
+        
                             }else{
                                 echo '
-                            
+                                
                                 <script>
                                 
-                                danger_alert("There was some error while uploading the user image !", "The image has not been uploaded successfully ! Please contact the developer !!");
+                                danger_alert("Your uploaded file is not an image", "Please select an image for uploading as user image !!");
         
                                 
                                 </script>
                                 
                                 ';
                             }
-    
-    
-                        }else{
+                   
+                           }else{
                             echo '
                             
                             <script>
                             
-                            danger_alert("Your uploaded file is not an image", "Please select an image for uploading as user image !!");
+                            danger_alert("There was some error while updating the information !");
     
                             
                             </script>
                             
                             ';
+                           }
+    
+    
+    
+                            
+    
+                        }else{
+                            // that means the img is not selected
+                          $result_update =  $this->update_where("users", "`user_name` = '$user_name', `email` = '$email', `user_img_name` = '$user_img_name'", "`user_id` = '$user_id'");
+    
+                          if($result_update){
+                            $_SESSION['username'] = $user_name;
+                            $_SESSION['user_email'] = $email;
+                           
+                            echo '
+                            
+                            <script>
+                            
+                            success_alert("The informations has been updated successfully !");
+    
+                            
+                            </script>
+                            
+                            ';
+    
+                          }else{
+                            echo '
+                            
+                            <script>
+                            
+                            danger_alert("There was some error while updating the information !");
+    
+                            
+                            </script>
+                            
+                            ';
+                          }
+                           
+    
                         }
-               
-                       }else{
-                        echo '
-                        
-                        <script>
-                        
-                        danger_alert("There was some error while updating the information !");
-
-                        
-                        </script>
-                        
-                        ';
-                       }
-
-
-
-                        
-
+    
                     }else{
-                        // that means the img is not selected
-                      $result_update =  $this->update_where("users", "`user_name` = '$user_name', `email` = '$email', `user_img_name` = '$user_img_name'", "`user_id` = '$user_id'");
+                        // that means the email is not verified and has to be verified
+                        if($user_img_name != ''){
+                            // that means the user img is not blank
+    
+                            $check_emails_result = $this->show_where("users", "`email` = '$email'");
 
-                      if($result_update){
-                        $_SESSION['username'] = $user_name;
-                        $_SESSION['user_email'] = $email;
-                       
-                        echo '
-                        
-                        <script>
-                        
-                        success_alert("The informations has been updated successfully !");
+                            if($check_emails_result){
+                                if($check_emails_result->num_rows > 0){
+                                    // that means there the email is already exists on the software and this will through an error and will not process further
 
-                        
-                        </script>
-                        
-                        ';
+                                    echo '
+                                    
+                                    <script>
+                                    
+                                    danger_alert("Error ! The user is already exists with the email ! You cannot update with the same email", "If you want to update your email please use another email. You cannot update with the email which already exists on our software !!"");
 
-                      }else{
-                        echo '
-                        
-                        <script>
-                        
-                        danger_alert("There was some error while updating the information !");
+                                    </script>
+                                    
+                                    ';
 
-                        
-                        </script>
-                        
-                        ';
-                      }
-                       
+                                }else{
+                                    // that means the email is not exists on the software and will continue further
 
+                                    $this->update_where("users", "`email_verification_status` = ''", "`user_id` = '$user_id'");
+    
+                                    $result_setting_update =  $this->update_where("users", "`user_name` = '$user_name', `email` = '$email', `user_img_name` = '$upload_img_name'", "`user_id` = '$user_id'");
+             
+                                    if($result_setting_update){
+                                                             // $_SESSION['user_id'] = $row['user_id'];
+                                     $_SESSION['username'] = $user_name;
+                                     $_SESSION['user_email'] = $email;
+                                     $_SESSION['user_img_name'] = $upload_img_name;
+             
+             
+                                     $upload_img = $upload_dir . $upload_img_name;
+             
+                                     if($img_type == 'jpg' || $img_type == 'jpeg' || $img_type == 'png'){
+             
+                                         if(move_uploaded_file($user_img_tmp_name, $upload_img)){
+                                             echo '
+                                         
+                                             <script>
+                                             
+                                             success_alert("The informations has been updated successfully with image !");
+                     
+                                             
+                                             </scrip>
+                                             
+                                             ';
+                                         }else{
+                                             echo '
+                                         
+                                             <script>
+                                             
+                                             danger_alert("There was some error while uploading the user image !", "The image has not been uploaded successfully ! Please contact the developer !!");
+                     
+                                             
+                                             </script>
+                                             
+                                             ';
+                                         }
+                 
+                 
+                                     }else{
+                                         echo '
+                                         
+                                         <script>
+                                         
+                                         danger_alert("Your uploaded file is not an image", "Please select an image for uploading as user image !!");
+                 
+                                         
+                                         </script>
+                                         
+                                         ';
+                                     }
+                            
+                                    }else{
+                                     echo '
+                                     
+                                     <script>
+                                     
+                                     danger_alert("There was some error while updating the information !");
+             
+                                     
+                                     </script>
+                                     
+                                     ';
+                                    }
+             
+
+
+                                }
+                            }
+
+                           
+    
+    
+                            
+                         // duc
+                        }
+                        else{
+                             // that means the img is not selected
+
+                            $check_emails_exists_result = $this->show_where("users", "`email` = '$email'");
+
+                            if($check_emails_exists_result){
+                                if($check_emails_exists_result->num_rows > 0){
+                                    // that means the user is already exists with the email and we cannot process further and this will through an error
+
+                                    echo '
+                                    
+                                    <script>
+                                    
+                                    danger_alert("Error ! The user is already exists with the email ! You cannot update with the same email", "If you want to update your email please use another email. You cannot update with the email which already exists on our software !!");
+
+                                    </script>
+
+
+
+                                    ';
+
+                                    
+                                }else{
+                                    // that means the user is not exists with the email and we can process further this will not through an error
+
+                                    
+                            $this->update_where("users", "`email_verification_status` = ''", "`user_id` = '$user_id'");
+                            $result_update =  $this->update_where("users", "`user_name` = '$user_name', `email` = '$email', `user_img_name` = '$user_img_name'", "`user_id` = '$user_id'");
+      
+                            if($result_update){
+                              $_SESSION['username'] = $user_name;
+                              $_SESSION['user_email'] = $email;
+                             
+                              echo '
+                              
+                              <script>
+                              
+                              success_alert("The informations has been updated successfully !");
+      
+                              
+                              </script>
+                              
+                              ';
+      
+                            }else{
+                              echo '
+                              
+                              <script>
+                              
+                              danger_alert("There was some error while updating the information !");
+      
+                              
+                              </script>
+                              
+                              ';
+                            }
+
+
+                                }
+                            }
+
+                           
+                           
+    
+                        }
+    
                     }
 
+      
                 }
             }
 
@@ -612,6 +983,169 @@ class Controllers extends sql_info
     }
 
 
+
+    public function verify_email(){
+        if(isset($_POST['verify_email'])){
+            $email = $this->pure_data($_POST['email']);
+            $otp = $this->pure_data($_POST['otp']);
+
+            $user_id = $_SESSION['user_id'];
+
+            // $result_check_email = $this->show_where("users", "`email` = '$email'");
+            $result_check_email = $this->show_where("users", "`user_id` = '$user_id'");
+
+            if($result_check_email){
+                if($result_check_email->num_rows == 1){
+                    while($row =$result_check_email->fetch_assoc()){
+                        $verify_otp = $row['otp'];
+
+                        if($verify_otp == $otp){
+                            $email_verify_status_result = $this->update_where("users", "`email_verification_status` = 'email_verified'", "`user_id` = '$user_id'");
+                            
+                            $email_update = $this->update_where("users", "`email` = '$email'", "`user_id` = '$user_id'");
+
+                            unset($_SESSION['verify_otp_email_address']);
+                            unset($_SESSION['verify_email_sent_otp_status']);
+
+                            if($email_verify_status_result){
+                                
+                            echo '
+                            
+                            <script>
+                            success_alert("Your email has been verified successfully");
+
+                            window.location.href="/publisher_home";
+                            </script>
+                            
+                            ';
+                            }
+
+                        }
+
+                    }
+                }
+            }
+
+
+        }
+    }
+
+    public function send_otp_email_verification(){
+        if(isset($_POST['send_email_verify_otp'])){
+            $email = $this->pure_data($_POST['email']);
+
+            $username = $_SESSION['username'];
+
+            $otp = rand(1111, 9999);
+
+            $user_id = $_SESSION['user_id'];
+
+            // checking if the email is already exists on the software
+            $result_email_check_conflit = $this->show_where("users", "`email` = '$email'");
+
+            if($result_email_check_conflit){
+                if($result_email_check_conflit->num_rows > 1){
+                    // that means there can be only one user with the email if the user number is greter than 1 user that means there are other users who have the same email
+                    
+                    // that means there are the same email exists on the software and we cannot go further. this will through an error and will return the process from the start to 0 stage and will continue the process from starting stage
+
+                    echo '
+                    
+                    <script>
+                    danger_alert("Error ! The user is already exists with the email !", "Please use another email to register or verify");
+                    </script>
+                    
+                    ';
+
+
+                }else{
+                    
+
+            // $update_otp = $this->update_where("users", "`otp` = '$otp'", "`user_name` = '$username' AND `email` = '$email'");
+            $update_otp = $this->update_where("users", "`otp` = '$otp'", "`user_id` = '$user_id'");
+
+            $result = $this->mail("Dahuk Forum Website", "$username", $email, "Verify your email -- Dahuk Forum Website", $this->mail_template($username, "otp_verify", $otp));
+
+            if($result == "mail_sent"){
+                // that means the mail is sent
+
+                $_SESSION['verify_email_sent_otp_status'] = "otp sent";
+                $_SESSION['verify_otp_email_address'] = $email;
+
+
+                echo '
+                        
+                <script>
+                success_alert("The otp has been sent to your email address :- '. $email .'. Please verify with your otp !!", "Please wait while we are processing");
+
+                // setTimeout(function(){
+                //         window.location.href="/email_verify_otp_confirm";
+                //      }, 5000);
+                    
+                window.location.href="/email_verify_otp_confirm";
+
+                </script>
+                
+                ';
+
+            }else{
+                echo '
+                        
+                <script>
+                danger_alert("The otp has not been sent to your email address. Please verify with your otp !!", "We are facing some issues while sending the with the mail. Please try again later. We are working to solve the issues !!");
+
+                </script>
+                
+                ';
+            }
+
+                }
+            }
+
+
+
+        }
+    }
+
+
+    // this function is for checking is the email is verified or not
+    public function check_verify_email($email){
+        // this function checks wheather the email is verified or not
+
+        // if the email is not verified then it will redirect to the email verification center
+
+
+        $result_check_email = $this->show_where("users", "`email` = '$email'");
+
+        if($result_check_email){
+            if($result_check_email->num_rows == 1){
+                while($row = $result_check_email->fetch_assoc()){
+                    if($row['email_verification_status'] == '' || $row['email_verification_status'] == 'not_verified'){
+                        // that means the email is not verified and has to be verified
+
+                        // return "email_not_verified";
+
+                        echo '
+                        
+                        <script>
+                        
+                        location.href = "/email_verify"
+
+                        </script>
+
+                        
+                        ';
+
+
+                    }else{
+                        // return "email_verified";
+                    }
+                }
+            }
+        }
+
+    }
+
     public function signup()
     {
         if (isset($_POST['signup_btn'])) {
@@ -681,6 +1215,7 @@ class Controllers extends sql_info
             }
         }
     }
+    
 
 
 
@@ -718,7 +1253,11 @@ class Controllers extends sql_info
                             $_SESSION['user_email'] = $row['email'];
                             $_SESSION['user_img_name'] = $row['user_img_name'];
 
-                            // header('location: /publisher_home');
+                            $username = $_SESSION['username'];
+
+                            $this->mail("", "$username", "$email", "New login has been found -- Dahuk Forum Website", $this->mail_template("$username", "new_login_found"));
+
+                            header('location: /publisher_home');
 
                             echo '
                             
