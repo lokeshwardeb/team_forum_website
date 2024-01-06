@@ -1055,7 +1055,9 @@ try {
             $sub_title = $this->pure_data($_POST['sub_title']);
             $catagory = $this->pure_data($_POST['catagory']);
             // $article = $this->pure_data($_POST['article']);
-            $article = $this->pure_data($_POST['article']);
+            $article = $this->sanitizeBlogContent($_POST['article']);
+
+            $updatedString = stripslashes($article);
 
             $img_name = $_FILES['img']['name'];
             $img_tmp_name = $_FILES['img']['tmp_name'];

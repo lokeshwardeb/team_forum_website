@@ -81,6 +81,20 @@ class sql_info extends connect{
         return $result;
 
     }
+  
+    function sanitizeBlogContent($content) {
+
+        // using the htmlspecialchars for the conversion of the htmlspecial chars and now the sanitizedBlogContent function is the main of them for publishing the bloga
+        $new_con = htmlspecialchars($content);
+
+
+    // Then, handle the normalization of multiple backslashes before \r or \n
+    $cleanedContent = preg_replace('/(?<!\\\\)(\\\\{2})(\\\\r|\\\\n)(?<!\\\\)/', '\\\\$2', $new_con);
+
+    return $cleanedContent;
+    }
+
+
 
 //     public function article_data($data){
 //         // $encodedData = htmlspecialchars($data); // Encode special characters
@@ -101,11 +115,63 @@ class sql_info extends connect{
         // $result = htmlspecialchars_decode($article);
 
         // replacing the \r\n with the br tag when it is showing the data
-        $result = str_replace("\r\n", "<br>", $article);;
+        // $result = str_replace("\r\n", "<br>", $article);;
+
+        $string = "thin\\r\\ntjk"; // Your string with escaped characters
+
+// Replace the escape sequences with their respective characters
+$result = str_replace(array("\\r", "\\n"), array("\r", "\n"), $string);
+
+// echo $convertedString;
 
         
 
         return $result;
+    }
+
+    function convertToBr($string) {
+        // Replace escaped sequences with actual newlines, then convert newlines to <br> tags
+        $convertedString = nl2br(str_replace(array("\\r", "\\n"), array("\r", "\n"), $string));
+        
+        return $convertedString;
+    }
+    // function convertEscapedAndNewlinesToBr($text) {
+    //     // Replace escaped sequences "\\r" and "\\n" with their corresponding characters
+    //     $text = str_replace(array("\\r", "\\n"), array("\r", "\n"), $text);
+        
+    //     // Convert newlines to <br> tags
+    //     $text = nl2br($text);
+
+    //     $result = str_replace(" \ ", " ", $text);
+    
+    //     // return $text;
+    //     return $result;
+    // }
+
+    // function convertEscapedAndNewlinesToBr($text) {
+    //     // Decode HTML entities
+    //     $text = htmlspecialchars_decode($text, ENT_QUOTES);
+    
+    //     // Replace escaped sequences "\\r" and "\\n" with their corresponding characters
+    //     $text = str_replace(array("\\r", "\\n"), array("\r", "\n"), $text);
+    
+    //     // Convert newlines to <br> tags
+    //     $text = nl2br($text);
+    
+    //     return $text;
+    // }
+
+    function convertTextToBr($text) {
+
+        // the convertTextToBr function is the main function for showing the blogs data and this is the main and primary funciton for showing and displaying the blogs data
+
+        // Replace escaped sequences "\\r" and "\\n" with their corresponding characters
+        $text = str_replace(array("\\r", "\\n"), array("\r", "\n"), $text);
+    
+        // Convert newlines to <br> tags
+        $text = nl2br($text);
+    
+        return $text;
     }
 
     public function read_article_data($data){

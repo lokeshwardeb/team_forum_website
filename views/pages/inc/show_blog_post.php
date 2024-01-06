@@ -124,7 +124,9 @@
                             <p> '.$row['sub_title'].'</p>
                         </div>
                         <div class="text-contents-title mt-4 mb-4 pb-4 fs-6 ">
-                            <p> '. $controllers->show_blog_data($row['description']) .'</p>
+                            <!-- <p> '. $controllers->show_blog_data($row['description']) .'</p> -->
+                            <!-- <p> '. $controllers->convertToBr($row['description']) .'</p> -->
+                            <p> '. $controllers->convertTextToBr($row['description']) .'</p>
                         </div>
                         <div class="text-contents-title mt-4 mb-4 pb-4 fs-6 ">
                             <a href="/all_blogs" class="nav-link"><button class="btn cus-bg-primary-color text-light d-flex m-auto hero_get_started_btn">View all blogs</button></a>
