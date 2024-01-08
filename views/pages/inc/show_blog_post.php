@@ -79,7 +79,7 @@
                         <div class="row">
                             <div class="col-md-6 col-sm-12 d-flex">
                                 <div class="publisher_img mt-4 mb-4">
-                                <!-- <img src="'. $controllers->show_user_image($row['user_img_name']) .'" class="img-fluid publisher_img rounded-circle" style="min-height: 50px !important;" alt=""> -->
+                                <img src="'. $controllers->show_user_image($row['user_img_name']) .'" class="img-fluid publisher_img rounded-circle" style="min-height: 50px !important;" alt=""> 
 
 
                                 '. $controllers->show_blog_post_image($row['user_img_name']) .'
