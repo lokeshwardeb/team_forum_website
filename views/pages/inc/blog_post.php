@@ -53,7 +53,7 @@
                                 </div>
                                 <div class="publisher_info mt-4 mb-4 ms-2">
                                     <div class="publisher_name fw-bold ms-2">'.$row['user_name'].'</div>
-                                    <div class="published_time ms-2">'. $controllers->blog_post_date($row['datetime']) .' (' . $controllers->calculateDate($row['datetime']) . ' days ago)</div>
+                                    <div class="published_time ms-2">'. $controllers->blog_post_date($row['article_datetime']) .' (' . $controllers->calculateDate($row['article_datetime']) . ' days ago)</div>
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-12">
