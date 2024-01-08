@@ -106,7 +106,7 @@
 
                     if($row['image_name'] != ''){
                         echo '
-                        <img src="assets/uploads/img/'. $row['image_name'] .'" class="img-fluid" style="max-height: 50vh; display: flex; justify-content: center; margin: auto;">
+                        <img src="assets/uploads/img/'. $row['image_name'] .'" class="img-fluid" style="/*max-height: 50vh;*/ display: flex; justify-content: center; margin: auto;">
                         ';
                     }
 
