@@ -1068,10 +1068,32 @@ class Controllers extends sql_info
             $title = $this->pure_data($_POST['title']);
             $catagory = $this->pure_data($_POST['catagory']);
             $sub_title = $this->pure_data($_POST['sub_title']);
-            $article = $this->pure_data($_POST['article']);
+            $article = $this->pure_data($_POST['add_article_content']);
             $img_name = $_FILES['img']['name'];
             $img_tmp_name = $_FILES['img']['tmp_name'];
             $img_type = $_FILES['img']['type'];
+
+            $get_img_type = pathinfo($img_name, PATHINFO_EXTENSION);
+
+            // exit;
+
+            $post_count_no_result = $this->show_all("article", "ORDER BY `article`.`article_id` DESC");
+
+            if($post_count_no_result){
+                if($post_count_no_result->num_rows > 0){
+                    while($row = $post_count_no_result->fetch_assoc()){
+                        $post_count_no = $post_count_no_result->num_rows;
+                    }
+                }else{
+                    $post_count_no = 0;
+                }
+            }
+
+            $user_name = $_SESSION['username'];
+
+            $username = str_replace(' ', '_', $user_name);
+
+            $custom_img_name = $username . '_' . $post_count_no . '.' . $get_img_type;
 
 
             $user_id = $_SESSION['user_id'];
@@ -1080,106 +1102,139 @@ class Controllers extends sql_info
 
             // echo 'the img type is : ' . $img_type;
 
-            $image_path = __DIR__ . '/../assets/uploads/img/' . $img_name;
+            $image_path = __DIR__ . '/../assets/uploads/img/' . $custom_img_name;
             // $image_path =  '/assets/uploads/img/' . $img_name;
 
-
-            $the_result = $this->show_where("article", " `album_id` = '$album_id' AND `catagory_id` = '$catagory' AND `title` = '$title' AND `sub_title` = '$sub_title' AND `description` = '$article'");
-
-            if ($the_result) {
-                if ($the_result->num_rows > 0) {
-                    echo '
+            if($article == ''){
+                echo '
                     
-                    <script>
-                    danger_alert("The blog already published !", "This blog has been already published ! Please publish another blog !!");
+                <script>
+                danger_alert("The article cannot be blank !", "The blank article cannot be published ! Please add the article to publish the blog");
+
+                </script>
+
+                ';
+
+              
+            }else{
+                // that means the article are not blank
+
+
+                $the_result = $this->show_where("article", " `album_id` = '$album_id' AND `catagory_id` = '$catagory' AND `title` = '$title' AND `sub_title` = '$sub_title' AND `description` = '$article'");
+
+                if ($the_result) {
+                    if ($the_result->num_rows > 0) {
+                        echo '
+                        
+                        <script>
+                        danger_alert("The blog already published !", "This blog has been already published ! Please publish another blog !!");
+        
+                        </script>
     
-                    </script>
+                        ';
+    
+                        // echo 'the danger';
+                    } else {
+    
 
-                    ';
-
-                    // echo 'the danger';
-                } else {
-
-
-                    $result_img = $this->insert_where("images", "`album_id`, `image_name`, `image_type`", "'$album_id', '$img_name', '$img_type'");
-
-                    // $result_select = $this->show_all("images", " ORDER BY `images`.`image_id` DESC");
-                    $result_select = $this->show_all("images");
-
-                    if ($result_select) {
-                        if ($result_select->num_rows > 0) {
-                            while ($row = $result_select->fetch_assoc()) {
-                                $last_img_id = $row['image_id'];
+                        if($get_img_type == 'jpeg' || $get_img_type == 'jpg' || $get_img_type == 'png'){
+                            $result_img = $this->insert_where("images", "`album_id`, `image_name`, `image_type`", "'$album_id', '$custom_img_name', '$img_type'");
+    
+                        // $result_select = $this->show_all("images", " ORDER BY `images`.`image_id` DESC");
+                        $result_select = $this->show_all("images");
+    
+                        if ($result_select) {
+                            if ($result_select->num_rows > 0) {
+                                while ($row = $result_select->fetch_assoc()) {
+                                    $last_img_id = $row['image_id'];
+                                }
                             }
                         }
-                    }
-
-
-
-                    $result = $this->insert_where("article", "`album_id`, `catagory_id`, `title`, `sub_title`, `description`, `image_id`, `user_id`", "'$album_id', '$catagory', '$title', '$sub_title', '$article', '$last_img_id', '$user_id'");
-
-
-
-
-                    if ($result_img) {
-                        if ($result) {
-
-                            echo '
-                
-                        <script>
-                        success_alert("The new blog has been added successfully");
-            
-                        </script>
-                        
-                        ';
-
-                            if (move_uploaded_file($img_tmp_name, $image_path)) {
+    
+    
+    
+                        $result = $this->insert_where("article", "`album_id`, `catagory_id`, `title`, `sub_title`, `description`, `image_id`, `user_id`", "'$album_id', '$catagory', '$title', '$sub_title', '$article', '$last_img_id', '$user_id'");
+    
+    
+    
+    
+                        if ($result_img) {
+                            if ($result) {
+    
                                 echo '
-                
+                    
                             <script>
-                            success_alert("The new blog has been added successfully with image !");
+                            success_alert("The new blog has been added successfully");
+                
+                            </script>
+                            
+                            ';
+    
+                                if (move_uploaded_file($img_tmp_name, $image_path)) {
+                                    echo '
+                    
+                                <script>
+                                success_alert("The new blog has been added successfully with image !");
+                
+                                </script>
+                                
+                                ';
+                                }
+                            } else {
+                                // that means if the blog are not published successfully
+                                echo '
+                    
+                            <script>
+                            danger_alert("The blog are not published successfully !");
             
                             </script>
                             
                             ';
                             }
                         } else {
-                            // that means if the blog are not published successfully
+                            // that means if the image are not inserted successfully
                             echo '
-                
+                    
                         <script>
-                        danger_alert("The blog are not published successfully !");
+                        danger_alert("The blog published but the image cannot be published !");
         
                         </script>
                         
                         ';
                         }
-                    } else {
-                        // that means if the image are not inserted successfully
-                        echo '
-                
+                        }else{
+                            // that means this is not img and it will show an error
+                            echo '
+                    
+                            <script>
+                            danger_alert("Please select an image !", "Your uploaded file are not an image !!");
+            
+                            </script>
+                    
+                        ';
+                        }
+
+    
+                        
+                    }
+                } else {
+                    echo '
+                    
                     <script>
-                    danger_alert("The blog published but the image cannot be published !");
+                    danger_alert("Something error has been occured !", "Please contract the developer, something internal issues has been found !!");
     
                     </script>
                     
                     ';
-                    }
                 }
-            } else {
-                echo '
-                
-                <script>
-                danger_alert("Something error has been occured !", "Please contract the developer, something internal issues has been found !!");
-
-                </script>
-                
-                ';
+    
+    
+    
+    
             }
 
 
-
-
+          
 
 
 
@@ -1205,86 +1260,139 @@ class Controllers extends sql_info
             $sub_title = $this->pure_data($_POST['sub_title']);
             $catagory = $this->pure_data($_POST['catagory']);
             // $article = $this->pure_data($_POST['article']);
-            $article = $this->sanitizeBlogContent($_POST['article']);
+            $article = $this->pure_data($_POST['article']);
 
             $updatedString = stripslashes($article);
 
             $img_name = $_FILES['img']['name'];
             $img_tmp_name = $_FILES['img']['tmp_name'];
 
+
+            $get_img_type = pathinfo($img_name, PATHINFO_EXTENSION);
+
+            // exit;
+
+            $post_count_no_result = $this->show_all("article", "ORDER BY `article`.`article_id` DESC");
+
+            if($post_count_no_result){
+                if($post_count_no_result->num_rows > 0){
+                    while($row = $post_count_no_result->fetch_assoc()){
+                        $post_count_no = $post_count_no_result->num_rows;
+                    }
+                }else{
+                    $post_count_no = 0;
+                }
+            }
+
+            $user_name = $_SESSION['username'];
+
+            $username = str_replace(' ', '_', $user_name);
+
+            $custom_img_name = $username . '_' . $post_count_no . '.' . $get_img_type;
+
+
+            
             $upload_dir = __DIR__ . '/../assets/uploads/img/';
 
-            $blog_id = $this->pure_data($_POST['blog_id']);
-
-            $result = $this->show_where("article", "`article_id` = '$blog_id'");
-
-            if ($result) {
-                if ($result->num_rows == 1) {
-                    // that means there are only one row will be exists
-
-                    // getting the img id no 
-
-                    while ($row = $result->fetch_assoc()) {
-                        $get_img_id = $row['image_id'];
-                    }
 
 
-                    // updating the article
-
-                    $result_update = $this->update_where("article", "`title` = '$title', `sub_title` = '$sub_title', `catagory_id` = '$catagory', `description` = '$article'", "`article_id` = '$blog_id'");
-
-                    // if the image is not blank then it will update the new image name else if the image is equals to blank then it will not update the old image name again
-                    if ($img_name != '') {
-                        // updating the article img
-                        $result_update_img = $this->update_where("images", "`image_name` = '$img_name'", "`image_id` = '$get_img_id'");
-                    }
-
-                    if ($result_update) {
-                        // that means updated successfully
+            
+            $upload_img = $upload_dir . $custom_img_name;
 
 
-                        // if the image is not equals to blank that means there are new images seleted for updation upload then it will upload the new updated image on the server else it will not update anything
+
+
+
+            if($article == ''){
+                echo '
+                    
+                <script>
+                danger_alert("The article cannot be blank !", "The blank article cannot be published ! Please add the article to publish the blog");
+
+                </script>
+
+                ';
+            }else{
+                // that means the article is not blank
+
+
+                $blog_id = $this->pure_data($_POST['blog_id']);
+
+                $result = $this->show_where("article", "`article_id` = '$blog_id'");
+    
+                if ($result) {
+                    if ($result->num_rows == 1) {
+                        // that means there are only one row will be exists
+    
+                        // getting the img id no 
+    
+                        while ($row = $result->fetch_assoc()) {
+                            $get_img_id = $row['image_id'];
+                        }
+    
+    
+                        // updating the article
+    
+                        $result_update = $this->update_where("article", "`title` = '$title', `sub_title` = '$sub_title', `catagory_id` = '$catagory', `description` = '$article'", "`article_id` = '$blog_id'");
+    
+                        // if the image is not blank then it will update the new image name else if the image is equals to blank then it will not update the old image name again
                         if ($img_name != '') {
-                            if ($result_update_img) {
-
-                                // if the file is not exist then it will upload on the server otherwise it will not upload the same file again
-
-                                if (!file_exists($upload_dir . $img_name)) {
-                                    move_uploaded_file($img_tmp_name, $upload_dir . $img_name);
-                                    // echo 'the img has been inserted';
+                            // updating the article img
+                            $result_update_img = $this->update_where("images", "`image_name` = '$custom_img_name'", "`image_id` = '$get_img_id'");
+                        }
+    
+                        if ($result_update) {
+                            // that means updated successfully
+    
+    
+                            // if the image is not equals to blank that means there are new images seleted for updation upload then it will upload the new updated image on the server else it will not update anything
+                            if ($img_name != '') {
+                                if ($result_update_img) {
+    
+                                    // if the file is not exist then it will upload on the server otherwise it will not upload the same file again
+    
+                                    if (!file_exists($upload_img)) {
+                                        move_uploaded_file($img_tmp_name, $upload_img);
+                                        // echo 'the img has been inserted';
+                                    }
                                 }
+    
+                                echo '
+                                
+                                <script>
+                                success_alert("The blog has been updated with the image successfully", "The blog has been updated with its new values");
+                                </script>
+                                
+                                ';
+                            } else {
+                                // that means the img is blank and will not be updated
+    
+                                echo '
+                            
+                                <script>
+                                success_alert("The blog has been updated without the image successfully", "The blog has been updated with its new values");
+                                </script>
+                                
+                                ';
                             }
-
-                            echo '
-                            
-                            <script>
-                            success_alert("The blog has been updated with the image successfully", "The blog has been updated with its new values");
-                            </script>
-                            
-                            ';
                         } else {
-                            // that means the img is blank and will not be updated
-
+                            // that means not updated successfully
                             echo '
-                        
+                            
                             <script>
-                            success_alert("The blog has been updated without the image successfully", "The blog has been updated with its new values");
+                            danger_alert("The blog has not been updated successfully", "There were some issues while updating the values !!");
                             </script>
                             
                             ';
                         }
-                    } else {
-                        // that means not updated successfully
-                        echo '
-                        
-                        <script>
-                        danger_alert("The blog has not been updated successfully", "There were some issues while updating the values !!");
-                        </script>
-                        
-                        ';
                     }
                 }
+
+
             }
+
+
+           
         }
     }
 

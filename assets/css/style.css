@@ -507,3 +507,17 @@ signup section design ends here
 =========================================================================
 
 */
+
+#article{
+    min-height: 100vh !important;
+}
+
+.cke_editable {
+    min-height: 50vh;  /* Set the desired height in pixels */
+}
+.cke_contents {
+    min-height: 50vh;  /* Set the desired height in pixels */
+}
+.marker{
+    background-color: yellow !important;
+}

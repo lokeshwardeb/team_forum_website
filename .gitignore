@@ -1,1 +1,7 @@
 /vendor/
+/ckfinder
+/ckeditor
+/user_files
+# /ckfinder/core/connector/php/vendor
+# /ckfinder/core/connector/php/user_files
+# \ckfinder\core\connector\php

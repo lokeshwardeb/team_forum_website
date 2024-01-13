@@ -142,8 +142,13 @@ $controllers->check_verify_email($_SESSION['user_email']);
                                             <div class="col-md-12 col-sm-12">
                                                 <div class="mb-3">
                                                     <label for="sub_title" class="fw-bold m-2">Article</label>
-                                                    <textarea name="article" id="article" class="form-control" placeholder="Write your article" cols="30" rows="10"><?php echo $controllers->pure_data($show_article);   ?></textarea>
-                                                    <div class="alert_note_section text-danger mt-4 mb-4">
+                                                    <textarea name="article" id="article" class="form-control" placeholder="Write your article" cols="30" rows="10" style="min-height: 500px !important;"><?php echo
+                                                     
+                                                     htmlspecialchars_decode($show_article);
+                                                     
+                                                     
+                                                     ?></textarea>
+                                                    <!-- <div class="alert_note_section text-danger mt-4 mb-4">
                                                         Note :
                                                         <ul>
                                                         <li>On the artical area when you are writing any article you can add a enter using <b>Enter key</b> on you keyboard and update or save the post. It will be detected by the program automatically</li>
@@ -151,7 +156,13 @@ $controllers->check_verify_email($_SESSION['user_email']);
                                                         <li>In example : Form:\r\nGreat UI/UX design isnot just about making things pretty; on this line the \r\n mean the structure and the line break or counts of the enter systems by the program</li>
                                                         <li>If you have any kinds of questions please feel free to ask the question</li>
                                                         </ul>
-                                                    </div>
+                                                    </div> -->
+                                                    <!-- <div class="alert_note_section text-danger mt-4 mb-4">
+                                                        Note :
+                                                        <ul>
+                                                        <li>If you want to make center of your image try to </li>
+                                                        </ul>
+                                                    </div> -->
 
                                                 </div>
                                             </div>
