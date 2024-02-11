@@ -28,6 +28,7 @@ session_start();
 <script src="/ckeditor/ckeditor.js"></script>
 <script src="/ckeditor/styles.js"></script>
 <script src="/ckfinder/ckfinder.js"></script>
+<!-- <script src="/assets/js/ck_editor_config.js"></script> -->
 <!-- <link rel="stylesheet" href="/ckeditor/contents.css"> -->
 <style>
   .marker
