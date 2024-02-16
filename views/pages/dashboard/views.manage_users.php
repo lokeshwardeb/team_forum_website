@@ -16,6 +16,8 @@ $controllers->login_check();
 
 $controllers->check_verify_email($_SESSION['user_email']);
 
+$controllers->check_user_roles();
+
 
 
 
@@ -40,11 +42,11 @@ $controllers->check_verify_email($_SESSION['user_email']);
             <div class="row">
                 <?php
 
-$active_class_team_members_section = "active_class";
+$active_class_manage_users = "active_class";
 
                 // $controllers->active_class($active_class);
 
-                $controllers->dashboard_active_class($active_class_team_members_section);
+                $controllers->dashboard_active_class($active_class_manage_users);
                 require __DIR__ . '/../inc/dashboard_sidebar.php';
 
                 ?>
@@ -53,7 +55,15 @@ $active_class_team_members_section = "active_class";
                         <div class="content-section">
                             <div class="add_blog_section  ">
                                 <div class="container blog_section_title fs-2 m-auto justify-content-center d-flex mt-4 pb-2 border-1 border-bottom border-dark">
-                                    MY TEAM MEMBERS
+                                    MANAGE USERS
+                                </div>
+
+                                <div class="alert_show_section">
+                                    <?php
+                                    
+                                    $controllers->update_user_roles();
+
+                                    ?>
                                 </div>
 
                                 <div class="manage-section container cus-bg-light-secondary-color mt-4">
@@ -82,7 +92,9 @@ $active_class_team_members_section = "active_class";
                                                         <th>Member Name</th>
                                                         <th>Contribution</th>
                                                         <th>Message Member</th>
-                                                        <th>Report The Member</th>
+                                                        <th>Block The Member</th>
+                                                        <th>Set the role of The Member</th>
+                                                        <th>Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -99,9 +111,8 @@ $active_class_team_members_section = "active_class";
                                                 
                                                 if($result_team){
                                                     if($result_team->num_rows > 0){
-
                                                         $sl_no = 1;
-
+                                                        
                                                         while($row = $result_team->fetch_assoc()){
 
                                                             $user_id = $row['user_id'];
@@ -110,7 +121,7 @@ $active_class_team_members_section = "active_class";
                                                             echo '
                                                             
                                                         <tr>
-                                                        <td>'. $sl_no .'</td>
+                                                        <td>'.$sl_no.'</td>
                                                         <td>
                                                             <img src="'. $controllers->show_user_image($row['user_img_name']) .'" style="min-height: 50px !important;"  width="50px" class="img-fluid" alt="">
                                                         </td>
@@ -144,11 +155,57 @@ $active_class_team_members_section = "active_class";
 
                                                             </button>
                                                         </td>
+
+                                                        <form action="" method="post">
+                                                            <td>
+                                                                <select name="select_user_roles" id="" class="form-control">'; ?>
+                                                                
+                                                                    <option value="admin" <?php 
+                                                                if($row['user_role'] == 'admin'){
+                                                                    echo 'selected';
+                                                                } ?> >
+                                                                        Team Leader / Admin
+                                                                    </option>
+                                                                    <option value="chief_programmer" <?php 
+                                                                if($row['user_role'] == 'chief_programmer'){
+                                                                    echo 'selected';
+                                                                } ?> >
+                                                                        Chief Programmer
+                                                                    </option>
+                                                                    <option value="programmer" <?php 
+                                                                if($row['user_role'] == 'programmer'){
+                                                                    echo 'selected';
+                                                                } ?> >
+                                                                        Programmer
+                                                                    </option>
+                                                                    <option value="designer" <?php 
+                                                                if($row['user_role'] == 'designer'){
+                                                                    echo 'selected';
+                                                                } ?>>
+                                                                        Designer
+                                                                    </option>
+                                                                    <option value="content_writer" <?php 
+                                                                if($row['user_role'] == 'content_writer'){
+                                                                    echo 'selected';
+                                                                } ?><?php echo ' >
+                                                                        Content Writer
+                                                                    </option>
+                                                                   
+                                                                </select>
+
+                                                                <input type="hidden" name="get_user_id" value="'.$user_id.'">
+
+                                                            </td>
+                                                            <td>
+                                                                <button type="submit" name="role_update_btn" class="btn btn-dark btn-sm">Update</button>
+                                                            </td>
+                                                        </form>
                                                         
                                                     </tr>
                                                             
                                                             ';
-                                                            $sl_no++;
+                                                        $sl_no++;
+
                                                         }
                                                     }
                                                 }
