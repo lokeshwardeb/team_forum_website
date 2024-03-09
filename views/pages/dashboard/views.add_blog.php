@@ -21,14 +21,14 @@ $controllers->check_verify_email($_SESSION['user_email']);
 
 ?>
 <div id="preloader">
-                            <?php
+    <?php
 
-                            // skeleton of the page
-                            
-                            require_once __DIR__ . '/skeletons/views.skeleton.add_blog.php';
+    // skeleton of the page
 
-                            ?>
-                        </div>
+    require_once __DIR__ . '/skeletons/views.skeleton.add_blog.php';
+
+    ?>
+</div>
 
 
 <!-- main code section starts here -->
@@ -37,7 +37,7 @@ $controllers->check_verify_email($_SESSION['user_email']);
         <div class="container-fluid">
             <div class="row">
 
-<!-- enter add blog nav -->
+                <!-- enter add blog nav -->
                 <?php
 
                 // main contents of the website
@@ -73,7 +73,7 @@ $controllers->check_verify_email($_SESSION['user_email']);
                                                 <div class="mb-3">
                                                     <label for="title" class="fw-bold m-2">Title</label>
                                                     <input type="text" name="title" id="title" class="form-control" placeholder="Enter Title" required>
-                                                   
+
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-sm-12">
@@ -86,10 +86,11 @@ $controllers->check_verify_email($_SESSION['user_email']);
                                                         $result = $controllers->show_all("catagory");
                                                         // $result = $controllers->show_where("catagory", "`catagory_name` = 'UI/UX DESIGN'");
 
-                                                        if($result){
-                                                            if($result->num_rows > 0){
-                                                                while($row = $result->fetch_assoc()){
-                                                                    echo '<option value="'. $row['catagory_id'] .'">'. $row['catagory_name'] .'</option>';                                                                }
+                                                        if ($result) {
+                                                            if ($result->num_rows > 0) {
+                                                                while ($row = $result->fetch_assoc()) {
+                                                                    echo '<option value="' . $row['catagory_id'] . '">' . $row['catagory_name'] . '</option>';
+                                                                }
                                                             }
                                                         }
 
@@ -125,36 +126,36 @@ $controllers->check_verify_email($_SESSION['user_email']);
 
                                                 </div>
                                             </div>
-                                            </div>
-                                            <div class="col-md-12 col-sm-12 mb-4">
-                                                <div class="mb-3">
-                                                    <label for="img" class="fw-bold m-2">Choose Image</label>
-                                                   <input type="file" name="img" id="img" class="form-control" >
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12 col-sm-12">
-                                                <div class="mb-3">
-                                                    <button type="submit" name="add_new_blog" class="btn cus-bg-primary-color text-white hero_get_started_btn mb-4">Add Blog</button>
-                                                </div>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 mb-4">
+                                            <div class="mb-3">
+                                                <label for="img" class="fw-bold m-2">Choose Image</label>
+                                                <input type="file" name="img" id="img" class="form-control" required>
                                             </div>
                                         </div>
-                                    </form>
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="mb-3">
+                                                <button type="submit" name="add_new_blog" class="btn cus-bg-primary-color text-white hero_get_started_btn mb-4">Add Blog</button>
+                                            </div>
+                                        </div>
                                 </div>
-
+                                </form>
                             </div>
+
                         </div>
-
-
                     </div>
+
+
                 </div>
             </div>
         </div>
     </div>
+    </div>
 </main>
 
 <script>
-    var editor =  CKEDITOR.replace( 'add_article_content' );
-CKFinder.setupCKEditor( editor );
+    var editor = CKEDITOR.replace('add_article_content');
+    CKFinder.setupCKEditor(editor);
 </script>
 
 
