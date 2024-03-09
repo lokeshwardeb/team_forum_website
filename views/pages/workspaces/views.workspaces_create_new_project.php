@@ -135,6 +135,20 @@ $controllers->workspace_permitted_users();
                                                 <input type="file" name="img" id="img" class="form-control" required>
                                             </div>
                                         </div>
+                                        <div class="col-md-12 col-sm-12 mb-4">
+                                            <div class="mb-3">
+                                                <label for="img" class="fw-bold m-2">Upload Project Additional File (Optional)</label>
+                                                <span class="text-danger fw-bold">Note :- It can be the .zip file with the all other components</span>
+                                                <input type="file" name="img" id="img" class="form-control" >
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 mb-4">
+                                            <div class="mb-3">
+                                                <label for="img" class="fw-bold m-2">Upload Project SRS pdf File (Optional)</label>
+                                                <span class="text-danger fw-bold">Note :- It should be the .pdf file with the all other components</span>
+                                                <input type="file" name="img" id="img" class="form-control" >
+                                            </div>
+                                        </div>
                                         <div class="col-md-12 col-sm-12">
                                             <div class="mb-3">
                                                 <button type="submit" name="create_new_project" class="btn cus-bg-primary-color text-white hero_get_started_btn mb-4">Create new project</button>
