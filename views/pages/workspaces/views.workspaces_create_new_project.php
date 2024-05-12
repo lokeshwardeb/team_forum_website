@@ -7,32 +7,34 @@ require_once __DIR__ . '/../../../controllers/controllers.php';
 
 $controllers = new Controllers;
 
-$active_title = "Add New Blog";
+$active_title = "Publisher Home";
 
 require_once __DIR__ . '/../inc/header.php';
 // require_once __DIR__ . '/inc/navbar.php';
 
 $controllers->login_check();
+// $controllers->workspace_login();
+$controllers->workspace_login_check();
 
 $controllers->check_verify_email($_SESSION['user_email']);
 
-
+$controllers->workspace_permitted_users();
 
 
 ?>
+
 <div id="preloader">
-    <?php
+                            <?php
 
-    // skeleton of the page
+                            // skeleton of the page
+                            
+                            // require_once __DIR__ . '../../dashboard/skeletons/views.skeleton.add_blog.php';
 
-    require_once __DIR__ . '/skeletons/views.skeleton.add_blog.php';
+                            ?>
+                        </div>
 
-    ?>
-</div>
-
-
-<!-- main code section starts here -->
-<main>
+    <!-- main code section starts here -->
+    <main>
     <div class="add_blog">
         <div class="container-fluid">
             <div class="row">
@@ -42,12 +44,12 @@ $controllers->check_verify_email($_SESSION['user_email']);
 
                 // main contents of the website
 
-                $active_class_add_blog = "active_class";
+                $active_class_project_hub = "active_class";
 
                 // $controllers->active_class($active_class);
 
-                $controllers->dashboard_active_class($active_class_add_blog);
-                include __DIR__ . '/../inc/dashboard_sidebar.php';
+                $controllers->dashboard_active_class($active_class_project_hub);
+                include __DIR__ . '/../inc/workspaces_sidebar.php';
 
                 ?>
                 <!-- enter add blog nav -->
@@ -56,14 +58,14 @@ $controllers->check_verify_email($_SESSION['user_email']);
                         <div class="content-section">
                             <div class="add_blog_section  ">
                                 <div class="container blog_section_title fs-2 m-auto justify-content-center d-flex mt-4 pb-2 border-1 border-bottom border-dark">
-                                    ADD NEW BLOGS
+                                    CREATE NEW PROJECT
                                 </div>
 
                                 <div class="form-section container cus-bg-light-secondary-color mt-4">
                                     <div class="disply_section">
                                         <?php
 
-                                        $controllers->add_new_blog();
+                                        $controllers->create_new_project();
 
                                         ?>
                                     </div>
@@ -71,8 +73,8 @@ $controllers->check_verify_email($_SESSION['user_email']);
                                         <div class="row">
                                             <div class="col-md-12 col-sm-12">
                                                 <div class="mb-3">
-                                                    <label for="title" class="fw-bold m-2">Title</label>
-                                                    <input type="text" name="title" id="title" class="form-control" placeholder="Enter Title" required>
+                                                    <label for="title" class="fw-bold m-2">Project Title</label>
+                                                    <input type="text" name="project_title" id="title" class="form-control" placeholder="Enter Title" required>
 
                                                 </div>
                                             </div>
@@ -100,14 +102,14 @@ $controllers->check_verify_email($_SESSION['user_email']);
                                             </div>
                                             <div class="col-md-6 col-sm-12">
                                                 <div class="mb-3">
-                                                    <label for="sub_title" class="fw-bold m-2">Sub Title</label>
-                                                    <input type="text" name="sub_title" id="sub_title" class="form-control" placeholder="Enter Sub Title">
+                                                    <label for="sub_title" class="fw-bold m-2">Project Sub Title</label>
+                                                    <input type="text" name="project_sub_title" id="sub_title" class="form-control" placeholder="Enter Sub Title">
                                                 </div>
                                             </div>
                                             <div class="col-md-12 col-sm-12">
                                                 <div class="mb-3">
-                                                    <label for="sub_title" class="fw-bold m-2">Article</label>
-                                                    <textarea name="add_article_content" id="article" class="form-control" placeholder="Write your article" cols="30" rows="10" style="min-height: 500px !important;" required></textarea>
+                                                    <label for="sub_title" class="fw-bold m-2">Project Description</label>
+                                                    <textarea name="project_description" id="article" class="form-control" placeholder="Write your article" cols="30" rows="10" style="min-height: 500px !important;" required></textarea>
                                                     <!-- <div class="alert_note_section text-danger mt-4 mb-4">
                                                         Note :
                                                         <ul>
@@ -133,9 +135,23 @@ $controllers->check_verify_email($_SESSION['user_email']);
                                                 <input type="file" name="img" id="img" class="form-control" required>
                                             </div>
                                         </div>
+                                        <div class="col-md-12 col-sm-12 mb-4">
+                                            <div class="mb-3">
+                                                <label for="img" class="fw-bold m-2">Upload Project Additional File (Optional)</label>
+                                                <span class="text-danger fw-bold">Note :- It can be the .zip file with the all other components</span>
+                                                <input type="file" name="img" id="img" class="form-control" >
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 mb-4">
+                                            <div class="mb-3">
+                                                <label for="img" class="fw-bold m-2">Upload Project SRS pdf File (Optional)</label>
+                                                <span class="text-danger fw-bold">Note :- It should be the .pdf file with the all other components</span>
+                                                <input type="file" name="img" id="img" class="form-control" >
+                                            </div>
+                                        </div>
                                         <div class="col-md-12 col-sm-12">
                                             <div class="mb-3">
-                                                <button type="submit" name="add_new_blog" class="btn cus-bg-primary-color text-white hero_get_started_btn mb-4">Add Blog</button>
+                                                <button type="submit" name="create_new_project" class="btn cus-bg-primary-color text-white hero_get_started_btn mb-4">Create new project</button>
                                             </div>
                                         </div>
                                 </div>
@@ -153,14 +169,10 @@ $controllers->check_verify_email($_SESSION['user_email']);
     </div>
 </main>
 
-<script>
-    var editor = CKEDITOR.replace('add_article_content');
-    CKFinder.setupCKEditor(editor);
-</script>
-
 
 
 <?php
 // require_once __DIR__ . '/../inc/footer.php';
-include __DIR__ . '/../inc/footer_scripts.php';
+require_once __DIR__ . '/../inc/footer_scripts.php';
 ?>
+

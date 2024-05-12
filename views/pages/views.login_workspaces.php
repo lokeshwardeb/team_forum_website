@@ -6,10 +6,18 @@ require_once __DIR__ . '/../../controllers/controllers.php';
 
 $controllers = new Controllers;
 
-$active_title = "Login";
+$active_title = "Enter into Team Workspaces";
 
 require_once __DIR__ . '/inc/header.php';
 require_once __DIR__ . '/inc/navbar.php';
+
+$controllers->login_check();
+// $controllers->workspace_login();
+// $controllers->workspace_login_check();
+
+$controllers->check_verify_email($_SESSION['user_email']);
+
+// $controllers->workspace_permitted_users();
 
 
 
@@ -28,21 +36,13 @@ require_once __DIR__ . '/inc/navbar.php';
             <div class="alert_section">
                 <?php
 
-                $controllers->login();
+                $controllers->workspace_login();
 
                 ?>
             </div>
-
-
-            <!-- <div class="logo_section">
-            <img src="/assets/img/dahuk_new_logo.jpg" alt="">
-            </div> -->
-
-
             <div class="mb-4 fs-2 text-center ">
-                Login
+                Enter into Team Workspaces
             </div>
-
           
             <div class="mb-3">
                 <label for="email " class="">Email</label>

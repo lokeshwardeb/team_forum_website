@@ -18,6 +18,51 @@ $model = new sql_info;
 class Controllers extends sql_info
 {
 
+    public function update_user_roles()
+    {
+        if (isset($_POST['role_update_btn'])) {
+            $select_user_roles = $this->pure_data($_POST['select_user_roles']);
+
+            $get_user_id = $this->pure_data($_POST['get_user_id']);
+
+            $result_update_user_roles = $this->update_where("users", "`user_role` = '$select_user_roles'", "`user_id` = '$get_user_id'");
+
+            if ($result_update_user_roles) {
+                echo '
+                            
+            <script>
+            
+            success_alert("User role has been updated successfully !");
+            
+            </script>
+
+        
+        ';
+            }
+        }
+    }
+
+    public function check_user_roles()
+    {
+        $user_name = $_SESSION['username'];
+
+        $result_user_role =  $this->show_where("users", "`user_role` = 'chief_programmer' and `user_name` = '$user_name' or `user_role` = 'admin' and `user_name` = '$user_name'");
+
+        if ($result_user_role) {
+            if ($result_user_role->num_rows != 1) {
+                // that means the the user is not exists and the user is not permitted to enter the section and to manage and control
+
+                echo '
+                <script>
+                
+                location.href = "/publisher_home"
+
+                </script>
+                ';
+            }
+        }
+    }
+
     public function change_password()
     {
         if (isset($_POST['change_pass'])) {
@@ -566,10 +611,11 @@ class Controllers extends sql_info
     }
 
 
-    public function check_img_extension($img_type){
-        if($img_type == 'jpeg' || $img_type == 'jpg' || $img_type == 'png'){
+    public function check_img_extension($img_type)
+    {
+        if ($img_type == 'jpeg' || $img_type == 'jpg' || $img_type == 'png') {
             return "img_file";
-        }else{
+        } else {
             return "not_img_file";
         }
     }
@@ -596,34 +642,34 @@ class Controllers extends sql_info
 
             $result = $this->show_where("users", "`user_id` = '$user_id'");
 
-            if($result){
-                if($result->num_rows == 1){
+            if ($result) {
+                if ($result->num_rows == 1) {
                     // that means there is only one user
 
                     // checking the db saved email
-                    while($row = $result->fetch_assoc()){
+                    while ($row = $result->fetch_assoc()) {
                         $db_email = $row['email'];
                     }
 
                     // checking if the user email is equals to db saved email
-                    if($email == $db_email){
+                    if ($email == $db_email) {
                         // if the two emails is equals then it will continue the updation without any error
 
-                        if($user_img_name !== ''){
+                        if ($user_img_name !== '') {
                             // that means there are user updation img seleccted
 
                             // updating with img name
                             $update_result_with_img = $this->update_where("users", "`user_name` = '$user_name', `email` = '$email', `user_img_name` = '$upload_img_name'", "`user_id` = '$user_id'");
 
-                            if($update_result_with_img){
-                              $img_type_status = $this->check_img_extension($img_type);
-                              if($img_type_status == 'img_file'){
-                                if(move_uploaded_file($user_img_tmp_name, $upload_img)){
+                            if ($update_result_with_img) {
+                                $img_type_status = $this->check_img_extension($img_type);
+                                if ($img_type_status == 'img_file') {
+                                    if (move_uploaded_file($user_img_tmp_name, $upload_img)) {
 
-                                    $_SESSION['user_img_name'] = $upload_img_name;
-                                    $_SESSION['username'] = $user_name;
+                                        $_SESSION['user_img_name'] = $upload_img_name;
+                                        $_SESSION['username'] = $user_name;
 
-                                    echo '
+                                        echo '
                             
                                     <script>
                                     
@@ -632,8 +678,8 @@ class Controllers extends sql_info
                                     </script>
                                     
                                     ';
-                                }else{
-                                    echo '
+                                    } else {
+                                        echo '
                             
                                     <script>
                                     
@@ -641,10 +687,10 @@ class Controllers extends sql_info
                                     
                                     </script>
                                     
-                                    '; 
-                                }
-                              }else{
-                                echo '
+                                    ';
+                                    }
+                                } else {
+                                    echo '
                             
                                 <script>
                                 
@@ -652,17 +698,15 @@ class Controllers extends sql_info
                                 
                                 </script>
                                 
-                                '; 
-                              }
+                                ';
+                                }
                             }
-
-                           
-                        }else{
+                        } else {
                             // that means there are not img selected
 
                             $update_result_without_img = $this->update_where("users", "`user_name` = '$user_name', `email` = '$email'", "`user_id` = '$user_id'");
 
-                            if($update_result_without_img){
+                            if ($update_result_without_img) {
 
                                 // $_SESSION['user_img_name'] = $user_img_name;
                                 $_SESSION['username'] = $user_name;
@@ -677,7 +721,7 @@ class Controllers extends sql_info
                                 </script>
                                 
                                 ';
-                            }else{
+                            } else {
                                 echo '
                             
                                 <script>
@@ -688,19 +732,15 @@ class Controllers extends sql_info
                                 
                                 ';
                             }
-
-                           
                         }
-
-
-                    }else{
+                    } else {
                         // that means the two emails are not equal and this will update and through and error
 
                         // that means the email has been changed and it has to be verified as usual 
                         // so the email verification status will be updated into blank
 
                         // if($user_img_name !== ''){
-                            
+
                         // $update_result_with_img_db_email_not_same = $this->update_where("users", "`user_name` = '$user_name', `email` = '$email', `user_img_name` = '$user_img_name'", "`user_id` = '$user_id'");
 
                         // if($update_result_with_img_db_email_not_same){
@@ -708,14 +748,14 @@ class Controllers extends sql_info
                         // }
 
                         // }
-                        
+
 
                         $update_email = $this->update_where("users", "`email` = '$email'", "`user_id` = '$user_id'");
 
-                        if($update_email){
+                        if ($update_email) {
                             $email_verification_status_update_result =  $this->update_where("users", "`email_verification_status` = ''", "`user_id` = '$user_id'");
 
-                            if($email_verification_status_update_result){
+                            if ($email_verification_status_update_result) {
                                 echo '
                                 
                                 <script>
@@ -724,21 +764,10 @@ class Controllers extends sql_info
                                 
                                 ';
                             }
-
                         }
-
-
                     }
-
-                  
                 }
             }
-
-
-            
-
-
-
         }
     }
 
@@ -1062,6 +1091,218 @@ class Controllers extends sql_info
     //     }
     // }
 
+    public function create_new_project()
+    {
+        if (isset($_POST['create_new_project'])) {
+            $project_title = $this->pure_data($_POST['project_title']);
+            $catagory = $this->pure_data($_POST['catagory']);
+            $project_sub_title = $this->pure_data($_POST['project_sub_title']);
+            $project_description = $this->pure_data($_POST['project_description']);
+
+            $project_status = "Project Declared and Created into the Projects Hub";
+
+            $img_name = $_FILES['img']['name'];
+            $img_tmp_name = $_FILES['img']['tmp_name'];
+            $img_type = $_FILES['img']['type'];
+
+            $get_img_type = pathinfo($img_name, PATHINFO_EXTENSION);
+
+            // exit;
+
+            $post_count_no_result = $this->show_all("projects", "ORDER BY `projects`.`project_id` DESC");
+
+            if ($post_count_no_result) {
+                if ($post_count_no_result->num_rows > 0) {
+                    while ($row = $post_count_no_result->fetch_assoc()) {
+                        $post_count_no = $post_count_no_result->num_rows;
+                    }
+                } else {
+                    $post_count_no = 0;
+                }
+            }
+
+            $user_name = $_SESSION['workspace_username'];
+
+            $username = str_replace(' ', '_', $user_name);
+
+            $custom_img_name = 'project_' . $project_title . '_' . $username . '_' . $post_count_no . '.' . $get_img_type;
+
+
+            $user_id = $_SESSION['workspace_user_id'];
+
+            $album_id = $catagory;
+
+            // echo 'the img type is : ' . $img_type;
+
+            $image_path = __DIR__ .'/../assets/uploads/workspaces/img/' . $custom_img_name;
+            // $image_path =  '/assets/uploads/img/' . $img_name;
+
+            if ($project_description == '') {
+                echo '
+                    
+                <script>
+                danger_alert("The article cannot be blank !", "The blank article cannot be published ! Please add the article to publish the blog");
+
+                </script>
+
+                ';
+            } else {
+                // that means the article are not blank
+
+
+                $the_result = $this->show_where("projects", " `album_id` = '$album_id' AND `catagory_id` = '$catagory' AND `project_title` = '$project_title' AND `project_sub_title` = '$project_sub_title' AND `project_description` = '$project_description' AND `project_status` = '$project_status'");
+
+                if ($the_result) {
+                    if ($the_result->num_rows > 0) {
+                        echo '
+                        
+                        <script>
+                        danger_alert("The project already created !", "This project has been already created ! Please create another project !!");
+        
+                        </script>
+    
+                        ';
+
+                        // echo 'the danger';
+                    } else {
+                        if($img_name != ''){
+                            // that means the image is not blank
+                            if ($get_img_type == 'jpeg' || $get_img_type == 'jpg' || $get_img_type == 'png') {
+                                $result_img = $this->insert_where("images", "`album_id`, `image_name`, `image_type`", "'$album_id', '$custom_img_name', '$img_type'");
+    
+                                // $result_select = $this->show_all("images", " ORDER BY `images`.`image_id` DESC");
+                                $result_select = $this->show_all("images");
+    
+                                if ($result_select) {
+                                    if ($result_select->num_rows > 0) {
+                                        while ($row = $result_select->fetch_assoc()) {
+                                            $last_img_id = $row['image_id'];
+                                        }
+                                    }
+                                }
+    
+    
+    
+                                $result = $this->insert_where("projects", "`album_id`, `catagory_id`, `project_title`, `project_sub_title`, `project_description`, `image_id`, `user_id`, `project_status`", "'$album_id', '$catagory', '$project_title', '$project_sub_title', '$project_description', '$last_img_id', '$user_id', '$project_status'");
+    
+    
+    
+    
+                                if ($result_img) {
+                                    if ($result) {
+    
+                                        echo '
+                        
+                                <script>
+                                success_alert("The new project has been created successfully");
+                    
+                                </script>
+                                
+                                ';
+    
+                                        if (move_uploaded_file($img_tmp_name, $image_path)) {
+                                            echo '
+                        
+                                    <script>
+                                    success_alert("The new project has been created successfully with image !");
+                    
+                                    </script>
+                                    
+                                    ';
+                                        }
+                                    } else {
+                                        // that means if the blog are not published successfully
+                                        echo '
+                        
+                                <script>
+                                danger_alert("The project are not created successfully !");
+                
+                                </script>
+                                
+                                ';
+                                    }
+                                } else {
+                                    // that means if the image are not inserted successfully
+                                    echo '
+                        
+                            <script>
+                            danger_alert("The project created but the image cannot be published !");
+            
+                            </script>
+                            
+                            ';
+                                }
+                            } else {
+                                // that means this is not img and it will show an error
+                                echo '
+                        
+                                <script>
+                                danger_alert("Please select an image !", "Your uploaded file are not an image !!");
+                
+                                </script>
+                        
+                            ';
+                            }
+                        }else{
+                            // that means the img is blank
+                            $result = $this->insert_where("projects", "`album_id`, `catagory_id`, `project_title`, `project_sub_title`, `project_description`, `user_id`, `project_status`", "'$album_id', '$catagory', '$project_title', '$project_sub_title', '$project_description', '$user_id', '$project_status'");
+                            
+                            if ($result) {
+    
+                                echo '
+                
+                        <script>
+                        success_alert("The new project has been created successfully");
+            
+                        </script>
+                        
+                        ';
+
+                            } else {
+                                // that means if the blog are not published successfully
+                                echo '
+                
+                        <script>
+                        danger_alert("The new project are not created successfully !");
+        
+                        </script>
+                        
+                        ';
+                            }
+
+                        }
+                    }
+                } else {
+                    echo '
+                    
+                    <script>
+                    danger_alert("Something error has been occured !", "Please contract the developer, something internal issues has been found !!");
+    
+                    </script>
+                    
+                    ';
+                }
+            }
+
+
+
+
+
+
+
+
+            // echo '
+
+            // <script>
+            // success_alert("The new blog has been added successfully");
+
+            // </script>
+
+            // ';
+
+
+        }
+    }
     public function add_new_blog()
     {
         if (isset($_POST['add_new_blog'])) {
@@ -1079,12 +1320,12 @@ class Controllers extends sql_info
 
             $post_count_no_result = $this->show_all("article", "ORDER BY `article`.`article_id` DESC");
 
-            if($post_count_no_result){
-                if($post_count_no_result->num_rows > 0){
-                    while($row = $post_count_no_result->fetch_assoc()){
+            if ($post_count_no_result) {
+                if ($post_count_no_result->num_rows > 0) {
+                    while ($row = $post_count_no_result->fetch_assoc()) {
                         $post_count_no = $post_count_no_result->num_rows;
                     }
-                }else{
+                } else {
                     $post_count_no = 0;
                 }
             }
@@ -1105,7 +1346,7 @@ class Controllers extends sql_info
             $image_path = __DIR__ . '/../assets/uploads/img/' . $custom_img_name;
             // $image_path =  '/assets/uploads/img/' . $img_name;
 
-            if($article == ''){
+            if ($article == '') {
                 echo '
                     
                 <script>
@@ -1114,9 +1355,7 @@ class Controllers extends sql_info
                 </script>
 
                 ';
-
-              
-            }else{
+            } else {
                 // that means the article are not blank
 
 
@@ -1132,36 +1371,36 @@ class Controllers extends sql_info
                         </script>
     
                         ';
-    
+
                         // echo 'the danger';
                     } else {
-    
 
-                        if($get_img_type == 'jpeg' || $get_img_type == 'jpg' || $get_img_type == 'png'){
+
+                        if ($get_img_type == 'jpeg' || $get_img_type == 'jpg' || $get_img_type == 'png') {
                             $result_img = $this->insert_where("images", "`album_id`, `image_name`, `image_type`", "'$album_id', '$custom_img_name', '$img_type'");
-    
-                        // $result_select = $this->show_all("images", " ORDER BY `images`.`image_id` DESC");
-                        $result_select = $this->show_all("images");
-    
-                        if ($result_select) {
-                            if ($result_select->num_rows > 0) {
-                                while ($row = $result_select->fetch_assoc()) {
-                                    $last_img_id = $row['image_id'];
+
+                            // $result_select = $this->show_all("images", " ORDER BY `images`.`image_id` DESC");
+                            $result_select = $this->show_all("images");
+
+                            if ($result_select) {
+                                if ($result_select->num_rows > 0) {
+                                    while ($row = $result_select->fetch_assoc()) {
+                                        $last_img_id = $row['image_id'];
+                                    }
                                 }
                             }
-                        }
-    
-    
-    
-                        $result = $this->insert_where("article", "`album_id`, `catagory_id`, `title`, `sub_title`, `description`, `image_id`, `user_id`", "'$album_id', '$catagory', '$title', '$sub_title', '$article', '$last_img_id', '$user_id'");
-    
-    
-    
-    
-                        if ($result_img) {
-                            if ($result) {
-    
-                                echo '
+
+
+
+                            $result = $this->insert_where("article", "`album_id`, `catagory_id`, `title`, `sub_title`, `description`, `image_id`, `user_id`", "'$album_id', '$catagory', '$title', '$sub_title', '$article', '$last_img_id', '$user_id'");
+
+
+
+
+                            if ($result_img) {
+                                if ($result) {
+
+                                    echo '
                     
                             <script>
                             success_alert("The new blog has been added successfully");
@@ -1169,9 +1408,9 @@ class Controllers extends sql_info
                             </script>
                             
                             ';
-    
-                                if (move_uploaded_file($img_tmp_name, $image_path)) {
-                                    echo '
+
+                                    if (move_uploaded_file($img_tmp_name, $image_path)) {
+                                        echo '
                     
                                 <script>
                                 success_alert("The new blog has been added successfully with image !");
@@ -1179,10 +1418,10 @@ class Controllers extends sql_info
                                 </script>
                                 
                                 ';
-                                }
-                            } else {
-                                // that means if the blog are not published successfully
-                                echo '
+                                    }
+                                } else {
+                                    // that means if the blog are not published successfully
+                                    echo '
                     
                             <script>
                             danger_alert("The blog are not published successfully !");
@@ -1190,10 +1429,10 @@ class Controllers extends sql_info
                             </script>
                             
                             ';
-                            }
-                        } else {
-                            // that means if the image are not inserted successfully
-                            echo '
+                                }
+                            } else {
+                                // that means if the image are not inserted successfully
+                                echo '
                     
                         <script>
                         danger_alert("The blog published but the image cannot be published !");
@@ -1201,8 +1440,8 @@ class Controllers extends sql_info
                         </script>
                         
                         ';
-                        }
-                        }else{
+                            }
+                        } else {
                             // that means this is not img and it will show an error
                             echo '
                     
@@ -1213,9 +1452,6 @@ class Controllers extends sql_info
                     
                         ';
                         }
-
-    
-                        
                     }
                 } else {
                     echo '
@@ -1227,14 +1463,10 @@ class Controllers extends sql_info
                     
                     ';
                 }
-    
-    
-    
-    
             }
 
 
-          
+
 
 
 
@@ -1274,12 +1506,12 @@ class Controllers extends sql_info
 
             $post_count_no_result = $this->show_all("article", "ORDER BY `article`.`article_id` DESC");
 
-            if($post_count_no_result){
-                if($post_count_no_result->num_rows > 0){
-                    while($row = $post_count_no_result->fetch_assoc()){
+            if ($post_count_no_result) {
+                if ($post_count_no_result->num_rows > 0) {
+                    while ($row = $post_count_no_result->fetch_assoc()) {
                         $post_count_no = $post_count_no_result->num_rows;
                     }
-                }else{
+                } else {
                     $post_count_no = 0;
                 }
             }
@@ -1291,19 +1523,19 @@ class Controllers extends sql_info
             $custom_img_name = $username . '_' . $post_count_no . '.' . $get_img_type;
 
 
-            
+
             $upload_dir = __DIR__ . '/../assets/uploads/img/';
 
 
 
-            
+
             $upload_img = $upload_dir . $custom_img_name;
 
 
 
 
 
-            if($article == ''){
+            if ($article == '') {
                 echo '
                     
                 <script>
@@ -1312,51 +1544,51 @@ class Controllers extends sql_info
                 </script>
 
                 ';
-            }else{
+            } else {
                 // that means the article is not blank
 
 
                 $blog_id = $this->pure_data($_POST['blog_id']);
 
                 $result = $this->show_where("article", "`article_id` = '$blog_id'");
-    
+
                 if ($result) {
                     if ($result->num_rows == 1) {
                         // that means there are only one row will be exists
-    
+
                         // getting the img id no 
-    
+
                         while ($row = $result->fetch_assoc()) {
                             $get_img_id = $row['image_id'];
                         }
-    
-    
+
+
                         // updating the article
-    
+
                         $result_update = $this->update_where("article", "`title` = '$title', `sub_title` = '$sub_title', `catagory_id` = '$catagory', `description` = '$article'", "`article_id` = '$blog_id'");
-    
+
                         // if the image is not blank then it will update the new image name else if the image is equals to blank then it will not update the old image name again
                         if ($img_name != '') {
                             // updating the article img
                             $result_update_img = $this->update_where("images", "`image_name` = '$custom_img_name'", "`image_id` = '$get_img_id'");
                         }
-    
+
                         if ($result_update) {
                             // that means updated successfully
-    
-    
+
+
                             // if the image is not equals to blank that means there are new images seleted for updation upload then it will upload the new updated image on the server else it will not update anything
                             if ($img_name != '') {
                                 if ($result_update_img) {
-    
+
                                     // if the file is not exist then it will upload on the server otherwise it will not upload the same file again
-    
+
                                     if (!file_exists($upload_img)) {
                                         move_uploaded_file($img_tmp_name, $upload_img);
                                         // echo 'the img has been inserted';
                                     }
                                 }
-    
+
                                 echo '
                                 
                                 <script>
@@ -1366,7 +1598,7 @@ class Controllers extends sql_info
                                 ';
                             } else {
                                 // that means the img is blank and will not be updated
-    
+
                                 echo '
                             
                                 <script>
@@ -1387,12 +1619,7 @@ class Controllers extends sql_info
                         }
                     }
                 }
-
-
             }
-
-
-           
         }
     }
 
@@ -1626,7 +1853,115 @@ class Controllers extends sql_info
 
 
 
+    public function workspace_permitted_users()
+    {
+        $workspace_user_name = $_SESSION['workspace_username'];
+        $workspace_user_id = $_SESSION['workspace_user_id'];
+        $result_check_users = $this->show_where("users", "`user_name` = '$workspace_user_name' and `user_id` = '$workspace_user_id'");
 
+        if ($result_check_users) {
+            if ($result_check_users->num_rows == 1) {
+                while ($row = $result_check_users->fetch_assoc()) {
+                    if ($row['user_role'] == 'admin' || $row['user_role'] == 'chief_programmer' || $row['user_role'] == 'programmer' || $row['user_role'] == 'designer') {
+                    } else {
+                        echo '
+                        
+                        <script>
+                        
+                        location.href = "/publisher_home"
+
+                        </script>
+                        
+                        ';
+                    }
+                }
+            }
+        }
+    }
+
+    public function workspace_login()
+    {
+        if (isset($_POST['login_btn'])) {
+            $email = $this->pure_data($_POST['email']);
+            $password = $this->pure_data($_POST['password']);
+
+            $result = $this->show_where("users", "`email` = '$email'");
+
+            if ($result) {
+                if ($result->num_rows == 1) {
+                    // if the only one user is found
+                    while ($row = $result->fetch_assoc()) {
+                        $hash = $row['password'];
+
+                        $password_verify = password_verify($password, $hash);
+
+                        if ($password == $password_verify) {
+                            // that means the password is correct
+                            if ($row['user_role'] == 'admin' || $row['user_role'] == 'chief_programmer' || $row['user_role'] == 'programmer' || $row['user_role'] == 'designer') {
+                                echo '
+                            <script>
+                            
+                            success_alert("Loggedin Successfully !!", "Loggedin successfully with your credentials");
+
+                            </script>
+                            
+                            ';
+
+                                $_SESSION['workspace_login_status'] = 'loggedin';
+                                $_SESSION['enable_workspace'] = 'enabled';
+
+                                $_SESSION['workspace_user_id'] = $row['user_id'];
+                                $_SESSION['workspace_username'] = $row['user_name'];
+                                $_SESSION['workspace_user_email'] = $row['email'];
+                                $_SESSION['workspace_user_img_name'] = $row['user_img_name'];
+
+                                $username = $_SESSION['username'];
+
+                                // $this->mail("", "$username", "$email", "New login has been found -- Dahuk Forum Website", $this->mail_template("$username", "new_login_found"));
+
+                                header('location: /workspaces_dashboard');
+
+                                echo '
+                            
+                            <script>
+                            location.href = "/workspaces_dashboard";
+                            </script>
+                            
+                            ';
+                            } else {
+                                echo '
+                                <script>
+                                alert_danger("Sorry, you have not the access to enter the system");
+                                location.href = "/team_workspaces"
+                                </script>                                
+                                ';
+                            }
+                        } else {
+                            // that means the password is not correct
+                            echo '
+                            <script>
+                            
+                            danger_alert("Wrong password !!", "Please enter the correct password for login");
+
+                            </script>
+                            
+                            ';
+                        }
+                    }
+                } else {
+                    // that means the user does not exist on db
+                    echo '
+                    <script>
+                    
+                    danger_alert("User does not exist !!", "Please enter the correct credentials");
+
+                    </script>
+                    
+                    ';
+                }
+            }
+        }
+    }
     public function login()
     {
         if (isset($_POST['login_btn'])) {
@@ -1703,6 +2038,21 @@ class Controllers extends sql_info
 
 
 
+    public function workspace_login_check()
+    {
+        if (!isset($_SESSION['workspace_login_status'])) {
+            // that means if the user is not loggedin
+            echo '
+            
+            <script>
+            
+            location.href = "/team_workspaces"
+
+            </script>
+            
+            ';
+        }
+    }
     public function login_check()
     {
         if (!isset($_SESSION['login_status'])) {
