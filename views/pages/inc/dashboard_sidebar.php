@@ -60,8 +60,15 @@ $user_name = $_SESSION['username'];
                                         </a>
                                     </li>
                                     <div class="border border-light"></div>
-                                 
+
                                     <?php
+
+                                    // this below commented code section in php is for the workspace section but it is now commented because it has been removed temporary until the next decission. It is expected that there will be a new software with the features of the workspaces and for the project management. The new project management software will be created with the workspaces features
+
+
+                                    ?>
+                                 
+                                    <!-- <?php
 
                                     $result_workspace_show = $controllers->show_where("users", "`user_role` = 'chief_programmer' and `user_name` = '$user_name' or `user_role` = 'admin' and `user_name` = '$user_name' or `user_role` = 'programmer' and `user_name` = '$user_name' or `user_role` = 'designer' and `user_name` = '$user_name'");
 
@@ -83,7 +90,7 @@ $user_name = $_SESSION['username'];
 
 
 
-                                    ?>
+                                    ?> -->
                                     
 
                                     
