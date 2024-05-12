@@ -5,8 +5,6 @@ require_once __DIR__ . '/../../../controllers/controllers.php';
 
 $controllers = new Controllers;
 
-$user_name = $_SESSION['username'];
-
 
 
 ?>
@@ -60,74 +58,7 @@ $user_name = $_SESSION['username'];
                                         </a>
                                     </li>
                                     <div class="border border-light"></div>
-
-                                    <?php
-
-                                    // this below commented code section in php is for the workspace section but it is now commented because it has been removed temporary until the next decission. It is expected that there will be a new software with the features of the workspaces and for the project management. The new project management software will be created with the workspaces features
-
-
-                                    ?>
-                                 
-                                    <!-- <?php
-
-                                    $result_workspace_show = $controllers->show_where("users", "`user_role` = 'chief_programmer' and `user_name` = '$user_name' or `user_role` = 'admin' and `user_name` = '$user_name' or `user_role` = 'programmer' and `user_name` = '$user_name' or `user_role` = 'designer' and `user_name` = '$user_name'");
-
-                                    if($result_workspace_show){
-                                        if($result_workspace_show->num_rows == 1){
-                                            echo '
-                                            
-                                            <li class="list-group dashboard-hover-link p-2 mt-4 rounded <?php echo $controllers->dashboard_active_class($active_class_team_workspaces) ?>">
-                                            <a href="/workspaces_dashboard" target="_blank" class="nav-link ">
-                                            <i class="fa-solid fa-briefcase"></i>
-                                                Workspaces
-                                            </a>
-                                        </li>
-                                            
-                                            ';
-                                        }
-                                    }
-
-
-
-
-                                    ?> -->
-                                    
-
-                                    
-                                    <?php
-
-$user_name = $_SESSION['username'];
-
-$result_user_role =  $controllers->show_where("users", "`user_role` = 'chief_programmer' and `user_name` = '$user_name' or `user_role` = 'admin' and `user_name` = '$user_name'");
-
-if($result_user_role){
-    if($result_user_role->num_rows == 1){
-        // that means the the user is not exists and the user is not permitted to enter the section and to manage and control
-
-        echo '
-        <li class="list-group dashboard-hover-link p-2 mt-4 rounded ';?>
-        <?php 
-        $controllers->dashboard_active_class($active_class_manage_users)
-        ?><?php echo '">
-        <a href="/manage_users" class="nav-link ">
-        <i class="fa-solid fa-people-roof"></i>
-            Manage Users
-        </a>
-    </li>
-        ';
-
-    }else{
-        // $active_class_manage_users ='';
-    }
-}
-
-
-
-                                    ?>
-
-
-                                 
-                                    <li class="list-group dashboard-hover-link p-2 mt-4 rounded <?php echo $controllers->dashboard_active_class($active_class_team_members_section) ?>">
+                                    <li class="list-group dashboard-hover-link p-2 mt-4 rounded <?php echo $controllers->dashboard_active_class($active_class_team_members) ?>">
                                         <a href="/my_team_members" class="nav-link ">
                                         <i class="fa-solid fa-people-group"></i>
                                             My Team Members

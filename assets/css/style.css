@@ -18,7 +18,9 @@ common css design starts here
     /* --custom-success-color: #198754; */
     /* --custom-primary-color: #B68C5A; */
 
-  --custom-primary-color: #45A3D9;
+    --custom-primary-color: #45A3D9;
+
+
     --custom-secondary-color: #5E7C84;
     --custom-light-secondary-color: #F3F3F3;
     --custom-login-and-hovers-color: #6f6f6f;
@@ -522,17 +524,4 @@ signup section design ends here
 }
 .marker{
     background-color: yellow !important;
-}
-
-
-.logo_section{
-    display: flex;
-    margin: auto;
-    justify-content: center;
-    text-align: center;
-}
-
-.logo_section img{
-    width: auto;
-    height: 188px;
 }

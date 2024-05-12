@@ -7,10 +7,6 @@
                             <div class="logo_part_1 fw-bold cus-primary-color">D</div>
                             <div class="logo_part_2">ahuk</div>
                         </div>
-
-                        <!-- <img src="/assets/img/dahuk_new_logo.jpg" alt=""> -->
-
-
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
