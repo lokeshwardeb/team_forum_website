@@ -16,7 +16,11 @@ common css design starts here
 
 :root{
     /* --custom-success-color: #198754; */
-    --custom-primary-color: #B68C5A;
+    /* --custom-primary-color: #B68C5A; */
+
+    --custom-primary-color: #45A3D9;
+
+
     --custom-secondary-color: #5E7C84;
     --custom-light-secondary-color: #F3F3F3;
     --custom-login-and-hovers-color: #6f6f6f;
