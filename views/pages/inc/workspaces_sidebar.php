@@ -98,6 +98,43 @@ $user_name = $_SESSION['username'];
                 </div>
 
 
+
+                <p class="d-inline-flex gap-1">
+                    <!-- <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        Link with href
+                    </a> -->
+                    <button class="btn dashboard-hover-link  fs-5" style="font-size: 18px !important;" type="button" data-bs-toggle="collapse" data-bs-target="#documentation_btn" aria-expanded="false" aria-controls="documentation_btn">
+                    <!-- <i class="fa-solid fa-book"></i> -->
+                    <i class="fa-regular fa-file-word"></i>
+                    <!-- <i class="fa-solid fa-file-word"></i> -->
+                        Meeting Repository
+                    </button>
+                </p>
+                <div class="collapse " id="documentation_btn">
+                    <div class="card card-body ">
+
+                        <li class="list-group mt-4 mb-4 dashboard-hover-link p-2 rounded <?php echo $controllers->dashboard_active_class($active_class_manage_items) ?>">
+                            <a href="/create_new_project" class="nav-link ">
+                                <i class="fa-solid fa-list-check"></i>
+                                Meeting Dashboard
+                            </a>
+                        </li>
+                        <li class="list-group mt-4 mb-4 dashboard-hover-link p-2 rounded <?php echo $controllers->dashboard_active_class($active_class_manage_items) ?>">
+                            <a href="/create_new_project" class="nav-link ">
+                                <i class="fa-solid fa-list-check"></i>
+                                Create a new project
+                            </a>
+                        </li>
+                        <li class="list-group dashboard-hover-link p-2 rounded mb-4 <?php echo $controllers->dashboard_active_class($active_class_my_all_blogs) ?>">
+                            <a href="/workspaces_all_projects" class="nav-link ">
+                                <i class="fa-regular fa-newspaper"></i>
+                                View all the projects
+                            </a>
+                        </li>
+                    </div>
+                </div>
+
+
                 <!-- <li class="list-group  mb-4 dashboard-hover-link p-2 rounded <?php echo $controllers->dashboard_active_class($active_class_add_blog) ?>">
                     <a href="" class="nav-link ">
                         <i class="fa-solid fa-square-plus"></i>

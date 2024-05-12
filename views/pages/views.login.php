@@ -32,9 +32,17 @@ require_once __DIR__ . '/inc/navbar.php';
 
                 ?>
             </div>
+
+
+            <!-- <div class="logo_section">
+            <img src="/assets/img/dahuk_new_logo.jpg" alt="">
+            </div> -->
+
+
             <div class="mb-4 fs-2 text-center ">
                 Login
             </div>
+
           
             <div class="mb-3">
                 <label for="email " class="">Email</label>

@@ -92,14 +92,14 @@ require_once __DIR__ . '/inc/navbar.php';
                            <div class="  m-4 ">
                                <div class="row cus-bg-white">
                                    <div class="col-md-6 col-sm-12 container contact-border p-4">
-                                       <i class="fa-solid fa-location-dot fs-2 mb-2" style="color: #b68c5a;"
+                                       <i class="fa-solid fa-location-dot fs-2 mb-2" style="color: var(--custom-primary-color) !important;"
                                            id="icon1"></i>
                                        <p class="paragraph5">Location</p>
                                        <p class="paragraph6">Datiara West</p>
                                        <p class="paragraph6">Brahmanbaria,Bangladesh</p>
                                    </div>
                                    <div class="col-md-6 col-sm-12 container contact-border p-4">
-                                       <i class="fa-solid fa-phone fs-2 mb-2" style="color: #b68c5a;" id="icon2"></i>
+                                       <i class="fa-solid fa-phone fs-2 mb-2" style="color:var(--custom-primary-color) !important;" id="icon2"></i>
                                        <p class="paragraph5">Call Us</p>
                                        <p class="paragraph6">+8801423659</p>
                                        <p class="paragraph6">+8801425454</p>
@@ -108,14 +108,14 @@ require_once __DIR__ . '/inc/navbar.php';
                                </div>
                                <div class="row cus-bg-white">
                                    <div class="col-md-6 col-sm-12 container contact-border p-4">
-                                       <i class="fa-regular fa-envelope fs-2 mb-2" style="color: #b68c5a;"
+                                       <i class="fa-regular fa-envelope fs-2 mb-2" style="color: var(--custom-primary-color) !important;"
                                            id="icon3"></i>
                                        <p class="paragraph5">Email Us</p>
                                        <p class="paragraph6">info@gmail.com</p>
                                        <p class="paragraph6">info@gmail.com</p>
                                    </div>
                                    <div class="col-md-6 col-sm-12 container contact-border p-4">
-                                       <i class="fa-regular fa-clock fs-2 mb-2" style="color: #b68c5a;" id="icon4"></i>
+                                       <i class="fa-regular fa-clock fs-2 mb-2" style="color: var(--custom-primary-color) !important;" id="icon4"></i>
                                        <p class="paragraph5">Working Hours</p>
                                        <p class="paragraph6">Mon-Fri 9am to 5pm</p>
                                        <p class="paragraph6">Sunday 9am to 1pm</p>
