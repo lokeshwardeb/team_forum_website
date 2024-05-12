@@ -40,11 +40,11 @@ $controllers->check_verify_email($_SESSION['user_email']);
             <div class="row">
                 <?php
 
-$active_class_team_members_section = "active_class";
+$active_class_team_members = "active_class";
 
                 // $controllers->active_class($active_class);
 
-                $controllers->dashboard_active_class($active_class_team_members_section);
+                $controllers->dashboard_active_class($active_class_team_members);
                 require __DIR__ . '/../inc/dashboard_sidebar.php';
 
                 ?>
@@ -99,9 +99,6 @@ $active_class_team_members_section = "active_class";
                                                 
                                                 if($result_team){
                                                     if($result_team->num_rows > 0){
-
-                                                        $sl_no = 1;
-
                                                         while($row = $result_team->fetch_assoc()){
 
                                                             $user_id = $row['user_id'];
@@ -110,7 +107,7 @@ $active_class_team_members_section = "active_class";
                                                             echo '
                                                             
                                                         <tr>
-                                                        <td>'. $sl_no .'</td>
+                                                        <td>1</td>
                                                         <td>
                                                             <img src="'. $controllers->show_user_image($row['user_img_name']) .'" style="min-height: 50px !important;"  width="50px" class="img-fluid" alt="">
                                                         </td>
@@ -148,7 +145,6 @@ $active_class_team_members_section = "active_class";
                                                     </tr>
                                                             
                                                             ';
-                                                            $sl_no++;
                                                         }
                                                     }
                                                 }

@@ -99,7 +99,7 @@ require_once __DIR__ . '/inc/navbar.php';
                                        <p class="paragraph6">Brahmanbaria,Bangladesh</p>
                                    </div>
                                    <div class="col-md-6 col-sm-12 container contact-border p-4">
-                                      <i class="fa-solid fa-phone fs-2 mb-2" style="color: var(--custom-primary-color) !important;" id="icon2"></i>
+                                       <i class="fa-solid fa-phone fs-2 mb-2" style="color: var(--custom-primary-color) !important;" id="icon2"></i>
                                        <p class="paragraph5">Call Us</p>
                                        <p class="paragraph6">+8801423659</p>
                                        <p class="paragraph6">+8801425454</p>
