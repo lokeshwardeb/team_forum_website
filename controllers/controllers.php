@@ -1485,6 +1485,23 @@ class Controllers extends sql_info
         }
     }
 
+    public function generate_new_image_id($username = '', $get_img_type = ''){
+        $img_uid = uniqid();
+
+        $check_img = $username . '_' . $img_uid . '.' . $get_img_type;
+
+        $check_img_uid_result = $this->show_where("images", "`image_id` = '$check_img'");
+
+        if($check_img_uid_result){
+            if($check_img_uid_result->num_rows > 0){
+                // that means the uniqid exists on the db
+                return $this->generate_new_image_id();
+            }
+            return $check_img;
+        }
+
+    }
+
     public function update_blog()
     {
         if (isset($_POST['update_blog_btn'])) {
@@ -1509,7 +1526,8 @@ class Controllers extends sql_info
             if ($post_count_no_result) {
                 if ($post_count_no_result->num_rows > 0) {
                     while ($row = $post_count_no_result->fetch_assoc()) {
-                        $post_count_no = $post_count_no_result->num_rows;
+                        // $post_count_no = $post_count_no_result->num_rows;
+                        $post_count_no = $row['article_id'];
                     }
                 } else {
                     $post_count_no = 0;
@@ -1520,7 +1538,8 @@ class Controllers extends sql_info
 
             $username = str_replace(' ', '_', $user_name);
 
-            $custom_img_name = $username . '_' . $post_count_no . '.' . $get_img_type;
+            // $custom_img_name = $username . '_' . $post_count_no . '.' . $get_img_type;
+            $custom_img_name = $this->generate_new_image_id($username, $get_img_type); ;
 
 
 
@@ -1581,21 +1600,61 @@ class Controllers extends sql_info
                             if ($img_name != '') {
                                 if ($result_update_img) {
 
+                                    // now the image should be uploaded to the server and update the image
+
+
+                                    if(move_uploaded_file($img_tmp_name, $upload_img)){
+                                        echo '
+                            
+                                        <script>
+                                        success_alert("The blog has been updated with the image successfully (The image has been updated successfully !!)", "The blog has been updated with its new values");
+                                        </script>
+                                        
+                                        ';
+                                    }else{
+                                        echo '
+                            
+                                        <script>
+                                        danger_alert("The image not moved successfully !!", "Please contract the developer immediately !!");
+                                        </script>
+                                        
+                                        ';
+                                    }
+
+
                                     // if the file is not exist then it will upload on the server otherwise it will not upload the same file again
 
-                                    if (!file_exists($upload_img)) {
-                                        move_uploaded_file($img_tmp_name, $upload_img);
-                                        // echo 'the img has been inserted';
-                                    }
+                                    // if (!file_exists($upload_img)) {
+                                    //     // move_uploaded_file($img_tmp_name, $upload_img);
+                                    //     // echo 'the img has been inserted';
+                                        
+                                    //     if(move_uploaded_file($img_tmp_name, $upload_img)){
+                                    //         echo '
+                                
+                                    //         <script>
+                                    //         success_alert("The blog has been updated with the image successfully (The image has been updated successfully !!)", "The blog has been updated with its new values");
+                                    //         </script>
+                                            
+                                    //         ';
+                                    //     }
+                                    // }
+                                }else{
+                                    echo '
+                            
+                                        <script>
+                                        danger_alert("The image name update is not runed successfully !!", "Please contract the developer immediately !!");
+                                        </script>
+                                        
+                                        ';
                                 }
 
-                                echo '
+                                // echo '
                                 
-                                <script>
-                                success_alert("The blog has been updated with the image successfully", "The blog has been updated with its new values");
-                                </script>
+                                // <script>
+                                // success_alert("The blog has been updated with the image successfully (The image has been selected)", "The blog has been updated with its new values");
+                                // </script>
                                 
-                                ';
+                                // ';
                             } else {
                                 // that means the img is blank and will not be updated
 
